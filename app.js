@@ -150,17 +150,17 @@ app.get('/', async (req, res) => {
   });
 });
 
-// app.get('/about', async (req, res) => {
-//   const api = await initApi(req);
-//   const defaults = await handleRequest(api);
-//   console.log(defaults.about)
+app.get('/about', async (req, res) => {
+  const api = await initApi(req);
+  const defaults = await handleRequest(api);
+  console.log(defaults.about)
 
-//   //   const about =defaults.about
-//   //  console.log(about)
-//   res.render('pages/about', {
-//     ...defaults,
-//   });
-// });
+  //   const about =defaults.about
+  //  console.log(about)
+  res.render('pages/about', {
+    ...defaults,
+  });
+});
 
 // app.get('/collections', async (req, res) => {
 //   const api = await initApi(req);
