@@ -83,11 +83,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.locals.basedir = app.get('views');
 // { results: collections }
 const handleRequest = async (api) => {
-  const [preloader,about, home, project,{results: projects}] =
+  const [preloader, navigation, about, home, project, { results: projects }] =
     await Promise.all([
       // api.getSingle('meta'),
       api.getSingle('preloader'),
-      // api.getSingle('navigation'),
+      api.getSingle('navigation'),
       api.getSingle('about'),
       api.getSingle('home'),
       api.getSingle('project'),
@@ -127,12 +127,10 @@ const handleRequest = async (api) => {
   return {
     assets,
     // meta,
-    home,
-    // collections,
-    // about,
-    // navigation,
-    about,
     preloader,
+    navigation,
+    home,
+    about,
     project,
     projects,
   };
@@ -141,9 +139,7 @@ const handleRequest = async (api) => {
 app.get('/', async (req, res) => {
   const api = await initApi(req);
   const defaults = await handleRequest(api);
-  // defaults.projects.forEach(x=>{
-  //   console.log(x.data);
-  // })
+
 
 
 
@@ -186,16 +182,15 @@ app.get('/project/:uid', async (req, res) => {
   const api = await initApi(req);
   const defaults = await handleRequest(api);
 
-  const project = await api.getByUID('project', req.params.uid,{
+  const project = await api.getByUID('project', req.params.uid, {
 
   });
-   console.log(project.data.body[4].items)
-  // project.data.body[1].primary.description.forEach(x=>{
-  //   console.log(x.text);
-  // })
+  const navigation = await api.getByUID('project', req.params.uid,)
+
   res.render('pages/project', {
     ...defaults,
     project,
+    navigation
   });
 });
 
