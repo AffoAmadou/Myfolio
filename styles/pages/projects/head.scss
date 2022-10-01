@@ -1,0 +1,31 @@
+.project_wrapper {}
+
+.project__head {
+    width     : 100%;
+    height    : 100vh;
+    margin-top: 15rem;
+    position  : relative;
+}
+
+.project__image {
+    background-color: aqua;
+    width           : 100%;
+    height          : 100%;
+    position        : relative;
+}
+
+.project__image__media {
+    @extend %cover;
+    object-fit: cover;
+}
+
+.project__head__wrapper {}
+
+.project__title {
+    position : absolute;
+    top      : 50%;
+    left     : 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20.5rem;
+    color:#efefef;
+}
