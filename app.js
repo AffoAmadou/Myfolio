@@ -83,7 +83,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.locals.basedir = app.get('views');
 // { results: collections }
 const handleRequest = async (api) => {
-  const [preloader, home, project,{results: iks}] =
+  const [preloader, home, project,{results: projects}] =
     await Promise.all([
       // api.getSingle('meta'),
       api.getSingle('preloader'),
@@ -132,19 +132,18 @@ const handleRequest = async (api) => {
     // navigation,
     preloader,
     project,
-    iks,
+    projects,
   };
 };
 
 app.get('/', async (req, res) => {
   const api = await initApi(req);
   const defaults = await handleRequest(api);
-// console.log(defaults.home.data.projects)
-  console.log(defaults);
+console.log(defaults.projects)
 
-  defaults.iks.forEach(x=>{
-    console.log(x.data);
-  })
+  // defaults.projects.forEach(x=>{
+  //   console.log(x.data);
+  // })
 
 
 
