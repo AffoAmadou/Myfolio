@@ -83,11 +83,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.locals.basedir = app.get('views');
 // { results: collections }
 const handleRequest = async (api) => {
-  const [preloader, home, project,{results: projects}] =
+  const [preloader,about, home, project,{results: projects}] =
     await Promise.all([
       // api.getSingle('meta'),
       api.getSingle('preloader'),
       // api.getSingle('navigation'),
+      api.getSingle('about'),
       api.getSingle('home'),
       api.getSingle('project'),
       api.query(Prismic.Predicates.at('document.type', 'project'), {
@@ -130,6 +131,7 @@ const handleRequest = async (api) => {
     // collections,
     // about,
     // navigation,
+    about,
     preloader,
     project,
     projects,
@@ -150,17 +152,17 @@ app.get('/', async (req, res) => {
   });
 });
 
-// app.get('/about', async (req, res) => {
-//   const api = await initApi(req);
-//   const defaults = await handleRequest(api);
-//   console.log(defaults.about)
+app.get('/about', async (req, res) => {
+  const api = await initApi(req);
+  const defaults = await handleRequest(api);
+  console.log(defaults.about.data)
 
-//   //   const about =defaults.about
-//   //  console.log(about)
-//   res.render('pages/about', {
-//     ...defaults,
-//   });
-// });
+  //   const about =defaults.about
+  //  console.log(about)
+  res.render('pages/about', {
+    ...defaults,
+  });
+});
 
 // app.get('/collections', async (req, res) => {
 //   const api = await initApi(req);
