@@ -83,7 +83,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.locals.basedir = app.get('views');
 // { results: collections }
 const handleRequest = async (api) => {
-  const [preloader, home, project,{results: iks}] =
+  const [preloader, home, project,{results: projects}] =
     await Promise.all([
       // api.getSingle('meta'),
       api.getSingle('preloader'),
@@ -132,19 +132,16 @@ const handleRequest = async (api) => {
     // navigation,
     preloader,
     project,
-    iks,
+    projects,
   };
 };
 
 app.get('/', async (req, res) => {
   const api = await initApi(req);
   const defaults = await handleRequest(api);
-// console.log(defaults.home.data.projects)
-  console.log(defaults);
-
-  defaults.iks.forEach(x=>{
-    console.log(x.data);
-  })
+  // defaults.projects.forEach(x=>{
+  //   console.log(x.data);
+  // })
 
 
 
@@ -183,19 +180,22 @@ app.get('/', async (req, res) => {
 
 
 
-// app.get('/detail/:uid', async (req, res) => {
-//   const api = await initApi(req);
-//   const defaults = await handleRequest(api);
+app.get('/project/:uid', async (req, res) => {
+  const api = await initApi(req);
+  const defaults = await handleRequest(api);
 
-//   const product = await api.getByUID('product', req.params.uid, {
-//     fetchLinks: 'collection.title',
-//   });
-//   console.log(product)
-//   res.render('pages/detail', {
-//     ...defaults,
-//     product,
-//   });
-// });
+  const project = await api.getByUID('project', req.params.uid,{
+
+  });
+   console.log(project.data.body[4].items)
+  // project.data.body[1].primary.description.forEach(x=>{
+  //   console.log(x.text);
+  // })
+  res.render('pages/project', {
+    ...defaults,
+    project,
+  });
+});
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
