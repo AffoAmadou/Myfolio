@@ -139,7 +139,6 @@ const handleRequest = async (api) => {
 app.get('/', async (req, res) => {
   const api = await initApi(req);
   const defaults = await handleRequest(api);
-console.log(defaults.projects[0].data.body)
   // defaults.projects.forEach(x=>{
   //   console.log(x.data);
   // })

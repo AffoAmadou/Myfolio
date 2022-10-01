@@ -1,5 +1,7 @@
 .preloader 
-    p.preloader__text!=preloader.data.title.replace(/\n/g,'<br>')
+    p.preloader__text!=preloader.data.title
 
     .preloader__number 
         .preloader__number__text 0%
+    .preloader__reverse__number
+         .preloader__reverse__text 100%
