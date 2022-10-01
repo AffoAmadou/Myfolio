@@ -159,36 +159,18 @@
 //   @extend %cover;
 // }
 
-.project_wrapper {}
-.project__head{}
-.project__image{}
-.project__image__media{}
-.project__head__wrapper{}
-.project__title {}
-.project__description {}
-.project__description__text{}
-.project__content{}
-.project__content__wrapper {}
-.project__content__image {}
-.project__content__image__media{}
-.project__content__content {}
-.project__content__title{}
-.project__content__text {}
-.project__content__description{}
-.project__content__description__sub{}
-.project__process {}
-.project__process_wrapper {}
-.project__process__title{}
-.project__process__subtitle {}
-.project__process__role{}
-.project__process__type{}
-.project__process__description {}
-.project__process__description__main {}
-.project__process__description__submain{}
-.project__process__link{}
-.project__design{}
-.project__design__image {}
-.project__design__image__media{}
-.project__mobile{}
-.project__mobile__image {}
-.project__mobile__image__media{}
+
+
+
+
+@import './content.scss';
+@import './description.scss';
+@import './design.scss';
+@import './head.scss';
+@import './mobile.scss';
+@import './process.scss';
+
+
+
+
+

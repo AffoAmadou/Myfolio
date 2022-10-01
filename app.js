@@ -185,12 +185,10 @@ app.get('/project/:uid', async (req, res) => {
   const project = await api.getByUID('project', req.params.uid, {
 
   });
-  const navigation = await api.getByUID('project', req.params.uid,)
 
   res.render('pages/project', {
     ...defaults,
     project,
-    navigation
   });
 });
 

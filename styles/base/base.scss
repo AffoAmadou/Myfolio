@@ -6,13 +6,13 @@
 }
 
 html {
-  @extend %cover;
+  // @extend %cover;
   $vw      : 100vw;
   font-size: calc($vw / 1920px * 10px);
 
-  position      : fixed; //Per rimuovere lo scroll 
+  // position      : fixed; //Per rimuovere lo scroll 
   line-height   : 1;
-  overflow      : hidden;
+  // overflow      : hidden;
   // background : $color-contessa;
   // color      : $color-white;
 
@@ -22,11 +22,11 @@ html {
 }
 
 body {
-  @extend %cover;
+  // @extend %cover;
   // font-family: $font-suisse-bp;
   // @extend %description-16;
   font-size: 5rem;
-  position: fixed;
+  // position: fixed;
 
  
   a {
@@ -60,7 +60,7 @@ body {
   // }
 
   .content {
-    @extend %cover;
+    // @extend %cover;
   }
 
   [data-animation='paragraph'],

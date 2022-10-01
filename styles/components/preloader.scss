@@ -45,6 +45,7 @@
 
 
 .preloader {
+  display: none;
   @extend %cover;
   @extend %center;
   z-index         : 2;
