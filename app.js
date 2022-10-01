@@ -41,12 +41,8 @@ const initApi = (req) => {
 
 // Link Resolver
 const HandleLinkResolver = (doc) => {
-  if (doc.type === 'product') {
-    return `/detail/${doc.slug}`;
-  }
-
-  if (doc.type === 'collections') {
-    return '/collections';
+  if (doc.type === 'project') {
+    return `/project/${doc.slug}`;
   }
 
   if (doc.type === 'about') {
@@ -85,17 +81,17 @@ app.use((req, res, next) => {
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 app.locals.basedir = app.get('views');
-
+// { results: collections }
 const handleRequest = async (api) => {
-  const [preloader, navigation, home, about, { results: collections }] =
+  const [preloader, home, project,{results: iks}] =
     await Promise.all([
       // api.getSingle('meta'),
       api.getSingle('preloader'),
-      api.getSingle('navigation'),
+      // api.getSingle('navigation'),
       api.getSingle('home'),
-      api.getSingle('about'),
-      api.query(Prismic.Predicates.at('document.type', 'collection'), {
-        fetchLinks: 'product.image',
+      api.getSingle('project'),
+      api.query(Prismic.Predicates.at('document.type', 'project'), {
+        fetchLinks: 'project.image',
       }),
     ]);
 
@@ -131,65 +127,75 @@ const handleRequest = async (api) => {
     assets,
     // meta,
     home,
-    collections,
-    about,
-    navigation,
+    // collections,
+    // about,
+    // navigation,
     preloader,
+    project,
+    iks,
   };
 };
 
 app.get('/', async (req, res) => {
   const api = await initApi(req);
   const defaults = await handleRequest(api);
-console.log(defaults.home)
+// console.log(defaults.home.data.projects)
+  console.log(defaults);
+
+  defaults.iks.forEach(x=>{
+    console.log(x.data);
+  })
+
+
+
   res.render('pages/home', {
     ...defaults,
   });
 });
 
-app.get('/about', async (req, res) => {
-  const api = await initApi(req);
-  const defaults = await handleRequest(api);
-  console.log(defaults.about)
+// app.get('/about', async (req, res) => {
+//   const api = await initApi(req);
+//   const defaults = await handleRequest(api);
+//   console.log(defaults.about)
 
-  //   const about =defaults.about
-  //  console.log(about)
-  res.render('pages/about', {
-    ...defaults,
-  });
-});
+//   //   const about =defaults.about
+//   //  console.log(about)
+//   res.render('pages/about', {
+//     ...defaults,
+//   });
+// });
 
-app.get('/collections', async (req, res) => {
-  const api = await initApi(req);
-  const defaults = await handleRequest(api);
-  // console.log(defaults.collections)
+// app.get('/collections', async (req, res) => {
+//   const api = await initApi(req);
+//   const defaults = await handleRequest(api);
+//   // console.log(defaults.collections)
 
-// defaults.collections.forEach(collection=>{
-//   console.log(collection.data.products[0].products_product)
-//   console.log("riopoipopopoppmmuzuzuznnnnnnavFEWFWEFWEFEWFEWFEW")
-// })
+// // defaults.collections.forEach(collection=>{
+// //   console.log(collection.data.products[0].products_product)
+// //   console.log("riopoipopopoppmmuzuzuznnnnnnavFEWFWEFWEFEWFEWFEW")
+// // })
 
-// console.log(collections)
-  res.render('pages/collections', {
-    ...defaults,
-  });
-});
+// // console.log(collections)
+//   res.render('pages/collections', {
+//     ...defaults,
+//   });
+// });
 
 
 
-app.get('/detail/:uid', async (req, res) => {
-  const api = await initApi(req);
-  const defaults = await handleRequest(api);
+// app.get('/detail/:uid', async (req, res) => {
+//   const api = await initApi(req);
+//   const defaults = await handleRequest(api);
 
-  const product = await api.getByUID('product', req.params.uid, {
-    fetchLinks: 'collection.title',
-  });
-  console.log(product)
-  res.render('pages/detail', {
-    ...defaults,
-    product,
-  });
-});
+//   const product = await api.getByUID('product', req.params.uid, {
+//     fetchLinks: 'collection.title',
+//   });
+//   console.log(product)
+//   res.render('pages/detail', {
+//     ...defaults,
+//     product,
+//   });
+// });
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
