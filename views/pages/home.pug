@@ -1,4 +1,4 @@
-//- extends ../base.pug 
+extends ../base.pug 
 
 block variables     
     - var template = 'home'
@@ -24,10 +24,24 @@ block content
 
     .home
         .home__wrapper
+            .home__title
+                each project in projects 
+                    article.home__title__article 
+                        h1.home__title__article__title=project.data.title
+
             .home__gallery 
                 .home__gallery__wrapper
                     each project in projects
                         a.home__gallery__link
                             figure.home__gallery__media
                                 img.home__gallery__media__image(alt=project.data.image.alt src=project.data.image.url)
+
+
+            .home__content
+                each project in projects
+                    article.home__article 
+                        each slice in project.data.body
+                            if slice.slice_type=='description'
+                                h2.home__article__title=slice.primary.intitulation
+                                p.home__article__description=slice.primary.text
 
