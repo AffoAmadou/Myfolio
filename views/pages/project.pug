@@ -60,10 +60,10 @@ block content
               figure.project__content__image 
                 img.project__content__image__media(alt=section.primary.content_image.alt src=section.primary.content_image.url)
               .project__content__content 
-                h2.project__content__title=section.primary.title
+                h2.project__content__title!=section.primary.title.replace(/\n/g, '<br>')
                 .project__content__text 
-                  p.project__content__description=section.primary.description[0].text
-                  p.project__content__description__sub=section.primary.text[0].text
+                  p.project__content__description!=section.primary.description[0].text.replace(/\n/g, '<br>')
+                  p.project__content__description__sub!=section.primary.text[0].text.replace(/\n/g, '<br>')
 
         if section.slice_type=='process'
           section.project__process 
