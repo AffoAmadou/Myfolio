@@ -140,7 +140,7 @@ app.get('/', async (req, res) => {
   const api = await initApi(req);
   const defaults = await handleRequest(api);
 
-console.log(defaults.navigation);
+console.log(defaults.projects.reverse());
 
 
   res.render('pages/home', {

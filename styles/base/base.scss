@@ -13,9 +13,7 @@ html {
   // position      : fixed; //Per rimuovere lo scroll 
   line-height      : 1;
   // overflow      : hidden;
-  // background : $color-contessa;
-  // color      : $color-white;
-
+  
   // @include media('<phone') {
   //   font-size: calc($vw / 750 * 10);
   // }
@@ -24,8 +22,7 @@ html {
 body {
   // @extend %cover;
   font-family: $font-mersad;
-  // @extend %description-16;
-  font-size  : 5rem;
+  font-size  : 1.6rem;
   // position: fixed;
 
 
@@ -43,15 +40,15 @@ body {
     outline   : none;
   }
 
-  // img {
-  //   opacity: 0;
-  //   transition: opacity 0.4s ease;
-  //   vertical-align: middle;
+  img {
+    // opacity: 0;
+    // transition: opacity 0.4s ease;
+    vertical-align: middle;
 
-  //   &.loaded {
-  //     opacity: 1;
-  //   }
-  // }
+    // &.loaded {
+    //   opacity: 1;
+    // }
+  }
 
   // canvas {
   //     pointer-events: none;
