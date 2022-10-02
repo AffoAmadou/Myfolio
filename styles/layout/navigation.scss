@@ -1,50 +1,91 @@
 .navigation {
+  @extend %center;
+
+  color   : $color-white;
+  position: fixed;
+  top     : 0;
+  left    : 0;
+  z-index : z('navigation');
+  height  : 10.3rem;
+  width   : 100%;
+
+}
+
+
+.navigation__wrapper {
+  width          : 178.6rem;
+  height         : 8.9rem;
+  display        : flex;
+  justify-content: space-between;
+  align-items    : center;
+}
+
+.navigation__link {}
+
+.navigation__logo__wrapper {
+  width   : 3.9rem;
+  height  : 4.1rem;
+  position: relative;
+}
+
+.navigation__logo__image {
   @extend %cover;
-
-  color         : $color-white;
-  pointer-events: none;
-  position      : fixed;
-  z-index       : z('navigation');
+  object-fit: cover;
 }
 
-.navigation__link {
-  font-size     : 0;
-  height        : 2rem;
-  left          : 4rem;
-  pointer-events: auto;
-  position      : absolute;
-  top           : 4rem;
-  transition    : opacity 0.4s ease;
-  width         : 12.8rem;
-
-  &:hover {
-    opacity: 0.5;
-  }
-
-  @include media('<phone') {
-    height: 4.3rem;
-    left  : 5rem;
-    top   : 5rem;
-    width : 27.9rem;
-  }
+.navigation__list {
+  display: flex;
 }
-
-.navigation__link__icon {
-  display: block;
-}
-
-.navigation__list {}
 
 .navigation__list__item {
-  pointer-events: auto;
-  position      : absolute;
-  right         : 4rem;
-  top           : 4rem;
+ margin-left: .8rem
 }
 
 .navigation__list__link {
-  @extend %link--hidden;
-  @extend %title-24;
-  line-height: 1;
-  display    : block;
+  @extend %description-20;
+  color: black;
 }
+
+
+
+// .navigation__link {
+//   font-size     : 0;
+//   height        : 2rem;
+//   left          : 4rem;
+//   pointer-events: auto;
+//   position      : absolute;
+//   top           : 4rem;
+//   transition    : opacity 0.4s ease;
+//   width         : 12.8rem;
+
+//   &:hover {
+//     opacity: 0.5;
+//   }
+
+//   @include media('<phone') {
+//     height: 4.3rem;
+//     left  : 5rem;
+//     top   : 5rem;
+//     width : 27.9rem;
+//   }
+// }
+
+// .navigation__link__icon {
+//   display: block;
+// }
+
+// .navigation__list {}
+
+// .navigation__list__item {
+//   pointer-events: auto;
+//   position      : absolute;
+//   right         : 4rem;
+//   top           : 4rem;
+// }
+
+// .navigation__list__link {
+//   @extend %link--hidden;
+//   @extend %title-24;
+//   line-height: 1;
+//   display    : block;
+// }

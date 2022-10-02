@@ -47,12 +47,12 @@ block content
           figure.project__image
             img.project__image__media(alt=project.data.image.alt src=project.data.image.url)  
           
-            h1.project__title!=project.data.title 
+            h1.project__title=project.data.title 
       
       each section in project.data.body
         if section.slice_type=='description' 
           section.project__description 
-            p.project__description__text=section.primary.text
+            p.project__description__text!=section.primary.text.replace(/\n/g, '<br>')
 
         if section.slice_type=='content'
           section.project__content
@@ -76,7 +76,7 @@ block content
               .project__process__description 
                   p.project__process__description__main!=section.primary.description[0].text.replace(/\n/g, '<br>')
                   p.project__process__description__submain!=section.primary.text[0].text.replace(/\n/g, '<br>')
-              a.project__process__link(href=section.primary.link)=section.primary.link_text
+                  a.project__process__link(href=section.primary.link)=section.primary.link_text
           
         if section.slice_type=='design'
          each item in section.items
