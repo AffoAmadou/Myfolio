@@ -67,16 +67,17 @@ block content
 
         if section.slice_type=='process'
           section.project__process 
-            .project__process_wrapper 
-              h1.project__process__title!=section.primary.title
-              .project__process__subtitle 
-                p.project__process__role=section.primary.role
-                p.project__process__type=section.primary.type
+            .project__process__wrapper
+              .project__process__intitulation
+                h1.project__process__title!=section.primary.title
+                .project__process__subtitle 
+                  p.project__process__role=section.primary.role
+                  p.project__process__type=section.primary.type
               .project__process__description 
-                p.project__process__description__main 
-                p.project__process__description__submain
+                  p.project__process__description__main!=section.primary.description[0].text.replace(/\n/g, '<br>')
+                  p.project__process__description__submain!=section.primary.text[0].text.replace(/\n/g, '<br>')
               a.project__process__link(href=section.primary.link)=section.primary.link_text
-        
+          
         if section.slice_type=='design'
          each item in section.items
           each m in item
@@ -86,7 +87,8 @@ block content
  
         if section.slice_type=='mobile'
             section.project__mobile(data-color=`${section.primary.color}`)
-              each item in section.items
-                 each p in item
-                    figure.project__mobile__image 
-                      img.project__mobile__image__media(alt=p.alt src=p.url)
+              .project__mobile__wrapper
+                each item in section.items
+                  each p in item
+                      figure.project__mobile__image 
+                        img.project__mobile__image__media(alt=p.alt src=p.url)

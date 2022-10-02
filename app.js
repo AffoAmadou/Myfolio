@@ -186,6 +186,7 @@ app.get('/project/:uid', async (req, res) => {
 
   });
 
+  console.log(project.data.body[2].primary.text[0].text);
   res.render('pages/project', {
     ...defaults,
     project,

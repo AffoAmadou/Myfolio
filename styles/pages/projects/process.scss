@@ -1,10 +1,51 @@
-.project__process {}
-.project__process_wrapper {}
-.project__process__title{}
-.project__process__subtitle {}
-.project__process__role{}
-.project__process__type{}
-.project__process__description {}
-.project__process__description__main {}
-.project__process__description__submain{}
-.project__process__link{}
+.project__process {
+    width  : 100%;
+    padding: 26rem 0;
+    @extend %center;
+
+}
+
+.project__process__wrapper {
+    display       : flex;
+    flex-direction: column;
+    width         : 140rem;
+}
+
+.project__process__intitulation{
+    margin-bottom:18.5rem ;
+}
+.project__process__title {
+    font-size: 21rem;
+}
+
+.project__process__subtitle {
+    display: flex;
+}
+
+.project__process__role {
+    font-size: 1.8rem;
+}
+
+.project__process__type {
+    font-size: 1.8rem;
+}
+
+.project__process__description {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.project__process__description__main {
+    font-size: 3.4rem;
+    font-weight: 700;
+}
+
+.project__process__description__submain {
+    font-size: 3.4rem;
+    color: #0D0E13;
+}
+
+.project__process__link {
+    font-size: 1.7rem;
+}
