@@ -7,6 +7,7 @@ block content
 
     .about(data-background="#B2B8C3" data-color="#F9F1E7") 
         .about__wrapper
+<<<<<<< HEAD
 
 
 
@@ -58,3 +59,11 @@ block content
             //-                         each media in section.items
             //-                             figure.about__gallery__media
             //-                                 img.about__gallery__media__image(data-src=media.image.url alt=media.image.alt)
+=======
+            figure.about__image 
+                img.about__media(alt=about.data.image.alt src=about.data.image.url)
+            .about__description
+                h1.about__title=about.data.title 
+                p.about__description__text=about.data.description[0].text
+                p.about.content=about.data.content[0].text 
+>>>>>>> about

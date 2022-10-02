@@ -1,0 +1,22 @@
+.project__mobile{
+    width           : 100%;
+    height          : 100vh;
+    background-color: #1c3457;
+    margin-bottom: .1rem;
+    @extend %center;
+}
+.project__mobile__wrapper{
+    width: 120.2rem;
+    @extend %center;
+    justify-content: space-between;
+}
+.project__mobile__image {
+    width   : 30rem;
+    height  : 64.886rem;
+    position: relative;
+    // margin-right: 15.1rem;
+}
+.project__mobile__image__media{
+    @extend %cover;
+    object-fit: cover;
+}

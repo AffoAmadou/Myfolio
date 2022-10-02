@@ -1,7 +1,11 @@
 .preloader 
-    p.preloader__text!=preloader.data.title
+    .preloader__container
 
-    .preloader__number 
-        .preloader__number__text 0%
-    .preloader__reverse__number
-         .preloader__reverse__text 100%
+        .preloader__number 
+            .preloader__number__text 0%
+            
+        p.preloader__text!=preloader.data.title
+
+        
+        .preloader__reverse__number
+            .preloader__reverse__text 100%
