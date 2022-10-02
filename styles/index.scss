@@ -4,9 +4,9 @@
 // // -------------------------------- U T I L S ---------------------------------------
 // // ------------------------------------ // ------------------------------------------
 
-// @import './utils/variables';
+@import './utils/variables';
 // @import './utils/functions';
- @import './utils/mixins';
+@import './utils/mixins';
 // @import './utils/vendors';
 // @import './utils/responsive';
 
@@ -24,8 +24,8 @@
 // // // --------------------------------- B A S E ----------------------------------------
 // // // ------------------------------------ // ------------------------------------------
 
-// @import './base/fonts';
-  @import './base/base';
+@import './base/fonts';
+@import './base/base';
 
 // // // ------------------------------------ // ------------------------------------------
 // // // --------------------------- C O M P O N E N T S ----------------------------------
@@ -39,5 +39,4 @@
 // @import './pages/about/gallery';
 // @import './pages/about/highlight';
 // @import './pages/collections/collections';
- @import './pages/projects/projects';
-
+@import './pages/projects/projects';
