@@ -25,21 +25,21 @@ block content
     .home
         .home__wrapper
             .home__title
-                each project in projects 
-                    article.home__title__article 
+                each project, index in projects 
+                    article.home__title__article(class=`${index === 0 ?'home__title__article--active' : ''}`) 
                         h1.home__title__article__title=project.data.title
 
             .home__gallery 
                 .home__gallery__wrapper
-                    each project in projects
-                        a.home__gallery__link
+                    each project, index in projects
+                        a.home__gallery__link(href=Link(home.data.projects[index].projects_project))
                             figure.home__gallery__media
                                 img.home__gallery__media__image(alt=project.data.image.alt src=project.data.image.url)
 
 
             .home__content
-                each project in projects
-                    article.home__article 
+                each project, index in projects
+                    article.home__article(class=`${index === 0 ?'home__article--active' : ''}`) 
                         each slice in project.data.body
                             if slice.slice_type=='description'
                                 h2.home__article__title=slice.primary.intitulation

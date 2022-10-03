@@ -4,9 +4,9 @@
 // // -------------------------------- U T I L S ---------------------------------------
 // // ------------------------------------ // ------------------------------------------
 
-// @import './utils/variables';
-// @import './utils/functions';
- @import './utils/mixins';
+@import './utils/variables';
+@import './utils/functions';
+@import './utils/mixins';
 // @import './utils/vendors';
 // @import './utils/responsive';
 
@@ -14,30 +14,27 @@
 // // // ------------------------------- S H A R E D --------------------------------------
 // // // ------------------------------------ // ------------------------------------------
 
-// @import './shared/descriptions';
-// @import './shared/titles';
-// @import './shared/links';
-// @import './shared/pages';
-// @import './shared/vertical-titles';
+
+ @import './shared/shared';
+
 
 // // // ------------------------------------ // ------------------------------------------
 // // // --------------------------------- B A S E ----------------------------------------
 // // // ------------------------------------ // ------------------------------------------
 
-// @import './base/fonts';
-  @import './base/base';
+@import './base/fonts';
+@import './base/base';
 
 // // // ------------------------------------ // ------------------------------------------
 // // // --------------------------- C O M P O N E N T S ----------------------------------
 // // // ------------------------------------ // ------------------------------------------
 
 @import './components/preloader';
-// @import './layout/navigation';
-// @import './pages/home/home';
+@import './layout/navigation';
+@import './pages/home/home';
 // @import './pages/about/about';
 // @import './pages/about/content';
 // @import './pages/about/gallery';
 // @import './pages/about/highlight';
 // @import './pages/collections/collections';
- @import './pages/projects/projects';
-
+@import './pages/projects/projects';
