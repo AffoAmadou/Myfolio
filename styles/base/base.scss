@@ -14,9 +14,9 @@ html {
   line-height      : 1;
   // overflow      : hidden;
   
-  // @include media('<phone') {
-  //   font-size: calc($vw / 750 * 10);
-  // }
+  @include media('<phone') {
+    font-size: calc($vw / 750 * 10);
+  }
 }
 
 body {
