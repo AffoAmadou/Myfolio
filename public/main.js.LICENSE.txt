@@ -1,8 +1,30 @@
+/*!
+ * CSSPlugin 3.10.4
+ * https://greensock.com
+ *
+ * Copyright 2008-2022, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/*!
+ * GSAP 3.10.4
+ * https://greensock.com
+ *
+ * @license Copyright 2008-2022, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
 /*! ../modules/logger/index.js */
 
 /*! ../node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */
 
 /*! ../utils/log.js */
+
+/*! ./CSSPlugin.js */
 
 /*! ./Logger */
 
@@ -64,6 +86,8 @@
 
 /*! ./getCurrentScriptSource.js */
 
+/*! ./gsap-core.js */
+
 /*! ./identity */
 
 /*! ./isArguments */
@@ -122,7 +146,11 @@
 
 /*! ansi-html-community */
 
+/*! classes/Page */
+
 /*! events */
+
+/*! gsap */
 
 /*! html-entities */
 
@@ -149,6 +177,10 @@
 /*!***************************!*\
   !*** ./styles/index.scss ***!
   \***************************/
+
+/*!*****************************!*\
+  !*** ./app/classes/Page.js ***!
+  \*****************************/
 
 /*!*********************************!*\
   !*** ./app/pages/Home/index.js ***!
@@ -239,6 +271,10 @@
   \******************************************/
 
 /*!*******************************************!*\
+  !*** ../../../node_modules/gsap/index.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
   !*** ./node_modules/lodash/_arrayEach.js ***!
   \*******************************************/
 
@@ -305,6 +341,14 @@
 /*!**********************************************!*\
   !*** ./node_modules/lodash/_castFunction.js ***!
   \**********************************************/
+
+/*!***********************************************!*\
+  !*** ../../../node_modules/gsap/CSSPlugin.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ../../../node_modules/gsap/gsap-core.js ***!
+  \***********************************************/
 
 /*!***********************************************!*\
   !*** ./node_modules/lodash/_arrayLikeKeys.js ***!
@@ -430,6 +474,26 @@
   !*** ./node_modules/webpack-dev-server/client/index.js?protocol=ws%3A&hostname=0.0.0.0&port=8080&pathname=%2Fws&logging=info&reconnect=10 ***!
   \********************************************************************************************************************************************/
 
+//! .about ad esempio passato da una delle pagine  
+
+//! E percio sapere in che pagina mi trovo
+
 //! Importo le diverse pagine sapendo che all'interno ci sono degli index quindi
 
 //! Nessun bisogno di chiamare il file intero
+
+//! Questo metodo mi permette di creare il content e cosi da recuperare il data-template 
+
+//! Recupero tutti i link della pagina 
+
+//! Se ce né piu di uno, ad esempio le immagini faccio un selector all per avere un array
+
+//! Sono tutte le classi che passo dalla classe pagina  ad esempio
+
+//! una sola volta senza bisogno di chiamarli in tutte le pagine
+
+//!Creo sta classe per avere un punto in commune in tutte le pagine cosi da avere la possibilità di chiamare i metodi 
+
+//!all click non eseguo il cambio di pagina come dovrebbe esserer
+
+//!i bottoni o altro in modo da poter fare le animazioni, entrate o uscite

@@ -4,14 +4,20 @@
 
 /*! pages/Home */
 
+/*! pages/Projects */
+
 /*!**********************!*\
   !*** ./app/index.js ***!
   \**********************/
 
-/*!*********************************!*\
-  !*** ./app/pages/Home/index.js ***!
-  \*********************************/
+//! E percio sapere in che pagina mi trovo
 
 //! Importo le diverse pagine sapendo che all'interno ci sono degli index quindi
 
 //! Nessun bisogno di chiamare il file intero
+
+//! Questo metodo mi permette di creare il content e cosi da recuperare il data-template 
+
+//! Recupero tutti i link della pagina 
+
+//!all click non eseguo il cambio di pagina come dovrebbe esserer
