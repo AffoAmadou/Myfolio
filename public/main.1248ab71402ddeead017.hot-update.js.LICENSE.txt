@@ -1,0 +1,17 @@
+/*! lodash/each */
+
+/*! pages/About */
+
+/*! pages/Home */
+
+/*!**********************!*\
+  !*** ./app/index.js ***!
+  \**********************/
+
+/*!*********************************!*\
+  !*** ./app/pages/Home/index.js ***!
+  \*********************************/
+
+//! Importo le diverse pagine sapendo che all'interno ci sono degli index quindi
+
+//! Nessun bisogno di chiamare il file intero

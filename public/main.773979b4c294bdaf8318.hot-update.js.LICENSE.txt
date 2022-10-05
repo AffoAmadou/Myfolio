@@ -1,0 +1,39 @@
+/*! ../classes/Colors */
+
+/*! ./AsyncLoad */
+
+/*! gsap */
+
+/*! lodash/each */
+
+/*! lodash/map */
+
+/*! normalize-wheel */
+
+/*! prefix */
+
+/*!*****************************!*\
+  !*** ./app/classes/Page.js ***!
+  \*****************************/
+
+//! DOVE SONO ORA
+
+//! Target non sara mmai piu grande di limit e piu piccolo di zerp cosi da non avee uno scroll storto
+
+//!ANIMAZIONE DI ENTRATA
+
+//!DOVE ARRIVO
+
+//!DOVE MI SONO FERMATO
+
+//!HIGHLIGHTS
+
+//!LABEL
+
+//!PARAGRAPH
+
+//!TITLES
+
+//!loadash import
+
+//!senno é una lista node che trsformo in elemento semplice
