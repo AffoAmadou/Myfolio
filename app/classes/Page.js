@@ -1,208 +1,67 @@
+//!Creo sta classe per avere un punto in commune in tutte le pagine cosi da avere la possibilità di chiamare i metodi 
+//! una sola volta senza bisogno di chiamarli in tutte le pagine
+
 import each from 'lodash/each'
-import map from 'lodash/map'
-
 import GSAP from 'gsap'
-import Prefix from 'prefix'
-import normalizeWheel from 'normalize-wheel'
-
-import Title from '../animations/Title'
-import Paragraph from '../animations/Paragraph'
-import Label from '../animations/Label'
-
-import { ColorsManager } from '../classes/Colors'
-
-import AsyncLoad from './AsyncLoad'
 
 export default class Page {
-  constructor({ id, element, elements = {}, }) //!elements é un oggetto
-  {
-    this.selector = element
-    this.selectorChildren = {
-      ...elements,
-      animationTitles: '[data-animation="title"]',
-      animationsParagraphs: '[data-animation="paragraph"]',
-      animationsLabels: '[data-animation="label"]',
-      animationsHighlights: '[data-animation="highlight"]',
-      preloaders: '[data-src]'
 
-    }
-
-    this.id = id
-
-    this.transformPrefix = Prefix('transform')
-
-    // this.scroll = {
-    //   current: 0, //! DOVE SONO ORA
-    //   target: 0, //!DOVE ARRIVO
-    //   last: 0, //!DOVE MI SONO FERMATO
-    //   limit:
-    // }
-
-    this.onMouseWheelEvent = this.onMouseWheel.bind(this)
-  }
-
-  create() {
-
-    this.element = document.querySelector(this.selector)
-    this.elements = {}
-
-    this.scroll = {
-      current: 0, //! DOVE SONO ORA
-      target: 0, //!DOVE ARRIVO
-      last: 0, //!DOVE MI SONO FERMATO
-      limit: 0
-    }
-
-    each(this.selectorChildren, (entry, key) => {  //!loadash import
-      if (entry instanceof window.HTMLElement || entry instanceof window.NodeList || Array.isArray(entry))//!Controllo se é un elemento del dom
-      {
-        this.elements[key] = entry
-      }
-      else { //!senno é una lista node che trsformo in elemento semplice
-        this.elements[key] = this.element.querySelectorAll(entry)
-
-        if (this.elements[key].length === 0) {
-          this.elements[key] = null
-        } else if (this.elements[key].length === 1) {
-          this.elements[key] = document.querySelector(entry)
+    constructor({ id, element, elements }) {
+        this.id = id
+        this.selector = element //! .about ad esempio passato da una delle pagine  
+        this.selectorChildren = {
+            ...elements
         }
-      }
-    })
-
-    this.createAnimations()
-    this.createPreloader()
-  }
-
-  createAnimations() {
-    this.animations = []
-
-    //!TITLES
-    this.animationsTitles = map(this.elements.animationTitles, element => {
-      return new Title({
-        element
-      })
-
-    })
-
-    this.animations.push(...this.animationsTitles)
-
-    //!PARAGRAPH
-    this.animationsParagraphs = map(this.elements.animationsParagraphs, element => {
-      return new Paragraph({
-        element
-      })
-
-    })
-
-    this.animations.push(...this.animationsParagraphs)
-
-    //!LABEL
-    this.animationsLabels = map(this.elements.animationsLabels, element => {
-      return new Label({
-        element
-      })
-
-    })
-
-
-    this.animations.push(...this.animationsLabels)
-
-    //!HIGHLIGHTS
-    this.animationsHighlights = map(this.elements.animationsHighlights, element => {
-      return new Label({
-        element
-      })
-
-    })
-
-
-    this.animations.push(...this.animationsHighlights)
-  }
-
-  createPreloader() {
-    this.preloaders = map(this.elements.preloaders, element => {
-      return new AsyncLoad({ element })
-    })
-  }
-
-  show() { //!ANIMAZIONE DI ENTRATA
-    return new Promise(resolve => {
-
-      ColorsManager.change({
-        backgroundColor: this.element.getAttribute('data-background'),
-        color: this.element.getAttribute('data-color'),
-
-      })
-      this.animationIn = GSAP.timeline()
-      console.log("colore")
-      this.animationIn.fromTo(this.element, {
-        autoAlpha: 0
-      }, {
-        autoAlpha: 1,
-      })
-
-      this.animationIn.call(_ => {
-        this.addEventListeners()
-        resolve()
-      })
-    })
-  }
-
-  hide() {
-    return new Promise(resolve => {
-      this.destroy()
-
-      this.animationOut = GSAP.timeline()
-
-      this.animationOut.to(this.element, {
-        autoAlpha: 0,
-        onComplete: resolve
-      })
-    })
-  }
-
-  destroy() {
-    this.removeEventListeners()
-  }
-  //* smoothscroll 
-  onMouseWheel(event) {
-
-
-    const { pixelY } = normalizeWheel(event)
-
-    this.scroll.target += pixelY
-  }
-
-  onResize() {
-    if (this.elements.wrapper) {
-      this.scroll.limit = this.elements.wrapper.clientHeight - window.innerHeight
     }
 
-    each(this.animations, animation => animation.onResize())
-  }
+    //? Metodo per creare una pagina ed ottenere tutti gli elementi utili per le animazioni etc
+    create() {
+        this.element = document.querySelector(this.selector)//* Ad esempio il . about mi ritorna la div.about con tutto il suo contenuto
+        this.elements = {} //! Sono tutte le classi che passo dalla classe pagina  ad esempio
+        //!i bottoni o altro in modo da poter fare le animazioni, entrate o uscite
 
-  update() {
-    this.scroll.target = GSAP.utils.clamp(0, this.scroll.limit, this.scroll.target)//! Target non sara mmai piu grande di limit e piu piccolo di zerp cosi da non avee uno scroll storto
+        each(this.selectorChildren, (entry, key) => {
+            if (entry instanceof window.HTMLElement || entry instanceof window.NodeList || Array.isArray(entry)) {
+                this.elements[key] = entry //* se é gia un query selector lo passo direttamente
+            }
+            else {
+                this.elements[key] = document.querySelectorAll(entry) //! Se ce né piu di uno, ad esempio le immagini faccio un selector all per avere un array
 
+                if (this.elements[key].lenght === 0) {
+                    this.elements[key] = null //*Se é vuoto ritorno null
+                }
+                else if (this.elements[key].lenght === 1) {
+                    this.elements[key] = querySelector(entry) //! se cé una sola di queste classi faccio un query selector cosi non mi fa un array
 
+                }
+            }
+            // console.log(this.elements[key], entry)
 
-    this.scroll.current = GSAP.utils.interpolate(this.scroll.current, this.scroll.target, 0.1)
+        })
 
-    if (this.scroll.current < 0.01) {
-      this.scroll.current = 0
     }
 
-    if (this.elements.wrapper) {
-      this.elements.wrapper.style[this.transformPrefix] = `translateY(-${this.scroll.current}px)`
+    show() {
+        return new Promise(resolve => {
+            GSAP.from(this.element, {
+                autoAlpha: 0,
+                onComplete: resolve
+            })
+        })
+
     }
-  }
 
-  addEventListeners() {
-    window.addEventListener('mousewheel', this.onMouseWheelEvent)
-  }
-
-  removeEventListeners() {
-    window.removeEventListener('mousewheel', this.onMouseWheelEvent)
-  }
+    hide() {
+        return new Promise(resolve => {
+            GSAP.to(this.element, {
+                autoAlpha: 0,
+                onComplete: resolve
+            })
+        })
+    }
 
 }
+
+
+
+

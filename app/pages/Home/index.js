@@ -1,27 +1,25 @@
-import Page from "../../classes/Page";
-
-import Button from "../../classes/Button";
+import Page from "classes/Page";
 
 export default class Home extends Page {
-  constructor() {
-    super({
-      id: 'home', //!Passo alla classe page l'id
-      element: '.home',
-      elements: {
-        navigation: document.querySelector('.navigation'),
-        link: '.home__link'
-      } //!passo tutti gli elementi .home visto che iniziano tutti cosi
-    })
-  }
-  create() {
-    super.create()
-    this.link = new Button({
-      element: this.elements.link
-    })
-  }
 
-  destroy(){
-    super.destroy()
-    this.link.removeEventListeners()
-  }
+    constructor() {
+        super({
+            id: 'home',
+            element: '.home',
+            elements: {
+                navigation: document.querySelector('.navigation'),
+                title: '.home__title__article__title',
+                links: '.home__gallery__link',
+                article_title: '.home__article__title',
+                description: '.home__article__description'
+
+            }
+        })
+    }
+
+    create() {
+        super.create()
+
+        this.elements.links[0].addEventListener('click', _ => console.log('OH YOU CLICKED'))
+    }
 }

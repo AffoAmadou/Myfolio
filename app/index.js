@@ -1,182 +1,102 @@
+//! Importo le diverse pagine sapendo che all'interno ci sono degli index quindi
+//! Nessun bisogno di chiamare il file intero
+
 import About from 'pages/About'
-import Collections from 'pages/Collections'
-import Detail from 'pages/Detail'
-import Home from 'pages/Home'
+import Project from 'pages/Projects'
 import each from 'lodash/each'
-import Preloader from './components/Preloader'
-import Navigation from './components/Navigation'
-import Canvas from './components/Canvas'
+
+// import Collections from 'pages/Collections'
+// import Detail from 'pages/Detail'
+import Home from 'pages/Home'
+
 //* IMPORTO GLI INDEX PRESENTI NELLE CARTELLE
 
 class App {
     constructor() {
-        this.createContent()
+        this.createContent() //! Questo metodo mi permette di creare il content e cosi da recuperare il data-template 
+        //! E percio sapere in che pagina mi trovo
 
-        this.createPreloader()
-        this.createNavigation()
+        // this.createPreloader()
+        // this.createNavigation()
         this.createPages()
-        this.createCanvas()
-        this.addEventListeners()
+        //     this.createCanvas()
+        //     this.addEventListeners()
         this.addLinkListeners()
 
-        this.update()
-    }
-
-    //!L'ORDINE IN CUI CHIAMO I METODI É IMPORTANTE
-
-    createNavigation() {
-        this.navigation = new Navigation({
-            template: this.template
-        })
-    }
-
-    createPreloader() {
-        this.preloader = new Preloader()
-        this.preloader.once('completed', this.onPreloaded.bind(this)) //! QUANDO COMPLETO RICHIAMO IL METODO SOTTO
-    }
-
-    createCanvas() {
-        this.canvas = new Canvas() //!CREO IL CANVA E LO RESIZZO NEL RESIZE SOTTO
+        //     this.update()
     }
 
     createContent() {
-
-        //!block variables      - var template = 'home'   block content  QUESTA PARTE DEL FILE PUG
+        //?Qui eseguo il create content per sapere in quale pagina mi trovo attualmente
         this.content = document.querySelector('.content')
         this.template = this.content.getAttribute('data-template')
-        //! Cosi ottengo la pagina in cui mi trovo GENIALEEE
+        // console.log(this.template)
     }
 
+    //? I questo modo creo l'oggetto PAGINA
     createPages() {
         this.pages = {
             about: new About(),
             home: new Home(),
-            collections: new Collections(),
-            detail: new Detail(),
+            project: new Project(), //!Il nome colorato deve essere uguale a nome dato nel template 
+            // detail: new Detail(),
         }
 
-        this.page = this.pages[this.template] //!INSERISCO LA PAGINA IN CUI SONO ATTUALMENTE
-        this.page.create()
-
-    }
-
-    onPreloaded() {
-        this.preloader.destroy()
-        this.onResize()
+        this.page = this.pages[this.template] //?INSERISCO LA PAGINA IN CUI SONO ATTUALMENTE
+        // console.log(this.page)
+        this.page.create() //? Chiamo il create nella classe page che é legata ad ognuna delle pagine
         this.page.show()
-    }
-
-    onPopState() {
-        this.onChange(
-            {
-                url: window.location.pathname, //!per cabmio link nella barra
-                push: false
-            })
-    }
-
-    //! ///////////////////////////////////////////////////////
-    update() {
-        if (this.canvas && this.canvas.update) {
-            this.canvas.update()
-        }
-
-        if (this.page && this.page.update) {
-            this.page.update()
-        }
-
-        this.frame = window.requestAnimationFrame(this.update.bind(this))
-
+        // this.page.hide()
 
     }
-    onResize() {
-        if (this.canvas && this.canvas.onResize) {
-            this.canvas.onResize()
-            console.log("ddd")
-        }
-        if (this.page && this.page.onResize) {
-            this.page.onResize()
-        }
-    }
-    //! ///////////////////////////////////////////////////////
 
 
-
-
-    //*  TUTTO QUSTO SERVE PER OTTENERE TUTTO L HTML DELLA PAGINA CHE E CONTENUTA NEL LINK CLICCATO IN MODO DA CARICARLA PRIMA DI CAMBIARE PAGINA
-    //? ////////////////////////////////INIZIO//////////////////////////////////////////////////////////////////////
-    //*  ////////////////////////////////INIZIO//////////////////////////////////////////////////////////////////////
-
-    async onChange(url, push = true) { //!URL SARA IL LINK DEL BOTTONE CLICCATO NEL METODO SOTTO
-
-
-        await this.page.hide() //*ANIMAZIONE DI USCITA
+    async onChange(url) {
+        // console.log(url)
+        await this.page.hide()
 
         const request = await window.fetch(url)
 
+        if (request.status === 200) { //!200 = pagina ben caricata
+            const html = await request.text() //!recupero il contenuto della pagina
 
-        if (request.status === 200) {
-            const html = await request.text() //!QUESTO CONTIENE TUTTO L HTML
+            const div = document.createElement('div') //!Creo una div per metterci la parte del "html" che voglio
+            //!cosi da non mettere anche i doctype etc 
 
-            const div = document.createElement('div') //!CREO LA DIV IN CUI METTERE L HTML ESTRATTO
             div.innerHTML = html
 
-            // if (push) {
-            //     window.history.pushState({}, '', url) //! CAMBIO LINK !!!!!!!!!!!
-            // }
-
-
-
-            const divContent = div.querySelector('.content') //!QUI PRENDO DA DIV (SOPRA) IL TAG DA CONTENTUTO NEL CONTENT VISTO CHE OGNI PAGINA HA CONTENT COSI DA NON INSERIRE TUTTI I TAG HTML META ETC...
-
-            this.content.innerHTML = divContent.innerHTML //! E LO INSERISCO NELLA PAGINA COS DA CAMBIARE QUANDO TUTTO É CARICATO FANTASTICOOOOOOOOOO
-
+            const divContent = div.querySelector('.content')//! Recupero solo il .content che contiene la parte di divs che cambia in ogni pagina
 
             this.template = divContent.getAttribute('data-template')
+            this.content.setAttribute('data-template', this.template);//*Cambio il data-template per far sapere che sono in questa pagina attualmente
 
-            this.content.setAttribute('data-template', this.template) //! BISOGNA CAMBIARE ANCHE L ATTRIBUTO VISTO CHE E IL NOME DELLA PAGINA IMPORTANTE
-            // console.log(html)
+            this.content.innerHTML = divContent.innerHTML //! E lo inserisco nel content della pagina in cui sono ora
 
-            this.navigation.onChange(this.template)
+            this.page =this.pages[this.template] //!Riassegno la pagina
 
-            this.page = this.pages[this.template]
-
-            this.page.create()
-
-            this.onResize()
+            this.page.create() //? Chiamo il create nella classe page che é legata ad ognuna delle pagine
             this.page.show()
-
-            this.addLinkListeners()
-        } else {
+        }
+        else {
             console.log("error")
         }
+
     }
 
-
-
-    addEventListeners()//!Metodo per update laltezza dello scroll nelle pagine
-    {
-        // window.addEventListener('popstate', this.onPopState.bind(this))
-        window.addEventListener('resize', this.onResize.bind(this))
-    }
 
     addLinkListeners() {
-        const links = document.querySelectorAll('a')
+        const links = document.querySelectorAll('a') //! Recupero tutti i link della pagina 
 
         each(links, link => {
             link.onclick = event => {
-
-                event.preventDefault() //!IN QUESTO MODO AL CLICK NON MI MANDA DIRETTAMENTE NELL'ALTRA PAGINA
-
                 const { href } = link
-                this.onChange(href)  //!{LO CHIAMO QUIIIIIIII ONCHANGE}
+                event.preventDefault() //!all click non eseguo il cambio di pagina come dovrebbe esserer
+
+                this.onChange(href)//*Funzione che si trova sopra Per gestire il cambio di pagina
+                // console.log(event, href)
             }
         })
     }
-    //*  ////////////////////////////////INIZIO//////////////////////////////////////////////////////////////////////
-    //? //////////////////////////////////////////FINE///////////////////////////////////////////////////////////////
-    //*  ////////////////////////////////INIZIO//////////////////////////////////////////////////////////////////////
-
-
 }
 
 new App()
