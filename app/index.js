@@ -43,7 +43,7 @@ class App {
         }
 
         this.page = this.pages[this.template] //?INSERISCO LA PAGINA IN CUI SONO ATTUALMENTE
-        console.log(this.page)
+        // console.log(this.page)
         this.page.create() //? Chiamo il create nella classe page che é legata ad ognuna delle pagine
         this.page.show()
         // this.page.hide()
@@ -51,8 +51,36 @@ class App {
     }
 
 
-    onChange(url) {
-        console.log(url)
+    async onChange(url) {
+        // console.log(url)
+        await this.page.hide()
+
+        const request = await window.fetch(url)
+
+        if (request.status === 200) { //!200 = pagina ben caricata
+            const html = await request.text() //!recupero il contenuto della pagina
+
+            const div = document.createElement('div') //!Creo una div per metterci la parte del "html" che voglio
+            //!cosi da non mettere anche i doctype etc 
+
+            div.innerHTML = html
+
+            const divContent = div.querySelector('.content')//! Recupero solo il .content che contiene la parte di divs che cambia in ogni pagina
+
+            this.template = divContent.getAttribute('data-template')
+            this.content.setAttribute('data-template', this.template);//*Cambio il data-template per far sapere che sono in questa pagina attualmente
+
+            this.content.innerHTML = divContent.innerHTML //! E lo inserisco nel content della pagina in cui sono ora
+
+            this.page =this.pages[this.template] //!Riassegno la pagina
+
+            this.page.create() //? Chiamo il create nella classe page che é legata ad ognuna delle pagine
+            this.page.show()
+        }
+        else {
+            console.log("error")
+        }
+
     }
 
 

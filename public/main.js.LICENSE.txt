@@ -476,6 +476,8 @@
 
 //! .about ad esempio passato da una delle pagine  
 
+//! E lo inserisco nel content della pagina in cui sono ora
+
 //! E percio sapere in che pagina mi trovo
 
 //! Importo le diverse pagine sapendo che all'interno ci sono degli index quindi
@@ -483,6 +485,8 @@
 //! Nessun bisogno di chiamare il file intero
 
 //! Questo metodo mi permette di creare il content e cosi da recuperare il data-template 
+
+//! Recupero solo il .content che contiene la parte di divs che cambia in ogni pagina
 
 //! Recupero tutti i link della pagina 
 
@@ -492,8 +496,18 @@
 
 //! una sola volta senza bisogno di chiamarli in tutte le pagine
 
+//!200 = pagina ben caricata
+
 //!Creo sta classe per avere un punto in commune in tutte le pagine cosi da avere la possibilità di chiamare i metodi 
+
+//!Creo una div per metterci la parte del "html" che voglio
+
+//!Riassegno la pagina
 
 //!all click non eseguo il cambio di pagina come dovrebbe esserer
 
+//!cosi da non mettere anche i doctype etc 
+
 //!i bottoni o altro in modo da poter fare le animazioni, entrate o uscite
+
+//!recupero il contenuto della pagina
