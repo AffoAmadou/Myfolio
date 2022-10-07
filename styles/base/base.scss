@@ -6,24 +6,27 @@
 }
 
 html {
-  // @extend %cover;
-  $vw              : 100vw;
-  font-size        : calc($vw / 1920px * 10px);
-  color            : $color-black;
-  // position      : fixed; //Per rimuovere lo scroll 
-  line-height      : 1;
-  // overflow      : hidden;
+   @extend %cover;
+  $vw        : 100vw;
+  font-size  : calc($vw / 1920px * 10px);
+  color      : $color-black;
+  line-height: 1;
+
+  position         : fixed; //!Per rimuovere lo scroll 
   
+   overflow      : hidden;
+
   @include media('<phone') {
     font-size: calc($vw / 750 * 10);
   }
 }
 
 body {
-  // @extend %cover;
+  @extend %cover;
   font-family: $font-mersad;
   font-size  : 1.6rem;
-  // position: fixed;
+  position   : fixed;
+  
 
 
   a {
@@ -57,7 +60,8 @@ body {
   // }
 
   .content {
-    // @extend %cover;
+    @extend %cover;
+    
   }
 
   [data-animation='paragraph'],

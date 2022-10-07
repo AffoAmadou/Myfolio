@@ -45,7 +45,7 @@ block content
     .project_wrapper 
       section.project__head
           figure.project__image
-            img.project__image__media(alt=project.data.image.alt src=project.data.image.url)  
+            img.project__image__media(alt=project.data.image.alt data-src=project.data.image.url)  
           
             h1.project__title=project.data.title 
       
@@ -58,7 +58,7 @@ block content
           section.project__content
             .project__content__wrapper 
               figure.project__content__image 
-                img.project__content__image__media(alt=section.primary.content_image.alt src=section.primary.content_image.url)
+                img.project__content__image__media(alt=section.primary.content_image.alt data-src=section.primary.content_image.url)
               .project__content__content 
                 h2.project__content__title!=section.primary.title.replace(/\n/g, '<br>')
                 .project__content__text 
@@ -83,7 +83,7 @@ block content
           each m in item
             section.project__design(data-color=`${section.primary.color}`)
               figure.project__design__image 
-                 img.project__design__image__media(alt=m.alt src=m.url)
+                 img.project__design__image__media(alt=m.alt data-src=m.url)
  
         if section.slice_type=='mobile'
             section.project__mobile(data-color=`${section.primary.color}`)
@@ -91,4 +91,4 @@ block content
                 each item in section.items
                   each p in item
                       figure.project__mobile__image 
-                        img.project__mobile__image__media(alt=p.alt src=p.url)
+                        img.project__mobile__image__media(alt=p.alt data-src=p.url)

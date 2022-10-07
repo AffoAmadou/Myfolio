@@ -11,8 +11,10 @@ export default class Project extends Page {
             }
 
         })
+
     }
 
+    
     create() {
         super.create()
     }

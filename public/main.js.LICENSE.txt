@@ -18,6 +18,8 @@
  * @author: Jack Doyle, jack@greensock.com
 */
 
+/*! ../classes/Components */
+
 /*! ../modules/logger/index.js */
 
 /*! ../node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */
@@ -148,6 +150,8 @@
 
 /*! classes/Page */
 
+/*! components/Preloader */
+
 /*! events */
 
 /*! gsap */
@@ -164,6 +168,8 @@
 
 /*! tapable/lib/SyncBailHook */
 
+/*! utils/text */
+
 /*! webpack/hot/emitter.js */
 
 /*! webpack/hot/log.js */
@@ -173,6 +179,10 @@
 /*!**********************!*\
   !*** ./app/index.js ***!
   \**********************/
+
+/*!***************************!*\
+  !*** ./app/utils/text.js ***!
+  \***************************/
 
 /*!***************************!*\
   !*** ./styles/index.scss ***!
@@ -189,6 +199,14 @@
 /*!**********************************!*\
   !*** ./app/pages/About/index.js ***!
   \**********************************/
+
+/*!***********************************!*\
+  !*** ./app/classes/Components.js ***!
+  \***********************************/
+
+/*!*************************************!*\
+  !*** ./app/components/Preloader.js ***!
+  \*************************************/
 
 /*!*************************************!*\
   !*** ./app/pages/Projects/index.js ***!

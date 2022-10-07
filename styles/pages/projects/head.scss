@@ -1,4 +1,5 @@
 .project{
+    @extend %page;
     width: 100vw;
     overflow: hidden;
 }
