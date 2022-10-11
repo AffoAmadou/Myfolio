@@ -7,9 +7,9 @@ import EventEmitter from 'events'
 
 export default class Component extends EventEmitter {
 
-    constructor({element, elements }) {
+    constructor({ element, elements }) {
         super()
-        this.selector = element 
+        this.selector = element
         this.selectorChildren = {
             ...elements
         }
@@ -20,22 +20,26 @@ export default class Component extends EventEmitter {
 
     //? Metodo per creare una pagina ed ottenere tutti gli elementi utili per le animazioni etc
     create() {
-        this.element = document.querySelector(this.selector)
-        this.elements = {} 
-        
+        if (this.selector instanceof window.HTMLElement) {
+            this.element = this.selector
+        } else {
+            this.element = document.querySelector(this.selector)
+        }
+        this.elements = {}
+
 
         each(this.selectorChildren, (entry, key) => {
             if (entry instanceof window.HTMLElement || entry instanceof window.NodeList || Array.isArray(entry)) {
-                this.elements[key] = entry 
+                this.elements[key] = entry
             }
             else {
-                this.elements[key] = document.querySelectorAll(entry) 
+                this.elements[key] = document.querySelectorAll(entry)
 
                 if (this.elements[key].lenght === 0) {
-                    this.elements[key] = null 
+                    this.elements[key] = null
                 }
                 else if (this.elements[key].lenght === 1) {
-                    this.elements[key] = querySelector(entry) 
+                    this.elements[key] = querySelector(entry)
 
                 }
             }
@@ -46,12 +50,12 @@ export default class Component extends EventEmitter {
     }
 
     addEventListeners() {
-        
+
 
     }
 
     removeEventListeners() {
-        
+
     }
 
 }

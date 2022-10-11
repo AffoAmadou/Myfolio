@@ -1,7 +1,7 @@
 extends ../base.pug 
 
 block variables     
-    - var template ="project"
+  - var template ="project"
 
 block content 
   //- .detail(data-background="#c97164" data-color="#f9f1e7")
@@ -23,7 +23,7 @@ block content
 
   //-               span.detail__information__highlight__text!=highlight.highlights_text.replace(/\n/, '<br>')
 
-               
+
 
   //-         .detail__information__list
   //-           each item in product.data.informations
@@ -38,57 +38,57 @@ block content
   //-       path(stroke="currentColor" fill="none" d="M62.5.5c34.24,0,62,13.43,62,30s-27.76,30-62,30S.5,47.07.5,30.5,28.26.5,62.5.5Zm0,.5c34,0,61.5,13.21,61.5,29.5S96.47,60,62.5,60,1,46.79,1,30.5,28.53,1,62.5,1Z")
   //-       path.detail__button__icon__path(stroke="#FFC400" fill="none" d="M62.5.5c34.24,0,62,13.43,62,30s-27.76,30-62,30S.5,47.07.5,30.5,28.26.5,62.5.5Zm0,.5c34,0,61.5,13.21,61.5,29.5S96.47,60,62.5,60,1,46.79,1,30.5,28.53,1,62.5,1Z")
 
-      
-      
-      
+
+
+
   .project 
     .project__wrapper 
       section.project__head
-          figure.project__image
-            img.project__image__media(alt=project.data.image.alt data-src=project.data.image.url)  
-          
-            h1.project__title=project.data.title 
-      
+        figure.project__image
+          img.project__image__media(alt=project.data.image.alt data-src=project.data.image.url)  
+
+          h1.project__title(data-animation="title")=project.data.title 
+
       each section in project.data.body
         if section.slice_type=='description' 
           section.project__description 
-            p.project__description__text!=section.primary.text.replace(/\n/g, '<br>')
+            p.project__description__text(data-animation="paragraph")!=section.primary.text.replace(/\n/g, '<br>')
 
         if section.slice_type=='content'
-          section.project__content
+          section.project__content(data-color=`${section.primary.color}`, data-animation="color")
             .project__content__wrapper 
               figure.project__content__image 
                 img.project__content__image__media(alt=section.primary.content_image.alt data-src=section.primary.content_image.url)
               .project__content__content 
-                h2.project__content__title!=section.primary.title.replace(/\n/g, '<br>')
+                h2.project__content__title(data-animation="title")!=section.primary.title.replace(/\n/g, '<br>')
                 .project__content__text 
-                  p.project__content__description!=section.primary.description[0].text.replace(/\n/g, '<br>')
-                  p.project__content__description__sub!=section.primary.text[0].text.replace(/\n/g, '<br>')
+                  p.project__content__description(data-animation="paragraph")!=section.primary.description[0].text.replace(/\n/g, '<br>')
+                  p.project__content__description__sub(data-animation="paragraph")!=section.primary.text[0].text.replace(/\n/g, '<br>')
 
         if section.slice_type=='process'
           section.project__process 
             .project__process__wrapper
               .project__process__intitulation
-                h1.project__process__title!=section.primary.title
+                h2.project__process__title(data-animation="title")!=section.primary.title
                 .project__process__subtitle 
-                  p.project__process__role=section.primary.role
-                  p.project__process__type=section.primary.type
+                  p.project__process__role(data-animation="label")=section.primary.role
+                  p.project__process__type(data-animation="label")=section.primary.type
               .project__process__description 
-                  p.project__process__description__main!=section.primary.description[0].text.replace(/\n/g, '<br>')
-                  p.project__process__description__submain!=section.primary.text[0].text.replace(/\n/g, '<br>')
-                  a.project__process__link(href=section.primary.link)=section.primary.link_text
-          
+                p.project__process__description__main(data-animation="paragraph")!=section.primary.description[0].text.replace(/\n/g, '<br>')
+                p.project__process__description__submain(data-animation="paragraph")!=section.primary.text[0].text.replace(/\n/g, '<br>')
+                a.project__process__link(href=section.primary.link)=section.primary.link_text
+
         if section.slice_type=='design'
-         each item in section.items
-          each m in item
-            section.project__design(data-color=`${section.primary.color}`)
-              figure.project__design__image 
-                 img.project__design__image__media(alt=m.alt data-src=m.url)
- 
+          each item in section.items
+            each m in item
+              section.project__design(data-color=`${section.primary.color}`, data-animation="color")
+                figure.project__design__image 
+                  img.project__design__image__media(alt=m.alt data-src=m.url)
+
         if section.slice_type=='mobile'
-            section.project__mobile(data-color=`${section.primary.color}`)
-              .project__mobile__wrapper
-                each item in section.items
-                  each p in item
-                      figure.project__mobile__image 
-                        img.project__mobile__image__media(alt=p.alt data-src=p.url)
+          section.project__mobile(data-color=`${section.primary.color}`, data-animation="color")
+            .project__mobile__wrapper
+              each item in section.items
+                each p in item
+                  figure.project__mobile__image 
+                    img.project__mobile__image__media(alt=p.alt data-src=p.url)

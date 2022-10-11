@@ -1,4 +1,4 @@
-import Component from "../classes/Components"
+import Component from "classes/Component"
 import each from 'lodash/each'
 import GSAP from 'gsap'
 
@@ -15,8 +15,8 @@ export default class Preloader extends Component {
                 downumber: '.preloader__reverse__text',
                 images: document.querySelectorAll('img')
             }
-
         })
+        console.log(this.elements.images)
 
         split({
             element: this.elements.title[0],
@@ -66,7 +66,7 @@ export default class Preloader extends Component {
                 delay: 2
             })
 
-            this.animateOut.to([this.elements.upnumber,this.elements.downumber], {
+            this.animateOut.to([this.elements.upnumber, this.elements.downumber], {
                 autoAlpha: 0,
                 ease: 'expo.out',
                 duration: 1.2,

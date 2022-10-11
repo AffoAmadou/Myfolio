@@ -1,8 +1,9 @@
-.project{
+.project {
     @extend %page;
-    width: 100vw;
+    width   : 100vw;
     overflow: hidden;
 }
+
 .project__wrapper {}
 
 .project__head {
@@ -13,8 +14,8 @@
 
     @include media('<phone') {
         margin-top: 26rem;
-        height: 42.2rem;
-     }
+        height    : 42.2rem;
+    }
 }
 
 .project__image {
@@ -23,7 +24,7 @@
     position: relative;
 
     @include media('<phone') {
-       height: 42.2rem;
+        height: 42.2rem;
     }
 }
 
@@ -36,19 +37,18 @@
 
 .project__title {
     @extend %title-210;
-    text-align   : center;
-    position     : absolute;
-    top          : 50%;
-    left         : 50%;
-    transform    : translate(-50%, -50%);
-    color        : #efefef;
 
-    width: 124.1rem;
+    text-align: center;
+    position  : absolute;
+    top       : 50%;
+    left      : 50%;
+    transform : translate(-50%, -50%);
+    color     : $color-white;
+    width     : 126.1rem;
 
     @include media('<phone') {
-        width: 50.4rem;
+        width: 52.4rem;
         color: black;
-        top: -4rem;
-
-      }
+        top  : -4rem;
+    }
 }
