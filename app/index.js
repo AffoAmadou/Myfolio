@@ -8,6 +8,7 @@ import each from 'lodash/each'
 // import Collections from 'pages/Collections'
 // import Detail from 'pages/Detail'
 import Home from 'pages/Home'
+import Preloader from 'components/Preloader'
 
 //* IMPORTO GLI INDEX PRESENTI NELLE CARTELLE
 
@@ -16,14 +17,21 @@ class App {
         this.createContent() //! Questo metodo mi permette di creare il content e cosi da recuperare il data-template 
         //! E percio sapere in che pagina mi trovo
 
-        // this.createPreloader()
+        this.createPreloader()
         // this.createNavigation()
         this.createPages()
         //     this.createCanvas()
-        //     this.addEventListeners()
+        this.addEventListeners()
         this.addLinkListeners()
 
-        //     this.update()
+        this.update()
+    }
+
+    createPreloader() {
+        this.preloader = new Preloader()
+
+        //*Event Emitter quando il preloader ha caricato le immagini chiamo il metodo che sta qui sotto
+        this.preloader.once('complete', this.onPreloaded.bind(this))
     }
 
     createContent() {
@@ -45,11 +53,16 @@ class App {
         this.page = this.pages[this.template] //?INSERISCO LA PAGINA IN CUI SONO ATTUALMENTE
         // console.log(this.page)
         this.page.create() //? Chiamo il create nella classe page che é legata ad ognuna delle pagine
-        this.page.show()
+
         // this.page.hide()
 
     }
 
+    onPreloaded() {
+        this.preloader.destroy()
+        this.onResize()
+        this.page.show()
+    }
 
     async onChange(url) {
         // console.log(url)
@@ -72,10 +85,16 @@ class App {
 
             this.content.innerHTML = divContent.innerHTML //! E lo inserisco nel content della pagina in cui sono ora
 
-            this.page =this.pages[this.template] //!Riassegno la pagina
+            this.page = this.pages[this.template] //!Riassegno la pagina
+
 
             this.page.create() //? Chiamo il create nella classe page che é legata ad ognuna delle pagine
+
+            this.onResize()
+
             this.page.show()
+
+            this.addLinkListeners()
         }
         else {
             console.log("error")
@@ -83,6 +102,24 @@ class App {
 
     }
 
+    onResize() {
+        if (this.page && this.page.onResize) {
+            this.page.onResize()
+        }
+    }
+
+    update() {
+        if (this.page && this.page.update) {
+            this.page.update()
+
+        }
+
+        this.frame = window.requestAnimationFrame(this.update.bind(this))
+    }
+
+    addEventListeners() {
+        window.addEventListener('resize', this.onResize.bind(this))
+    }
 
     addLinkListeners() {
         const links = document.querySelectorAll('a') //! Recupero tutti i link della pagina 

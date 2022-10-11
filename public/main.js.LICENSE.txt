@@ -18,6 +18,8 @@
  * @author: Jack Doyle, jack@greensock.com
 */
 
+/*! ../classes/Components */
+
 /*! ../modules/logger/index.js */
 
 /*! ../node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */
@@ -26,7 +28,11 @@
 
 /*! ./CSSPlugin.js */
 
+/*! ./ExecutionEnvironment */
+
 /*! ./Logger */
+
+/*! ./UserAgent_DEPRECATED */
 
 /*! ./_Symbol */
 
@@ -98,6 +104,8 @@
 
 /*! ./isBuffer */
 
+/*! ./isEventSupported */
+
 /*! ./isFunction */
 
 /*! ./isLength */
@@ -128,6 +136,8 @@
 
 /*! ./socket.js */
 
+/*! ./src/normalizeWheel.js */
+
 /*! ./stubFalse */
 
 /*! ./surrogate-pairs */
@@ -148,6 +158,8 @@
 
 /*! classes/Page */
 
+/*! components/Preloader */
+
 /*! events */
 
 /*! gsap */
@@ -156,13 +168,19 @@
 
 /*! lodash/each */
 
+/*! normalize-wheel */
+
 /*! pages/About */
 
 /*! pages/Home */
 
 /*! pages/Projects */
 
+/*! prefix */
+
 /*! tapable/lib/SyncBailHook */
+
+/*! utils/text */
 
 /*! webpack/hot/emitter.js */
 
@@ -173,6 +191,10 @@
 /*!**********************!*\
   !*** ./app/index.js ***!
   \**********************/
+
+/*!***************************!*\
+  !*** ./app/utils/text.js ***!
+  \***************************/
 
 /*!***************************!*\
   !*** ./styles/index.scss ***!
@@ -190,6 +212,14 @@
   !*** ./app/pages/About/index.js ***!
   \**********************************/
 
+/*!***********************************!*\
+  !*** ./app/classes/Components.js ***!
+  \***********************************/
+
+/*!*************************************!*\
+  !*** ./app/components/Preloader.js ***!
+  \*************************************/
+
 /*!*************************************!*\
   !*** ./app/pages/Projects/index.js ***!
   \*************************************/
@@ -204,6 +234,10 @@
 
 /*!**************************************!*\
   !*** ./node_modules/lodash/_root.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./node_modules/prefix/index.js ***!
   \**************************************/
 
 /*!***************************************!*\
@@ -358,6 +392,10 @@
   !*** ./node_modules/lodash/_createBaseFor.js ***!
   \***********************************************/
 
+/*!***********************************************!*\
+  !*** ./node_modules/normalize-wheel/index.js ***!
+  \***********************************************/
+
 /*!************************************************!*\
   !*** ./node_modules/lodash/_createBaseEach.js ***!
   \************************************************/
@@ -418,9 +456,17 @@
   !*** ./node_modules/html-entities/lib/named-references.js ***!
   \************************************************************/
 
+/*!************************************************************!*\
+  !*** ./node_modules/normalize-wheel/src/normalizeWheel.js ***!
+  \************************************************************/
+
 /*!*************************************************************!*\
   !*** ./node_modules/webpack-dev-server/client/utils/log.js ***!
   \*************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/normalize-wheel/src/isEventSupported.js ***!
+  \**************************************************************/
 
 /*!***************************************************************!*\
   !*** ./node_modules/html-entities/lib/numeric-unicode-map.js ***!
@@ -429,6 +475,14 @@
 /*!*****************************************************************!*\
       !*** ./node_modules/webpack/lib/logging/createConsoleLogger.js ***!
       \*****************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/normalize-wheel/src/ExecutionEnvironment.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/normalize-wheel/src/UserAgent_DEPRECATED.js ***!
+  \******************************************************************/
 
 /*!******************************************************************!*\
   !*** ./node_modules/webpack-dev-server/client/utils/parseURL.js ***!
@@ -471,8 +525,23 @@
   \********************************************************************************/
 
 /*!********************************************************************************************************************************************!*\
-  !*** ./node_modules/webpack-dev-server/client/index.js?protocol=ws%3A&hostname=0.0.0.0&port=8080&pathname=%2Fws&logging=info&reconnect=10 ***!
+  !*** ./node_modules/webpack-dev-server/client/index.js?protocol=ws%3A&hostname=0.0.0.0&port=8081&pathname=%2Fws&logging=info&reconnect=10 ***!
   \********************************************************************************************************************************************/
+
+/**
+ * Checks if an event is supported in the current execution environment.
+ *
+ * NOTE: This will not work correctly for non-generic events such as `change`,
+ * `reset`, `load`, `error`, and `select`.
+ *
+ * Borrows from Modernizr.
+ *
+ * @param {string} eventNameSuffix Event name, e.g. "click".
+ * @param {?boolean} capture Check if the capture phase is supported.
+ * @return {boolean} True if the event is supported.
+ * @internal
+ * @license Modernizr 3.0.0pre (Custom Build) | MIT
+ */
 
 //! .about ad esempio passato da una delle pagine  
 

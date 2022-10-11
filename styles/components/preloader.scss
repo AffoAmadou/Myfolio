@@ -45,7 +45,7 @@
 
 
 .preloader {
-  display: none;
+  // display: none;
   @extend %cover;
   @extend %center;
   z-index         : 2;
@@ -54,28 +54,43 @@
 }
 
 .preloader__container {
-  width          : 69rem;
-  height         : 26.3rem;
+  width          : 70rem;
+  height         : 26.4rem;
   display        : flex;
   flex-direction : column;
   justify-content: space-between;
 }
 
 .preloader__text {
-  font-weight: bold;
+  font-size: 0;
+
+  span {
+    display : inline-block; //!Con l'inline block posso fare le animazioni
+    overflow: hidden;
+  }
+
+  span span {
+    @extend %description-50;
+  }
 }
 
 .preloader__number {
   align-self: flex-end;
+  font-size: 0;
+}
+
+
+.preloader__reverse__number {
+  font-size: 0;
+}
+
+.preloader__reverse__text {
+  display : inline-block;
+  @extend %description-30;
+
 }
 
 .preloader__number__text {
-  font-size: 3rem;
-
+  display : inline-block;
+  @extend %description-30;
 }
-
-.preloader__reverse__number {
-  font-size: 3rem;
-}
-
-.preloader__reverse__text {}
