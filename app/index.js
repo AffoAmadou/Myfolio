@@ -21,10 +21,10 @@ class App {
         // this.createNavigation()
         this.createPages()
         //     this.createCanvas()
-        //     this.addEventListeners()
+        this.addEventListeners()
         this.addLinkListeners()
 
-        //     this.update()
+        this.update()
     }
 
     createPreloader() {
@@ -53,13 +53,14 @@ class App {
         this.page = this.pages[this.template] //?INSERISCO LA PAGINA IN CUI SONO ATTUALMENTE
         // console.log(this.page)
         this.page.create() //? Chiamo il create nella classe page che é legata ad ognuna delle pagine
-      
+
         // this.page.hide()
 
     }
 
     onPreloaded() {
         this.preloader.destroy()
+        this.onResize()
         this.page.show()
     }
 
@@ -86,7 +87,11 @@ class App {
 
             this.page = this.pages[this.template] //!Riassegno la pagina
 
+
             this.page.create() //? Chiamo il create nella classe page che é legata ad ognuna delle pagine
+
+            this.onResize()
+
             this.page.show()
 
             this.addLinkListeners()
@@ -95,6 +100,25 @@ class App {
             console.log("error")
         }
 
+    }
+
+    onResize() {
+        if (this.page && this.page.onResize) {
+            this.page.onResize()
+        }
+    }
+
+    update() {
+        if (this.page && this.page.update) {
+            this.page.update()
+
+        }
+
+        this.frame = window.requestAnimationFrame(this.update.bind(this))
+    }
+
+    addEventListeners() {
+        window.addEventListener('resize', this.onResize.bind(this))
     }
 
     addLinkListeners() {

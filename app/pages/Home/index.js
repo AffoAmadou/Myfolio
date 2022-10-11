@@ -11,7 +11,8 @@ export default class Home extends Page {
                 title: '.home__title__article__title',
                 links: '.home__gallery__link',
                 article_title: '.home__article__title',
-                description: '.home__article__description'
+                description: '.home__article__description',
+                // wrapper:'.home__wrapper'
 
             }
         })

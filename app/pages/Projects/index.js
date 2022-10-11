@@ -8,13 +8,11 @@ export default class Project extends Page {
             element: '.project',
             elements: {
                 navigation: document.querySelector('.navigation'),
+                wrapper: '.project__wrapper'
             }
-
         })
-
     }
 
-    
     create() {
         super.create()
     }
