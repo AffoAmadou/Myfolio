@@ -13,8 +13,7 @@ html {
   line-height: 1;
 
   position         : fixed; //!Per rimuovere lo scroll 
-  
-   overflow      : hidden;
+  overflow      : hidden;
 
   @include media('<phone') {
     font-size: calc($vw / 750 * 10);
@@ -44,13 +43,13 @@ body {
   }
 
   img {
-    // opacity: 0;
-    // transition: opacity 0.4s ease;
+    opacity: 0;
+    transition: opacity 0.4s ease;
     vertical-align: middle;
 
-    // &.loaded {
-    //   opacity: 1;
-    // }
+    &.loaded {
+      opacity: 1;
+    }
   }
 
   // canvas {
@@ -61,10 +60,10 @@ body {
 
   .content {
     @extend %cover;
-    
   }
 
   [data-animation='paragraph'],
+  [data-animation='subparagraph'],
   [data-animation='label'],
   [data-animation='title'] {
     span {

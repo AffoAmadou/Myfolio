@@ -27,6 +27,9 @@ class App {
         this.update()
     }
 
+    /**
+     * //*Events
+     */
     createPreloader() {
         this.preloader = new Preloader()
 
@@ -117,6 +120,9 @@ class App {
         this.frame = window.requestAnimationFrame(this.update.bind(this))
     }
 
+    /**
+     * //*LISTENERS
+     */
     addEventListeners() {
         window.addEventListener('resize', this.onResize.bind(this))
     }

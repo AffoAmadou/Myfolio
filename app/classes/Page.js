@@ -2,17 +2,32 @@
 //! una sola volta senza bisogno di chiamarli in tutte le pagine
 
 import each from 'lodash/each'
+import map from 'lodash/map'
+
 import GSAP from 'gsap'
 import Prefix from 'prefix'
 import NormalizeWheel from 'normalize-wheel'
 
+import Title from 'animations/Title'
+import Paragraph from 'animations/Paragraph'
+import Label from 'animations/Label'
+import Section from 'animations/Section'
+import Preloader from '../components/Preloader'
+
+import AsyncLoad from './AsyncLoad'
 export default class Page {
 
     constructor({ id, element, elements }) {
         this.id = id
         this.selector = element //! .about ad esempio passato da una delle pagine  
         this.selectorChildren = {
-            ...elements
+            ...elements,
+            animationsTitles: '[data-animation="title"]',
+            animationsParagraphs: '[data-animation="paragraph"]',
+            animationsLabels: '[data-animation="label"]',
+            animationsSection: '[data-animation="color"]',
+
+            preloaders: '[data-src]'
         }
 
         this.transformPrefix = Prefix('transform')
@@ -62,8 +77,51 @@ export default class Page {
 
         })
 
+        this.createAnimations()
+        this.createPreloader()
     }
 
+    createAnimations() {
+        this.animations = []
+
+        //*Title
+        this.animationsTitles = map(this.elements.animationsTitles, element => {
+            return new Title({ element })
+        })
+
+        this.animations.push(...this.animationsTitles)
+
+        //*Paragraphs
+        this.animationsParagraphs = map(this.elements.animationsParagraphs, element => {
+            return new Paragraph({ element })
+        })
+
+        this.animations.push(...this.animationsParagraphs)
+
+        //*SUBParagraphs
+        this.animationsSection = map(this.elements.animationsSection, element => {
+            return new Section({ element })
+        })
+
+        this.animations.push(...this.animationsSection)
+
+
+        //*Labels
+        this.animationsLabels = map(this.elements.animationsLabels, element => {
+            return new Label({ element })
+        })
+        this.animations.push(...this.animationsLabels)
+    }
+
+    createPreloader() {
+        this.preloaders = map(this.elements.preloaders, element => {
+            return new AsyncLoad({ element }) //!CREARE LE IMMAGINI DOPO CAMBIO PAGINA
+        })
+    }
+
+    /**
+     * //!Animation
+     */
     show() {
         return new Promise(resolve => {
             this.animationIn = GSAP.timeline()
@@ -85,7 +143,7 @@ export default class Page {
     hide() {
         return new Promise(resolve => {
 
-            this.removeEventListeners()
+            this.destroy()
             this.animationOut = GSAP.timeline()
 
             this.animationOut.to(this.element, {
@@ -95,7 +153,13 @@ export default class Page {
         })
     }
 
+    destroy() {
 
+    }
+
+    /**
+     * //!Event
+     */
     //*Debug dello scroll per lo smoothscroll
 
     onMouseWheel(event) {
@@ -107,8 +171,13 @@ export default class Page {
         if (this.elements.wrapper) {
             this.scroll.limit = this.elements.wrapper[0].clientHeight - window.innerHeight
         }
+
+        each(this.animations, animation => animation.onResize())
     }
 
+    /**
+     * //!Loop
+     */
     update() {
         this.scroll.target = GSAP.utils.clamp(0, this.scroll.limit, this.scroll.target)
 
@@ -123,6 +192,10 @@ export default class Page {
             this.elements.wrapper[0].style[this.transformPrefix] = `translateY(-${this.scroll.current}px)`
         }
     }
+
+    /**
+     * //!Listeners
+     */
     addEventListeners() {
         window.addEventListener('mousewheel', this.onMouseWheelEvent)
     }
@@ -133,6 +206,13 @@ export default class Page {
 
     //* Fine debug dello scroll
 
+    /**
+     * //!Destroy
+     */
+
+    destroy(){
+        this.removeEventListeners()
+    }
 }
 
 
