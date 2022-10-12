@@ -25,6 +25,10 @@ export default class Section extends Animation {
             color: "#EFEFEF"
         })
 
+        this.timelineIn.to(".navigation__logo__image", {
+            fill: "#EFEFEF"
+        })
+
         // each(this.element, (line, index) => {
         this.timelineIn.fromTo(this.element, {
             backgroundColor: "#EFEFEF",
@@ -54,6 +58,10 @@ export default class Section extends Animation {
 
         this.timelineOut.set(".navigation__list__link", {
             color: "#1B1B19"
+        })
+
+        this.timelineOut.set(".navigation__logo__image", {
+            fill: "#1B1B19"
         })
     }
 

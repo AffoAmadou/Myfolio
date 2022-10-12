@@ -115,9 +115,13 @@ export default class Page {
 
     createPreloader() {
         this.preloaders = map(this.elements.preloaders, element => {
-            return new AsyncLoad({element}) //!CREARE LE IMMAGINI DOPO CAMBIO PAGINA
+            return new AsyncLoad({ element }) //!CREARE LE IMMAGINI DOPO CAMBIO PAGINA
         })
     }
+
+    /**
+     * //!Animation
+     */
     show() {
         return new Promise(resolve => {
             this.animationIn = GSAP.timeline()
@@ -139,7 +143,7 @@ export default class Page {
     hide() {
         return new Promise(resolve => {
 
-            this.removeEventListeners()
+            this.destroy()
             this.animationOut = GSAP.timeline()
 
             this.animationOut.to(this.element, {
@@ -149,7 +153,13 @@ export default class Page {
         })
     }
 
+    destroy() {
 
+    }
+
+    /**
+     * //!Event
+     */
     //*Debug dello scroll per lo smoothscroll
 
     onMouseWheel(event) {
@@ -165,6 +175,9 @@ export default class Page {
         each(this.animations, animation => animation.onResize())
     }
 
+    /**
+     * //!Loop
+     */
     update() {
         this.scroll.target = GSAP.utils.clamp(0, this.scroll.limit, this.scroll.target)
 
@@ -179,6 +192,10 @@ export default class Page {
             this.elements.wrapper[0].style[this.transformPrefix] = `translateY(-${this.scroll.current}px)`
         }
     }
+
+    /**
+     * //!Listeners
+     */
     addEventListeners() {
         window.addEventListener('mousewheel', this.onMouseWheelEvent)
     }
@@ -189,6 +206,13 @@ export default class Page {
 
     //* Fine debug dello scroll
 
+    /**
+     * //!Destroy
+     */
+
+    destroy(){
+        this.removeEventListeners()
+    }
 }
 
 
