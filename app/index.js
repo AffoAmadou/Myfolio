@@ -4,13 +4,12 @@
 import About from 'pages/About'
 import Project from 'pages/Projects'
 import each from 'lodash/each'
-
-// import Collections from 'pages/Collections'
-// import Detail from 'pages/Detail'
 import Home from 'pages/Home'
 import Preloader from 'components/Preloader'
-
 import Detection from 'classes/Detection'
+
+
+import Canvas from 'components/Canvas'
 //* IMPORTO GLI INDEX PRESENTI NELLE CARTELLE
 
 class App {
@@ -21,7 +20,7 @@ class App {
         this.createPreloader()
         // this.createNavigation()
         this.createPages()
-        //     this.createCanvas()
+        this.createCanvas()
         this.addEventListeners()
         this.addLinkListeners()
 
@@ -38,6 +37,9 @@ class App {
         this.preloader.once('complete', this.onPreloaded.bind(this))
     }
 
+    createCanvas() {
+        this.canvas = new Canvas()
+    }
     createContent() {
         //?Qui eseguo il create content per sapere in quale pagina mi trovo attualmente
         this.content = document.querySelector('.content')
@@ -117,17 +119,23 @@ class App {
     }
 
     onResize() {
+        if (this.canvas && this.canvas.onResize) {
+            this.canvas.onResize()
+        }
+
         if (this.page && this.page.onResize) {
             this.page.onResize()
         }
     }
 
     update() {
-        if (this.page && this.page.update) {
-            this.page.update()
-
+        if (this.canvas && this.canvas.update) {
+            this.canvas.update()
         }
 
+        if (this.page && this.page.update) {
+            this.page.update()
+        }
         this.frame = window.requestAnimationFrame(this.update.bind(this))
     }
 
