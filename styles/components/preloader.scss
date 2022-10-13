@@ -1,64 +1,69 @@
-// .preloader {
-//   @extend %cover;
-//   @extend %center;
-//   background: $color-contessa;
-//   color     : $color-white;
-//   text-align: center;
-//   z-index   : z('preloader');
-// }
-
-// .preloader__text {
-//    font-size: 0;
-//   // max-width: 66rem;
-//   @extend %title-53;
-
-//   span { //!é creato automaticamente dalla funzione nell utils text
-//     display: inline-block; //!Senza questo le animazioni non funzionerebbero (Per l'altezza)
-//     overflow: hidden;
-//   }
-
-//   span span {
-//     @extend %title-53;
-//   }
-// }
-
-// .preloader__number {
-//   @extend %description-14;
-//   position : absolute;
-
-//   overflow : hidden;
-
-//   bottom   : 5.1rem;
-//   left     : 50%;
-//   transform: translateX(-50%);
-
-//   @include media('<phone') {
-//     font-size: 2.5rem;
-//   }
-// }
-
-// .preloader__number__text {
-//   display: inline-block;
-// }
-
-
-
-
 .preloader {
   // display: none;
   @extend %cover;
   @extend %center;
-  z-index         : 2;
+  z-index: 2;
+  color  : #EFEFEF;
+
+  display              : grid;
+  grid-template-columns: 100%;
+  pointer-events       : none;
+  grid-template-rows   : repeat(2, 1fr);
+
+  width : 100vw;
+  height: 100vh;
+}
+
+//* Overlay //
+.preloader__overlay {
+
+  width : 100%;
+  height: 100%;
+
   background-color: #141411;
-  color           : #EFEFEF;
+  transform       : scaleY(1);
+  will-change     : transform;
+
+  &:first-child {
+    transform-origin: 100% 0%;
+  }
+
+  &:nth-child(2) {
+    transform-origin: 0% 100%;
+  }
+}
+
+//! Overlay //
+
+.preloader__background {
+  position        : absolute;
+  top             : 50%;
+  left            : 50%;
+  transform       : translate(-50%, -50%);
+
+
+  background-color: #10100E;
+  transform-origin: 0% 100%;
+  width           : 95.5rem;
+  height          : 36.4rem;
+
+
 }
 
 .preloader__container {
-  width          : 70rem;
-  height         : 26.4rem;
+  position: absolute;
+  top     : 50%;
+  left    : 50%;
+  transform: translate(-50%, -50%);
+
+  width : 70rem;
+  height: 26.4rem;
+
   display        : flex;
   flex-direction : column;
   justify-content: space-between;
+
+
 }
 
 .preloader__text {
@@ -76,21 +81,23 @@
 
 .preloader__number {
   align-self: flex-end;
-  font-size: 0;
+  font-size : 0;
 }
-
 
 .preloader__reverse__number {
   font-size: 0;
 }
 
 .preloader__reverse__text {
-  display : inline-block;
+  display: inline-block;
   @extend %description-30;
 
 }
 
 .preloader__number__text {
-  display : inline-block;
+  display: inline-block;
   @extend %description-30;
 }
+
+
+//TODO  %  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
