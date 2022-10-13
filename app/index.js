@@ -10,6 +10,7 @@ import each from 'lodash/each'
 import Home from 'pages/Home'
 import Preloader from 'components/Preloader'
 
+import Detection from 'classes/Detection'
 //* IMPORTO GLI INDEX PRESENTI NELLE CARTELLE
 
 class App {
@@ -67,7 +68,14 @@ class App {
         this.page.show()
     }
 
-    async onChange(url) {
+    onPopState() {
+        this.onChange({
+            url: window.location.pathname,
+            push: false
+        })
+    }
+
+    async onChange({ url, push = true }) {
         // console.log(url)
         await this.page.hide()
 
@@ -79,6 +87,10 @@ class App {
             const div = document.createElement('div') //!Creo una div per metterci la parte del "html" che voglio
             //!cosi da non mettere anche i doctype etc 
 
+            if (push) {
+                window.history.pushState({}, '', url)
+            }
+
             div.innerHTML = html
 
             const divContent = div.querySelector('.content')//! Recupero solo il .content che contiene la parte di divs che cambia in ogni pagina
@@ -87,7 +99,6 @@ class App {
             this.content.setAttribute('data-template', this.template);//*Cambio il data-template per far sapere che sono in questa pagina attualmente
 
             this.content.innerHTML = divContent.innerHTML //! E lo inserisco nel content della pagina in cui sono ora
-
             this.page = this.pages[this.template] //!Riassegno la pagina
 
 
@@ -124,6 +135,7 @@ class App {
      * //*LISTENERS
      */
     addEventListeners() {
+        window.addEventListener('popstate', this.onPopState.bind(this))
         window.addEventListener('resize', this.onResize.bind(this))
     }
 
@@ -135,7 +147,7 @@ class App {
                 const { href } = link
                 event.preventDefault() //!all click non eseguo il cambio di pagina come dovrebbe esserer
 
-                this.onChange(href)//*Funzione che si trova sopra Per gestire il cambio di pagina
+                this.onChange({ url: href })//*Funzione che si trova sopra Per gestire il cambio di pagina
                 // console.log(event, href)
             }
         })

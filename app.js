@@ -61,6 +61,9 @@ app.use((req, res, next) => {
   res.locals.isPhone = ua.device.type === 'mobile';
   res.locals.isTablet = ua.device.type === 'tablet';
 
+
+  console.log(res.locals.isDesktop, res.locals.isPhone, res.locals.isTablet)
+
   res.locals.Link = HandleLinkResolver;
   res.locals.PrismicH = PrismicH;
   res.locals.Numbers = (index) => {
@@ -140,7 +143,7 @@ app.get('/', async (req, res) => {
   const api = await initApi(req);
   const defaults = await handleRequest(api);
 
-console.log(defaults.projects.reverse());
+// console.log(defaults.projects.reverse());
 
 
   res.render('pages/home', {
@@ -185,7 +188,7 @@ app.get('/project/:uid', async (req, res) => {
 
   });
 
-  console.log(project.data.body);
+  // console.log(project.data.body);
   res.render('pages/project', {
     ...defaults,
     project,
