@@ -13,7 +13,9 @@ export default class Preloader extends Component {
                 title: '.preloader__text',
                 upnumber: '.preloader__number__text',
                 downumber: '.preloader__reverse__text',
-                images: document.querySelectorAll('img')
+                images: document.querySelectorAll('img'),
+                overlay: '.preloader__overlay',
+                container: '.preloader__background'
             }
         })
         console.log(this.elements.images)
@@ -63,28 +65,39 @@ export default class Preloader extends Component {
 
         return new Promise(resolve => {
             this.animateOut = GSAP.timeline({
-                delay: 2
+                defaults: {
+                    duration: 1,
+                    ease: 'power3.inOut'
+                }
             })
 
             this.animateOut.to([this.elements.upnumber, this.elements.downumber], {
                 autoAlpha: 0,
-                ease: 'expo.out',
-                duration: 1.2,
-                y: "100%"
-            })
+                y: "-100%"
+            }, 'myLabel')
 
             this.animateOut.to(this.elements.titleSpans, {
+                delay: .5,
                 autoAlpha: 0,
-                delay: .1,
-                ease: 'expo.out',
-                duration: 1.5,
-                y: "100%"
+                y: "-100%"
+            }, 'myLabel')
+
+            this.animateOut.to(this.elements.container, {
+                delay: .5,
+                scaleY: 0,
+            }, 'myLabel')
+
+
+
+            this.animateOut.to(this.elements.overlay, {
+                scaleY: 0,
             })
 
             this.animateOut.to(this.element, {
                 scaleY: 0,
                 transformOrigin: '100% 100%'
             })
+
             //*Dopo aver fatto l'animazione di uscita faccio l'emit in APP js cosiche il preloader
             //* corrente chiami il destroy cosi da essere rimosso lui
             this.animateOut.call(_ => {
