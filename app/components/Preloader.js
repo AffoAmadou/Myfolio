@@ -18,7 +18,6 @@ export default class Preloader extends Component {
                 container: '.preloader__background'
             }
         })
-        console.log(this.elements.images)
 
         split({
             element: this.elements.title[0],
