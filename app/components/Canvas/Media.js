@@ -45,6 +45,8 @@ export default class Media {
         })
 
         this.mesh.setParent(this.scene)
+
+        this.mesh.scale.x = 2
         this.mesh.position.x += this.index * this.mesh.scale.x
 
     }

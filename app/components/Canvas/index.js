@@ -1,5 +1,7 @@
 import { Camera, Renderer, Transform } from 'ogl'
 import Home from './Home'
+
+
 export default class Canvas {
     constructor() {
         this.createRenderer()
@@ -9,7 +11,10 @@ export default class Canvas {
     }
 
     createRenderer() {
-        this.renderer = new Renderer()
+        this.renderer = new Renderer({
+            alpha: true,
+            antialias: true,
+        });
 
         this.gl = this.renderer.gl
 
@@ -26,10 +31,10 @@ export default class Canvas {
     }
 
     createHome() {
-       this.home = new Home({
-        gl: this.gl,
-        scene: this.scene
-       })
+        this.home = new Home({
+            gl: this.gl,
+            scene: this.scene
+        })
 
     }
 
@@ -39,6 +44,21 @@ export default class Canvas {
         this.camera.perspective({
             aspect: window.innerWidth / window.innerHeight
         })
+
+
+        const fov = this.camera.fov * (Math.PI / 180);
+        const height = 2 * Math.tan(fov / 2) * this.camera.position.z;
+        const width = height * this.camera.aspect;
+
+
+        this.sizes = {
+            height,
+            width
+        }
+
+        this.home.onResize(){
+            
+        }
     }
 
     update() {
