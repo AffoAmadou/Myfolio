@@ -56,9 +56,9 @@ export default class Canvas {
             width
         }
 
-        this.home.onResize(){
-            
-        }
+        this.home.onResize({
+            sizes: this.sizes
+        })
     }
 
     update() {
