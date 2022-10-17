@@ -57,7 +57,6 @@ export default class Media {
         this.updateScale()
         this.updateX()
         this.updateY()
-
     }
     /**
       * Events
