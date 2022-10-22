@@ -38,8 +38,6 @@ export default class Page {
             last: 0,
             limit: 0
         }
-
-
     }
 
     //? Metodo per creare una pagina ed ottenere tutti gli elementi utili per le animazioni etc
