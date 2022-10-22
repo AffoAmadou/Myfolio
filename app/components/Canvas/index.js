@@ -101,7 +101,6 @@ export default class Canvas {
         const x = event.touches ? event.touches[0].clientX : event.clientX
         const y = event.touches ? event.touches[0].clientY : event.clientY
 
-        console.log(y)
         this.x.end = x
         this.y.end = y
 
@@ -137,7 +136,11 @@ export default class Canvas {
         }
 
     }
-
+    onWheel(event) {
+        if (this.home) {
+            this.home.onWheel(event)
+        }
+    }
     /**
      * //* LOOP
      */

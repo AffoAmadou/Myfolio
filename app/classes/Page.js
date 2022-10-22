@@ -6,7 +6,6 @@ import map from 'lodash/map'
 
 import GSAP from 'gsap'
 import Prefix from 'prefix'
-import NormalizeWheel from 'normalize-wheel'
 
 import Title from 'animations/Title'
 import Paragraph from 'animations/Paragraph'
@@ -39,9 +38,6 @@ export default class Page {
             last: 0,
             limit: 0
         }
-
-
-        this.onMouseWheelEvent = this.onMouseWheel.bind(this)//!SENZA QUESTO LA VARIABILE THIS.SCROLL É UNDEFINED
     }
 
     //? Metodo per creare una pagina ed ottenere tutti gli elementi utili per le animazioni etc
@@ -162,8 +158,7 @@ export default class Page {
      */
     //*Debug dello scroll per lo smoothscroll
 
-    onMouseWheel(event) {
-        const { pixelY } = NormalizeWheel(event) //* Per normalizzare la velocita in ogni browser
+    onWheel({ pixelY }) {
         this.scroll.target += pixelY
     }
 
@@ -197,11 +192,9 @@ export default class Page {
      * //!Listeners
      */
     addEventListeners() {
-        window.addEventListener('mousewheel', this.onMouseWheelEvent)
     }
 
     removeEventListeners() {
-        window.addEventListener('mouseWheel', this.onMouseWheelEvent)
     }
 
     //* Fine debug dello scroll
@@ -210,7 +203,7 @@ export default class Page {
      * //!Destroy
      */
 
-    destroy(){
+    destroy() {
         this.removeEventListeners()
     }
 }

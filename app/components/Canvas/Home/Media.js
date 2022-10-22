@@ -15,6 +15,11 @@ export default class Media {
         this.createTexture()
         this.createProgram()
         this.createMesh()
+
+        this.extra = {
+            x: 0,
+            y: 0
+        }
     }
     createTexture() {
         this.texture = new Texture(this.gl)
@@ -61,8 +66,14 @@ export default class Media {
     /**
       * Events
       */
-    onResize(sizes) {
+    onResize(sizes, scroll) {
+        this.extra = {
+            x: 0,
+            y: 0
+        }
         this.createBounds(sizes)
+        this.updateX(scroll && scroll.x)
+        this.updateY(scroll && scroll.y)
     }
 
     /**
@@ -78,18 +89,18 @@ export default class Media {
 
     updateX(x = 0) {
         this.x = (this.bounds.left + x) / window.innerWidth
-        this.mesh.position.x = (-this.sizes.width / 2) + (this.mesh.scale.x / 2) + (this.x * this.sizes.width)
+        this.mesh.position.x = (-this.sizes.width / 2) + (this.mesh.scale.x / 2) + (this.x * this.sizes.width) + this.extra.x
     }
 
     updateY(y = 0) {
         this.y = (this.bounds.top + y) / window.innerHeight
-        this.mesh.position.y = (this.sizes.height / 2) - (this.mesh.scale.y / 2) - (this.y * this.sizes.height)
+        this.mesh.position.y = (this.sizes.height / 2) - (this.mesh.scale.y / 2) - (this.y * this.sizes.height) + this.extra.y
     }
 
     update(scroll) {
         if (!this.bounds) return
         this.updateX(scroll.x)
-        this.updateY(scroll.y)
+        // this.updateY(scroll.y)
     }
 
 

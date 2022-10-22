@@ -8,6 +8,8 @@ import Home from 'pages/Home'
 import Preloader from 'components/Preloader'
 import Detection from 'classes/Detection'
 
+import NormalizeWheel from 'normalize-wheel'
+
 
 import Canvas from 'components/Canvas'
 //* IMPORTO GLI INDEX PRESENTI NELLE CARTELLE
@@ -122,10 +124,13 @@ class App {
         if (this.canvas && this.canvas.onResize) {
             this.canvas.onResize()
         }
+        window.requestAnimationFrame(_ => {
+            if (this.page && this.page.onResize) {
+                this.page.onResize()
+            }
+        })
 
-        if (this.page && this.page.onResize) {
-            this.page.onResize()
-        }
+
     }
 
 
@@ -143,6 +148,19 @@ class App {
         if (this.canvas && this.canvas.onTouchUp) {
             this.canvas.onTouchUp(event)
         }
+    }
+
+    onWheel(event) {
+        const normalizedWheel = NormalizeWheel(event) //* Per normalizzare la velocita in ogni browser
+
+        if (this.canvas && this.canvas.onWheel) {
+            this.canvas.onWheel(normalizedWheel)
+        }
+
+        if (this.page && this.page.onWheel) {
+            this.page.onWheel(normalizedWheel)
+        }
+
     }
 
     /**
@@ -164,6 +182,9 @@ class App {
      * //*LISTENERS
      */
     addEventListeners() {
+
+        window.addEventListener('mousewheel', this.onWheel.bind(this))
+
         window.addEventListener('popstate', this.onPopState.bind(this))
 
         window.addEventListener('mousedown', this.onTouchDown.bind(this))
