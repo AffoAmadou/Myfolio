@@ -3,6 +3,10 @@
     height          : 100vh;
     margin-bottom: .1rem;
     @extend %center;
+    pointer-events: none;
+    overflow: hidden;
+
+    visibility: hidden;
 }
 .project__mobile__wrapper{
     width: 120.2rem;

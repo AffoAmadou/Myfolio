@@ -10,11 +10,9 @@ export default class Button extends Component {
     }
 
     onMouseEnter() {
-        console.log('enter')
     }
 
     onMouseLeave() {
-        console.log('leave')
     }
     addEventListeners() {
         this.element.addEventListener('mouseenter', this.onMouseEnter)

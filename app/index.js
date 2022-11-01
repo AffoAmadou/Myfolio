@@ -40,8 +40,11 @@ class App {
     }
 
     createCanvas() {
-        this.canvas = new Canvas()
+        this.canvas = new Canvas({
+            template: this.template
+        })
     }
+    
     createContent() {
         //?Qui eseguo il create content per sapere in quale pagina mi trovo attualmente
         this.content = document.querySelector('.content')
@@ -81,6 +84,7 @@ class App {
 
     async onChange({ url, push = true }) {
         // console.log(url)
+         this.canvas.onChangeStart(this.template)
         await this.page.hide()
 
         const request = await window.fetch(url)
@@ -100,11 +104,14 @@ class App {
             const divContent = div.querySelector('.content')//! Recupero solo il .content che contiene la parte di divs che cambia in ogni pagina
 
             this.template = divContent.getAttribute('data-template')
+
+
             this.content.setAttribute('data-template', this.template);//*Cambio il data-template per far sapere che sono in questa pagina attualmente
-
             this.content.innerHTML = divContent.innerHTML //! E lo inserisco nel content della pagina in cui sono ora
-            this.page = this.pages[this.template] //!Riassegno la pagina
 
+            this.canvas.onChangeEnd(this.template)
+
+            this.page = this.pages[this.template] //!Riassegno la pagina
 
             this.page.create() //? Chiamo il create nella classe page che é legata ad ognuna delle pagine
 
