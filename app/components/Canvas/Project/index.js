@@ -65,7 +65,6 @@ export default class {
     }
 
     onWheel({ pixelX, pixelY }) {
-
     }
 
     /**
