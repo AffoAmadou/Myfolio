@@ -1,9 +1,13 @@
+import { values } from 'lodash'
 import { Camera, Renderer, Transform } from 'ogl'
 import Home from './Home'
+import Project from './Project'
 
 
 export default class Canvas {
-    constructor() {
+    constructor({ template }) {
+
+        this.template = template
 
         this.x = {
             start: 0,
@@ -21,7 +25,8 @@ export default class Canvas {
         this.createScene()
 
         this.onResize()
-        this.createHome()
+
+        this.onChangeEnd(this.template)
     }
 
     createRenderer() {
@@ -50,12 +55,56 @@ export default class Canvas {
             scene: this.scene,
             sizes: this.sizes
         })
-
     }
 
+    destroyHome() {
+        if (!this.home) return
+        this.home.destroy()
+        this.home = null
+    }
+
+
+    createProject() {
+        this.project = new Project({
+            gl: this.gl,
+            scene: this.scene,
+            sizes: this.sizes
+        })
+    }
+
+    destroyProject() {
+        if (!this.project) return
+        this.project.destroy()
+        this.project = null
+    }
     /**
      * //*Events
      */
+
+    onChangeStart(){
+        if(this.home){
+            this.home.hide()
+        }
+
+        if(this.project){
+            this.project.hide()
+        }
+    }
+    onChangeEnd(template) {
+
+        if (template === 'home') {
+            this.createHome()
+        } else {
+            this.destroyHome()
+        }
+
+        if (template === 'project') {
+            this.createProject()
+        } else {
+            this.destroyProject()
+        }
+    }
+
     onResize() {
         this.renderer.setSize(window.innerWidth, window.innerHeight)
 
@@ -73,11 +122,16 @@ export default class Canvas {
             height,
             width
         }
+        const values = {
+            sizes: this.sizes
+        }
+
+        if (this.project) {
+            this.project.onResize(values)
+        }
 
         if (this.home) {
-            this.home.onResize({
-                sizes: this.sizes
-            })
+            this.home.onResize(values)
         }
     }
 
@@ -86,12 +140,17 @@ export default class Canvas {
         this.x.start = event.touches ? event.touches[0].clientX : event.clientX
         this.y.start = event.touches ? event.touches[0].clientY : event.clientY
 
+        const values = {
+            x: this.x,
+            y: this.y
+        }
+
+        if (this.project) {
+            this.project.onTouchDown(values)
+        }
 
         if (this.home) {
-            this.home.onTouchDown({
-                x: this.x,
-                y: this.y
-            })
+            this.home.onTouchDown(values)
         }
     }
 
@@ -104,15 +163,18 @@ export default class Canvas {
         this.x.end = x
         this.y.end = y
 
-        this.x.distance = this.x.start - this.x.end
-        this.y.distance = this.y.start - this.y.end
+        const values = {
+            x: this.x,
+            y: this.y
+        }
 
+        if (this.project) {
+            this.project.onTouchMove(values)
+        }
 
         if (this.home) {
-            this.home.onTouchMove({
-                x: this.x,
-                y: this.y
-            })
+            this.home.onTouchMove(values)
+
         }
     }
 
@@ -125,14 +187,17 @@ export default class Canvas {
         this.x.end = x
         this.y.end = y
 
-        this.x.distance = this.x.start - this.x.end
-        this.y.distance = this.y.start - this.y.end
+        const values = {
+            x: this.x,
+            y: this.y
+        }
+
+        if (this.project) {
+            this.project.onTouchUp(values)
+        }
 
         if (this.home) {
-            this.home.onTouchMove({
-                x: this.x,
-                y: this.y
-            })
+            this.home.onTouchUp(values)
         }
 
     }
@@ -145,6 +210,11 @@ export default class Canvas {
      * //* LOOP
      */
     update() {
+
+        if (this.project) {
+            this.project.update()
+        }
+
         if (this.home) {
             this.home.update()
         }
