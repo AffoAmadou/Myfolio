@@ -4,20 +4,16 @@ import Media from "./Media"
 
 import GSAP from 'gsap'
 
-export default class Home {
+export default class {
     constructor({ gl, scene, sizes }) {
         this.gl = gl
         this.sizes = sizes
+        this.scene = scene
 
         this.group = new Transform()
 
         this.galleryElement = document.querySelector('.home__gallery__wrapper')
         this.mediasElements = document.querySelectorAll('.home__gallery__media__image')
-
-        this.createGeometry()
-        this.createGallery()
-
-        this.group.setParent(scene)
 
         this.x = {
             current: 0,
@@ -41,6 +37,13 @@ export default class Home {
             x: 0,
             y: 0
         }
+
+        this.createGeometry()
+        this.createGallery()
+
+        this.group.setParent(this.scene)
+
+        this.show()
     }
 
     createGeometry() {
@@ -59,11 +62,23 @@ export default class Home {
         })
     }
 
+      /**
+     * Animations
+     */
+
+    show(){
+        map(this.medias, media => media.show())
+    }
+
+    hide(){
+        map(this.medias, media => media.hide())
+    }
+
+
     /**
      * Events
      */
     onResize(event) {
-       
         this.galleryBounds = this.galleryElement.getBoundingClientRect()
 
         this.sizes = event.sizes
@@ -75,7 +90,7 @@ export default class Home {
 
         this.scroll.x = this.x.target = 0
         this.scroll.y = this.y.target = 0
-        map(this.medias, media => media.onResize(event,this.scroll))
+        map(this.medias, media => media.onResize(event, this.scroll))
     }
 
     onTouchDown({ x, y }) {
@@ -166,9 +181,15 @@ export default class Home {
                 }
 
             }
-
-
             media.update(this.scroll)
         })
+    }
+
+    /**
+     * Dedstroy
+     */
+
+    destroy() {
+        this.scene.removeChild(this.group)
     }
 }
