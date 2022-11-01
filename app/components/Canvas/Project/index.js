@@ -72,12 +72,13 @@ export default class {
      * UPDATE
      */
 
-    update() {
-        map(this.galleries, gallery => gallery.update())
+    update(scroll) {
+        const y = scroll.current / window.innerHeight 
+        
+        map(this.galleries, gallery => gallery.update(y))
     }
 
     destroy() {
-        // this.group.setParent(null)
         map(this.galleries, gallery => gallery.destroy())
     }
 }
