@@ -101,12 +101,25 @@ export default class Media {
     /**
      * LOOP
      */
+
+    updateRotation() {
+        this.mesh.rotation.z = GSAP.utils.mapRange(
+            -this.sizes.width / 2,
+            this.sizes.width / 2,
+            Math.PI * 0.1,
+            -Math.PI * 0.1,
+            this.mesh.position.x
+        )
+    }
     updateScale() {
         this.width = this.bounds.width / window.innerWidth
         this.height = this.bounds.height / window.innerHeight
 
         this.mesh.scale.x = this.sizes.width * this.width
         this.mesh.scale.y = this.sizes.height * this.height
+
+
+       
     }
 
     updateX(x = 0) {
@@ -117,11 +130,16 @@ export default class Media {
     updateY(y = 0) {
         this.y = (this.bounds.top + y) / window.innerHeight
         this.mesh.position.y = (this.sizes.height / 2) - (this.mesh.scale.y / 2) - (this.y * this.sizes.height)
+
+        //*ROTATION
+        this.mesh.position.y += Math.cos((this.mesh.position.x / this.sizes.width) * Math.PI * 0.1) * 40 - 40
     }
 
     update(scroll) {
         if (!this.bounds) return
 
+        this.updateRotation()
+        this.updateScale()
         this.updateX(scroll)
         this.updateY(0)
     }

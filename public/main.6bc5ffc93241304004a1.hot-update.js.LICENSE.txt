@@ -12,8 +12,6 @@
 
 /*! components/Preloader */
 
-/*! gsap */
-
 /*! lodash */
 
 /*! lodash/each */
@@ -28,10 +26,6 @@
 
 /*! pages/Projects */
 
-/*! shaders/plane-fragment.glsl */
-
-/*! shaders/plane-vertex.glsl */
-
 /*!**********************!*\
   !*** ./app/index.js ***!
   \**********************/
@@ -43,10 +37,6 @@
 /*!****************************************!*\
   !*** ./app/components/Canvas/index.js ***!
   \****************************************/
-
-/*!************************************************!*\
-  !*** ./app/components/Canvas/Project/Media.js ***!
-  \************************************************/
 
 /*!************************************************!*\
   !*** ./app/components/Canvas/Project/index.js ***!

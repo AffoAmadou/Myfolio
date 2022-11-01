@@ -72,12 +72,11 @@ export default class {
      * UPDATE
      */
 
-    update() {
-        map(this.galleries, gallery => gallery.update())
+    update(scroll) {
+        map(this.galleries, gallery => gallery.update(scroll))
     }
 
     destroy() {
-        // this.group.setParent(null)
         map(this.galleries, gallery => gallery.destroy())
     }
 }
