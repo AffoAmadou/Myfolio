@@ -53,25 +53,35 @@
 
 .home__gallery {
   @extend %cover;
-  overflow : hidden;
+  overflow: hidden;
 }
 
 .home__gallery__wrapper {
   display    : flex;
   align-items: center;
-
-  top      : 50%;
-  position : absolute;
-  transform: translateY(-50%);
+  left       : 50%;
+  top        : 50%;
+  position   : absolute;
+  transform  : translate(-64.531rem * 0.5, -50%);
 }
 
 .home__gallery__link {
   display: block;
   margin : 0 3rem;
 
-  @include media('<phone') {
-  margin: 0 .75rem;
+  &:first-child {
+    margin-left: 0;
   }
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  @include media('<phone') {
+    margin: 0 .75rem;
+  }
+
+
 }
 
 .home__gallery__media {

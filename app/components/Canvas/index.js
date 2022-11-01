@@ -49,6 +49,9 @@ export default class Canvas {
         this.scene = new Transform()
     }
 
+    /**
+    **Home
+    */
     createHome() {
         this.home = new Home({
             gl: this.gl,
@@ -63,7 +66,9 @@ export default class Canvas {
         this.home = null
     }
 
-
+    /**
+    **Project
+    */
     createProject() {
         this.project = new Project({
             gl: this.gl,
@@ -78,15 +83,15 @@ export default class Canvas {
         this.project = null
     }
     /**
-     * //*Events
+     **Events
      */
 
-    onChangeStart(){
-        if(this.home){
+    onChangeStart() {
+        if (this.home) {
             this.home.hide()
         }
 
-        if(this.project){
+        if (this.project) {
             this.project.hide()
         }
     }

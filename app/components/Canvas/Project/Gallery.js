@@ -18,7 +18,6 @@ export default class Gallery {
         this.scroll = {
             current: 0,
             target: 0,
-            last: 0,
             start: 0,
             lerp: 0.1,
             velocity: 1
