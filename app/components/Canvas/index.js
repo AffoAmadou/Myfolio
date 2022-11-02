@@ -98,12 +98,15 @@ export default class Canvas {
     onChangeEnd(template) {
 
         if (template === 'home') {
+            // this.gl.canvas.style.zIndex= 1000
             this.createHome()
         } else {
             this.destroyHome()
         }
 
         if (template === 'project') {
+            // this.gl.canvas.style.zIndex= ""
+
             this.createProject()
         } else {
             this.destroyProject()
