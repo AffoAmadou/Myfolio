@@ -15,6 +15,13 @@ export default class {
         this.galleryElement = document.querySelector('.home__gallery__wrapper')
         this.mediasElements = document.querySelectorAll('.home__gallery__media')
 
+
+        this.projectsElementsActive = 'home__article--active'
+        this.projectsElements = document.querySelectorAll('.home__article')
+
+        this.projectsTitle = document.querySelectorAll('.home__title__article')
+        this.projectsTitleActive ='home__title__article--active'
+
         this.scroll = {
             current: 0,
             target: 0,
@@ -70,9 +77,9 @@ export default class {
 
         this.scroll.last = this.scroll.target = 0
 
-        
+
         map(this.medias, media => media.onResize(event, this.scroll))
-        // this.scroll.limit = this.bounds.width - this.medias[0].element.clientWidth
+        this.scroll.limit = this.bounds.width - this.medias[0].element.clientWidth
     }
 
     onTouchDown({ x, y }) {
@@ -91,13 +98,44 @@ export default class {
     }
 
     /**
+     * *Changing
+     */
+
+    onChange(index) {
+        this.index = index
+        const selectedProject = parseInt(this.mediasElements[this.index].getAttribute('data-index'))
+
+        map(this.projectsElements, (element, elementIndex) => {
+            console.log(elementIndex, selectedProject)
+
+            if (elementIndex === selectedProject) {
+                element.classList.add(this.projectsElementsActive)
+            } else {
+                element.classList.remove(this.projectsElementsActive)
+            }
+        })
+
+
+
+        map(this.projectsTitle, (element, elementIndex) => {
+            console.log(elementIndex, selectedProject)
+
+            if (elementIndex === selectedProject) {
+                element.classList.add(this.projectsTitleActive)
+            } else {
+                element.classList.remove(this.projectsTitleActive)
+            }
+        })
+
+    }
+    /**
      * UPDATE
      */
 
     update() {
         if (!this.bounds) return
 
-        // this.scroll.target = GSAP.utils.clamp(-this.scroll.limit, 0, this.scroll.target)
+        this.scroll.target = GSAP.utils.clamp(-this.scroll.limit, 0, this.scroll.target)
         this.scroll.current = GSAP.utils.interpolate(this.scroll.current, this.scroll.target, this.scroll.lerp)
 
         if (this.scroll.last < this.scroll.current) {
@@ -109,26 +147,33 @@ export default class {
         this.scroll.last = this.scroll.current
 
         map(this.medias, (media, index) => {
-            const scaleX = media.mesh.scale.x / 2
+            // const scaleX = media.mesh.scale.x / 2
 
-            if (this.scroll.direction === 'left') {
-                const x = media.mesh.position.x + scaleX
+            // if (this.scroll.direction === 'left') {
+            //     const x = media.mesh.position.x + scaleX
 
-                if (x < -this.sizes.width / 2) {
-                    media.extra.x += this.sizes.width
-                }
-            }
-            else if (this.scroll.direction === 'right') {
-                const x = media.mesh.position.x - scaleX
+            //     if (x < -this.sizes.width / 2) {
+            //         media.extra.x += this.sizes.width
+            //     }
+            // }
+            // else if (this.scroll.direction === 'right') {
+            //     const x = media.mesh.position.x - scaleX
 
-                if (x > this.sizes.width / 2) {
-                    media.extra.x -= this.sizes.width
-                }
-            }
+            //     if (x > this.sizes.width / 2) {
+            //         media.extra.x -= this.sizes.width
+            //     }
+            // }
             media.update(this.scroll.current)
         })
-    }
 
+        const index = Math.floor(Math.abs(this.scroll.current / this.scroll.limit) * this.medias.length)
+
+
+        if (this.index !== index) {
+            console.log(index)
+            this.onChange(index)
+        }
+    }
     /**
      * Dedstroy
      */

@@ -143,9 +143,7 @@ app.get('/', async (req, res) => {
   const api = await initApi(req);
   const defaults = await handleRequest(api);
 
-// console.log(defaults.projects.reverse());
-
-
+console.log(defaults.projects);
   res.render('pages/home', {
     ...defaults,
   });

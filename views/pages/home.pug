@@ -33,8 +33,9 @@ block content
                 .home__gallery__wrapper
                     each project, index in projects
                         a.home__gallery__link(href=Link(home.data.projects[index].projects_project))
-                            figure.home__gallery__media
+                            figure.home__gallery__media(data-index=index)
                                 img.home__gallery__media__image(alt=project.data.image.alt data-src=project.data.image.url)
+                            p=index
 
 
             .home__content
