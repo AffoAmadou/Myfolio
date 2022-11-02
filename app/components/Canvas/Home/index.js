@@ -1,6 +1,7 @@
 import { map } from "lodash"
 import { Plane, Transform } from "ogl"
 import Media from "./Media"
+import Prefix from "prefix"
 
 import GSAP from 'gsap'
 
@@ -12,7 +13,12 @@ export default class {
 
         this.group = new Transform()
 
-        this.galleryElement = document.querySelector('.home__gallery__wrapper')
+        this.galleryElement = document.querySelector('.home__gallery')
+
+        this.galleryElementWrapper = document.querySelector('.home__gallery__wrapper')
+
+
+
         this.mediasElements = document.querySelectorAll('.home__gallery__media')
 
 
@@ -20,7 +26,10 @@ export default class {
         this.projectsElements = document.querySelectorAll('.home__article')
 
         this.projectsTitle = document.querySelectorAll('.home__title__article')
-        this.projectsTitleActive ='home__title__article--active'
+        this.projectsTitleActive = 'home__title__article--active'
+
+
+        this.transformPrefix = Prefix('transform');
 
         this.scroll = {
             current: 0,
@@ -73,7 +82,7 @@ export default class {
      */
     onResize(event) {
         this.sizes = event.sizes
-        this.bounds = this.galleryElement.getBoundingClientRect()
+        this.bounds = this.galleryElementWrapper.getBoundingClientRect()
 
         this.scroll.last = this.scroll.target = 0
 
@@ -103,10 +112,16 @@ export default class {
 
     onChange(index) {
         this.index = index
+        // console.log(this.index)
+
+        console.log(this.mediasElements.length)
+        if (this.index === this.mediasElements.length) {
+            this.index = this.index - 1
+        }
         const selectedProject = parseInt(this.mediasElements[this.index].getAttribute('data-index'))
 
         map(this.projectsElements, (element, elementIndex) => {
-            console.log(elementIndex, selectedProject)
+            // console.log(elementIndex, selectedProject)
 
             if (elementIndex === selectedProject) {
                 element.classList.add(this.projectsElementsActive)
@@ -137,6 +152,8 @@ export default class {
 
         this.scroll.target = GSAP.utils.clamp(-this.scroll.limit, 0, this.scroll.target)
         this.scroll.current = GSAP.utils.interpolate(this.scroll.current, this.scroll.target, this.scroll.lerp)
+
+        this.galleryElement.style[this.transformPrefix] = `translateX(${this.scroll.current}px)`
 
         if (this.scroll.last < this.scroll.current) {
             this.scroll.direction = 'right'
@@ -170,7 +187,6 @@ export default class {
 
 
         if (this.index !== index) {
-            console.log(index)
             this.onChange(index)
         }
     }

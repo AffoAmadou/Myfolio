@@ -143,7 +143,6 @@ app.get('/', async (req, res) => {
   const api = await initApi(req);
   const defaults = await handleRequest(api);
 
-console.log(defaults.projects);
   res.render('pages/home', {
     ...defaults,
   });
@@ -153,30 +152,10 @@ app.get('/about', async (req, res) => {
   const api = await initApi(req);
   const defaults = await handleRequest(api);
 
-  //   const about =defaults.about
-  //  console.log(about)
   res.render('pages/about', {
     ...defaults,
   });
 });
-
-// app.get('/collections', async (req, res) => {
-//   const api = await initApi(req);
-//   const defaults = await handleRequest(api);
-//   // console.log(defaults.collections)
-
-// // defaults.collections.forEach(collection=>{
-// //   console.log(collection.data.products[0].products_product)
-// //   console.log("riopoipopopoppmmuzuzuznnnnnnavFEWFWEFWEFEWFEWFEW")
-// // })
-
-// // console.log(collections)
-//   res.render('pages/collections', {
-//     ...defaults,
-//   });
-// });
-
-
 
 app.get('/project/:uid', async (req, res) => {
   const api = await initApi(req);
@@ -185,8 +164,6 @@ app.get('/project/:uid', async (req, res) => {
   const project = await api.getByUID('project', req.params.uid, {
 
   });
-
-  // console.log(project.data.body);
   res.render('pages/project', {
     ...defaults,
     project,

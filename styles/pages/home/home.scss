@@ -55,7 +55,9 @@
 
 .home__gallery {
   @extend %cover;
-  overflow: hidden;
+  // overflow: hidden;
+  z-index: 1;
+
 }
 
 .home__gallery__wrapper {
@@ -65,13 +67,13 @@
   top        : 50%;
   position   : absolute;
   transform  : translate(-64.531rem * 0.5, -50%);
-  width: 100vw+6vw;
 }
 
 .home__gallery__link {
   display: block;
   margin : 0 3rem;
 
+  background-color: aqua;
   &:first-child {
     margin-left: 0;
   }
@@ -89,6 +91,7 @@
   width   : 64.531rem;
   height  : 34.613rem;
   position: relative;
+  visibility: hidden;
 }
 
 .home__gallery__media__image {
@@ -129,7 +132,14 @@
   max-width: 51.3rem;
 }
 
-
+// .home__button{
+//   left: 50%;
+//   position: absolute;
+//   top: 50%;
+//   transform: translate(-50%, -50%);
+//   width   : 64.531rem;
+//   height  : 34.613rem;
+// }
 
 
 
