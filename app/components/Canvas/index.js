@@ -49,6 +49,9 @@ export default class Canvas {
         this.scene = new Transform()
     }
 
+    /**
+    **Home
+    */
     createHome() {
         this.home = new Home({
             gl: this.gl,
@@ -63,7 +66,9 @@ export default class Canvas {
         this.home = null
     }
 
-
+    /**
+    **Project
+    */
     createProject() {
         this.project = new Project({
             gl: this.gl,
@@ -78,27 +83,30 @@ export default class Canvas {
         this.project = null
     }
     /**
-     * //*Events
+     **Events
      */
 
-    onChangeStart(){
-        if(this.home){
+    onChangeStart() {
+        if (this.home) {
             this.home.hide()
         }
 
-        if(this.project){
+        if (this.project) {
             this.project.hide()
         }
     }
     onChangeEnd(template) {
 
         if (template === 'home') {
+            // this.gl.canvas.style.zIndex= 1000
             this.createHome()
         } else {
             this.destroyHome()
         }
 
         if (template === 'project') {
+            // this.gl.canvas.style.zIndex= ""
+
             this.createProject()
         } else {
             this.destroyProject()

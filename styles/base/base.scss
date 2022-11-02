@@ -52,11 +52,11 @@ body {
     }
   }
 
-  // canvas {
-  //     pointer-events: none;
-  //     position: relative;
-  //     z-index: z('canvas')
-  // }
+  canvas {
+      pointer-events: none;
+      // position: relative;
+      // z-index: z('canvas')
+  }
 
   .content {
     @extend %cover;
