@@ -167,7 +167,7 @@ export default class Page {
             this.scroll.limit = this.elements.wrapper[0].clientHeight - window.innerHeight
         }
 
-        each(this.animations, animation => animation.onResize())
+        // each(this.animations, animation => animation.onResize())
     }
 
     /**

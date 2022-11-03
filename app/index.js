@@ -19,12 +19,14 @@ class App {
         this.createContent() //! Questo metodo mi permette di creare il content e cosi da recuperare il data-template 
         //! E percio sapere in che pagina mi trovo
 
+        this.createCanvas()
         this.createPreloader()
         // this.createNavigation()
         this.createPages()
-        this.createCanvas()
         this.addEventListeners()
         this.addLinkListeners()
+
+        //  this.onResize()
 
         this.update()
     }
@@ -33,7 +35,9 @@ class App {
      * //*Events
      */
     createPreloader() {
-        this.preloader = new Preloader()
+        this.preloader = new Preloader({
+            canvas:this.canvas
+        })
 
         //*Event Emitter quando il preloader ha caricato le immagini chiamo il metodo che sta qui sotto
         this.preloader.once('complete', this.onPreloaded.bind(this))
@@ -70,7 +74,7 @@ class App {
     }
 
     onPreloaded() {
-        this.preloader.destroy()
+        this.canvas.onPreloaded()
         this.onResize()
         this.page.show()
     }
@@ -136,10 +140,7 @@ class App {
                 this.page.onResize()
             }
         })
-
-
     }
-
 
     onTouchDown(event) {
         if (this.canvas && this.canvas.onTouchDown) {
