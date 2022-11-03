@@ -40,6 +40,11 @@ export default class {
             velocity: 1
         }
 
+        this.speed = {
+            target: 0,
+            current: 0,
+            lerp: 0.1
+        }
         this.createGeometry()
         this.createGallery()
 
@@ -49,7 +54,10 @@ export default class {
     }
 
     createGeometry() {
-        this.geometry = new Plane(this.gl)
+        this.geometry = new Plane(this.gl, {
+            widthSegments: 20,
+            heightSegments: 20
+        })
     }
     createGallery() {
         this.medias = map(this.mediasElements, (element, index) => {
@@ -92,6 +100,7 @@ export default class {
     }
 
     onTouchDown({ x, y }) {
+        this.speed.target = 1
         this.scroll.last = this.scroll.current
     }
     onTouchMove({ x, y }) {
@@ -99,7 +108,9 @@ export default class {
 
         this.scroll.target = this.scroll.last - distance
     }
-    onTouchUp({ x, y }) { }
+    onTouchUp({ x, y }) {
+        this.speed.target = 0
+    }
 
     onWheel({ pixelY }) {
         this.scroll.target += pixelY
@@ -150,37 +161,21 @@ export default class {
     update() {
         if (!this.bounds) return
 
+
+
+        this.speed.current = GSAP.utils.interpolate(this.speed.current, this.speed.target, this.speed.lerp)
+
         this.scroll.target = GSAP.utils.clamp(-this.scroll.limit, 0, this.scroll.target)
         this.scroll.current = GSAP.utils.interpolate(this.scroll.current, this.scroll.target, this.scroll.lerp)
 
         this.galleryElement.style[this.transformPrefix] = `translateX(${this.scroll.current}px)`
 
-        if (this.scroll.last < this.scroll.current) {
-            this.scroll.direction = 'right'
-        } else if (this.scroll.last > this.scroll.current) {
-            this.scroll.direction = 'left'
-        }
 
         this.scroll.last = this.scroll.current
 
+
         map(this.medias, (media, index) => {
-            // const scaleX = media.mesh.scale.x / 2
-
-            // if (this.scroll.direction === 'left') {
-            //     const x = media.mesh.position.x + scaleX
-
-            //     if (x < -this.sizes.width / 2) {
-            //         media.extra.x += this.sizes.width
-            //     }
-            // }
-            // else if (this.scroll.direction === 'right') {
-            //     const x = media.mesh.position.x - scaleX
-
-            //     if (x > this.sizes.width / 2) {
-            //         media.extra.x -= this.sizes.width
-            //     }
-            // }
-            media.update(this.scroll.current)
+            media.update(this.scroll.current, this.speed.current)
         })
 
         const index = Math.floor(Math.abs(this.scroll.current / this.scroll.limit) * this.medias.length)
