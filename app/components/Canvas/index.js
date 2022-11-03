@@ -2,6 +2,7 @@ import { values } from 'lodash'
 import { Camera, Renderer, Transform } from 'ogl'
 import Home from './Home'
 import Project from './Project'
+import Transition from './Transition'
 
 
 export default class Canvas {
@@ -86,11 +87,11 @@ export default class Canvas {
      */
 
 
-     onPreloaded(){
+    onPreloaded() {
         this.onChangeEnd(this.template)
-     }
+    }
 
-    onChangeStart() {
+    onChangeStart(template, url) {
         if (this.home) {
             this.home.hide()
         }
@@ -98,6 +99,21 @@ export default class Canvas {
         if (this.project) {
             this.project.hide()
         }
+
+        this.isFromHomeToProject = this.template === 'home' && url.indexOf('project') > -1
+        this.isFromProjectToHome = this.template === 'project' && url.indexOf('home') > -1
+
+
+        if (this.isFromHomeToProject || this.isFromProjectToHome) {
+            this.transition = new Transition({
+                home: this.home,
+                gl: this.gl,
+                scene: this.scene,
+                sizes: this.sizes,
+                url
+            })
+        }
+
     }
     onChangeEnd(template) {
 
@@ -112,6 +128,8 @@ export default class Canvas {
         } else {
             this.destroyProject()
         }
+
+        this.template = template
     }
 
     onResize() {

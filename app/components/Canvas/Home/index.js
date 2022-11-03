@@ -173,17 +173,18 @@ export default class {
 
         this.scroll.last = this.scroll.current
 
-
-        map(this.medias, (media, index) => {
-            media.update(this.scroll.current, this.speed.current)
-        })
-
         const index = Math.floor(Math.abs(this.scroll.current / this.scroll.limit) * this.medias.length)
 
 
         if (this.index !== index) {
             this.onChange(index)
         }
+
+        map(this.medias, (media, index) => {
+            media.update(this.scroll.current, this.speed.current, this.index)
+        })
+
+      
     }
     /**
      * Dedstroy
