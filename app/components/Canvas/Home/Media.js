@@ -24,14 +24,8 @@ export default class Media {
         }
     }
     createTexture() {
-        this.texture = new Texture(this.gl)
-
         const image = this.element.querySelector('.home__gallery__media__image')
-
-        this.image = new window.Image()
-        this.image.crossOrigin = 'anonymous'
-        this.image.src = image.getAttribute('data-src')
-        this.image.onload = _ => (this.texture.image = this.image)
+        this.texture = window.TEXTURES[image.getAttribute('data-src')]
     }
 
     createProgram() {

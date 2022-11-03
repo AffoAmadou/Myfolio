@@ -26,7 +26,6 @@ export default class Canvas {
 
         this.onResize()
 
-        this.onChangeEnd(this.template)
     }
 
     createRenderer() {
@@ -86,6 +85,11 @@ export default class Canvas {
      **Events
      */
 
+
+     onPreloaded(){
+        this.onChangeEnd(this.template)
+     }
+
     onChangeStart() {
         if (this.home) {
             this.home.hide()
@@ -98,15 +102,12 @@ export default class Canvas {
     onChangeEnd(template) {
 
         if (template === 'home') {
-            // this.gl.canvas.style.zIndex= 1000
             this.createHome()
         } else {
             this.destroyHome()
         }
 
         if (template === 'project') {
-            // this.gl.canvas.style.zIndex= ""
-
             this.createProject()
         } else {
             this.destroyProject()

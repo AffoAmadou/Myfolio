@@ -2,20 +2,8 @@
   @extend %center;
   @extend %page;
 
-  // background: $color-contessa;
-  // color: $color-white;
-
   overflow  : hidden;
   text-align: center;
-
-  // &::before,
-  // &::after {
-  //   content: '';
-  //   height: 24rem;
-  //   width: 100%;
-  //   z-index: 1;
-  //   position: absolute;
-  //   left: 0;
 }
 
 
@@ -56,8 +44,7 @@
 .home__gallery {
   @extend %cover;
   // overflow: hidden;
-  z-index: 1;
-
+  // z-index: 1;
 }
 
 .home__gallery__wrapper {
@@ -73,7 +60,6 @@
   display: block;
   margin : 0 3rem;
 
-  background-color: aqua;
   &:first-child {
     margin-left: 0;
   }

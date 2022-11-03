@@ -84,7 +84,7 @@ app.use((req, res, next) => {
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 app.locals.basedir = app.get('views');
-// { results: collections }
+
 const handleRequest = async (api) => {
   const [preloader, navigation, about, home, project, { results: projects }] =
     await Promise.all([
@@ -99,12 +99,42 @@ const handleRequest = async (api) => {
       }),
     ]);
 
-  //   console.log(about, home, collections);
+  // console.log(projects[0].data);
 
   const assets = [];
 
+  
+
+  projects.forEach((project) => {
+    assets.push(project.data.image.url);
+    project.data.body.forEach((section) => {
+      if (section.slice_type === 'content') {
+        assets.push(section.primary.content_image.url)
+      }
+    })
+
+    project.data.body.forEach((section) => {
+      if (section.slice_type === 'design') {
+        section.items.forEach((item) => {
+          assets.push(item.media.url)
+        })
+      }
+    })
+
+    project.data.body.forEach((section) => {
+      if (section.slice_type === 'mobile') {
+        section.items.forEach((item) => {
+          assets.push(item.picture.url)
+        })
+      }
+    })
+
+  })
+
+  assets.push(about.data.image.url)
+
   // home.data.gallery.forEach((item) => {
-  //   assets.push(item.image.url);
+  //  
   // });
 
   // about.data.gallery.forEach((item) => {
