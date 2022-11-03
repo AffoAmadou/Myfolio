@@ -2,7 +2,7 @@
   // display: none;
   @extend %cover;
   @extend %center;
-  // z-index: 2;
+  z-index   : z('preloader');
   color  : #EFEFEF;
 
   display              : grid;
@@ -46,8 +46,6 @@
   transform-origin: 0% 100%;
   width           : 95.5rem;
   height          : 36.4rem;
-
-
 }
 
 .preloader__container {
@@ -62,8 +60,6 @@
   display        : flex;
   flex-direction : column;
   justify-content: space-between;
-
-
 }
 
 .preloader__text {

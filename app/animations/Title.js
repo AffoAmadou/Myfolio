@@ -10,40 +10,42 @@ export default class Title extends Animation {
             element, elements
         })
 
-        split({
-            element: this.element, append: true
-        })
+        // split({
+        //     element: this.element, append: true
+        // })
 
-        split({
-            element: this.element, append: true
-        })
+        // split({
+        //     element: this.element, append: true
+        // })
 
-        this.elementLinesSpans = this.element.querySelectorAll('span span')
-
-
+        // this.elementLinesSpans = this.element.querySelectorAll('span span')
     }
 
     animateIn() {
+        GSAP.fromTo(
+          this.element,
+          {
+            autoAlpha: 0,
+            delay: 0.5,
+          },
+          {
+            autoAlpha: 1,
+            duration: 1,
+          }
+        );
+      
 
-        this.timelineIn = GSAP.timeline({
-            delay: 0.5
-        })
 
-        this.timelineIn.set(this.element, {
-            autoAlpha: 1
-        })
-
-
-        each(this.elementsLines, (line, index) => {
-            this.timelineIn.fromTo(line, {
-                y: '100%'
-            }, {
-                delay: index * 0.2,
-                duration: 1.5,
-                ease: 'expo.out',
-                y: '0%'
-            }, 0)
-        })
+        // each(this.elementsLines, (line, index) => {
+        //     this.timelineIn.fromTo(line, {
+        //         y: '100%'
+        //     }, {
+        //         delay: index * 0.2,
+        //         duration: 1.5,
+        //         ease: 'expo.out',
+        //         y: '0%'
+        //     }, 0)
+        // })
 
     }
 
@@ -53,7 +55,7 @@ export default class Title extends Animation {
         })
     }
 
-    onResize() {
-        this.elementsLines = calculate(this.elementLinesSpans)
-    }
+    // onResize() {
+    //     this.elementsLines = calculate(this.elementLinesSpans)
+    // }
 }
