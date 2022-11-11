@@ -1,9 +1,9 @@
-import { values } from 'lodash'
 import { Camera, Renderer, Transform } from 'ogl'
 import Home from './Home'
 import Project from './Project'
 import Transition from './Transition'
 
+import GSAP from 'gsap'
 
 export default class Canvas {
     constructor({ template }) {
@@ -56,7 +56,8 @@ export default class Canvas {
         this.home = new Home({
             gl: this.gl,
             scene: this.scene,
-            sizes: this.sizes
+            sizes: this.sizes,
+            transition: this.transition
         })
     }
 
@@ -73,7 +74,8 @@ export default class Canvas {
         this.project = new Project({
             gl: this.gl,
             scene: this.scene,
-            sizes: this.sizes
+            sizes: this.sizes,
+            transition: this.transition
         })
     }
 
@@ -106,12 +108,13 @@ export default class Canvas {
 
         if (this.isFromHomeToProject || this.isFromProjectToHome) {
             this.transition = new Transition({
-                home: this.home,
                 gl: this.gl,
                 scene: this.scene,
                 sizes: this.sizes,
                 url
             })
+
+            this.transition.setElement(this.home || this.project)
         }
 
     }
@@ -125,7 +128,8 @@ export default class Canvas {
 
         if (template === 'project') {
             this.createProject()
-        } else {
+        }
+        else {
             this.destroyProject()
         }
 

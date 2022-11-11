@@ -6,11 +6,12 @@ import Prefix from "prefix"
 import GSAP from 'gsap'
 
 export default class {
-    constructor({ gl, scene, sizes }) {
+    constructor({ gl, scene, sizes, transition }) {
+        this.id = 'home'
         this.gl = gl
         this.sizes = sizes
         this.scene = scene
-
+        this.transition = transition
         this.group = new Transform()
 
         this.galleryElement = document.querySelector('.home__gallery')
@@ -77,6 +78,10 @@ export default class {
    */
 
     show() {
+        if (this.transition) {
+            this.transition.animate(this.medias[0].mesh, _ => {
+            })
+        }
         map(this.medias, media => media.show())
     }
 
@@ -162,10 +167,10 @@ export default class {
         if (!this.bounds) return
 
 
-
         this.speed.current = GSAP.utils.interpolate(this.speed.current, this.speed.target, this.speed.lerp)
 
         this.scroll.target = GSAP.utils.clamp(-this.scroll.limit, 0, this.scroll.target)
+
         this.scroll.current = GSAP.utils.interpolate(this.scroll.current, this.scroll.target, this.scroll.lerp)
 
         this.galleryElement.style[this.transformPrefix] = `translateX(${this.scroll.current}px)`
@@ -182,9 +187,11 @@ export default class {
 
         map(this.medias, (media, index) => {
             media.update(this.scroll.current, this.speed.current, this.index)
+
+            media.mesh.position.y += Math.cos((media.mesh.position.x / this.sizes.width) * Math.PI * 0.1) * 40 - 40
         })
 
-      
+
     }
     /**
      * Dedstroy

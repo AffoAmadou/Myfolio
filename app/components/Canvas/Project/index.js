@@ -1,16 +1,20 @@
 import { map } from "lodash"
 import { Plane, Transform } from "ogl"
 import Gallery from "./Gallery"
-
+import Picture from "./Picture"
 import GSAP from 'gsap'
 
 export default class {
-    constructor({ gl, scene, sizes }) {
+    constructor({ gl, scene, sizes, transition }) {
+        this.id = 'project'
+        this.scene = scene
+
+        console.log(this.scene)
         this.gl = gl
         this.sizes = sizes
 
         this.group = new Transform()
-
+        this.transition = transition
         this.createGeometry()
         this.createGalleries()
 
@@ -24,6 +28,8 @@ export default class {
     }
 
     createGalleries() {
+
+        this.Picture = new Picture({ gl: this.gl, scene: this.scene, sizes: this.sizes, transition: this.transition })
         this.galleriesElements = document.querySelectorAll('.project__mobile')
 
         this.galleries = map(this.galleriesElements, (element, index) => {
@@ -37,12 +43,12 @@ export default class {
             })
         })
     }
-    
-    show(){
+
+    show() {
         map(this.galleries, gallery => gallery.show())
     }
 
-    hide(){
+    hide() {
         map(this.galleries, gallery => gallery.hide())
     }
 
