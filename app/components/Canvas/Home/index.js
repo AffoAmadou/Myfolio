@@ -125,7 +125,7 @@ export default class {
         this.index = index
         // console.log(this.index)
 
-        console.log(this.mediasElements.length)
+        // console.log(this.mediasElements.length)
         if (this.index === this.mediasElements.length) {
             this.index = this.index - 1
         }
@@ -144,7 +144,6 @@ export default class {
 
 
         map(this.projectsTitle, (element, elementIndex) => {
-            console.log(elementIndex, selectedProject)
 
             if (elementIndex === selectedProject) {
                 element.classList.add(this.projectsTitleActive)
@@ -183,6 +182,7 @@ export default class {
 
         map(this.medias, (media, index) => {
             media.update(this.scroll.current, this.speed.current, this.index)
+            media.mesh.position.y += Math.cos((media.mesh.position.x / this.sizes.width) * Math.PI * 0.1) * 40 - 40
         })
 
 

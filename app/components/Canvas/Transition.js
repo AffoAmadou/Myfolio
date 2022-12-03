@@ -19,15 +19,11 @@ export default class Media {
         this.createProgram()
         this.createMesh()
 
-        this.extra = {
-            x: 0,
-            y: 0
-        }
     }
     createTexture() {
-        console.log(this.home)
-        // const image = this.element.querySelector('.home__gallery__media__image')
-        // this.texture = window.TEXTURES[image.getAttribute('data-src')]
+        const { index, medias } = this.home
+
+        this.media = medias[index]
     }
 
     createProgram() {
@@ -39,7 +35,7 @@ export default class Media {
                 uAlpha: { value: 1 },
                 uSpeed: { value: 0 },
                 uViewportSizes: { value: [this.sizes.width, this.sizes.height] },
-                tMap: { value: this.texture }
+                tMap: { value: this.media.Texture }
             }
         })
 
@@ -50,13 +46,17 @@ export default class Media {
             geometry: this.geometry,
             program: this.program
         })
+        this.mesh.scale.x = this.media.mesh.scale.x
+        this.mesh.scale.y = this.media.mesh.scale.y
+        this.mesh.scale.z = this.media.mesh.scale.z
+
+        this.mesh.position.z = this.media.mesh.position.z + 0.01
 
         this.mesh.setParent(this.scene)
 
-        this.mesh.scale.x = 2
     }
 
-   
+
 
     /**
      * 
@@ -67,7 +67,7 @@ export default class Media {
     transition() {
 
     }
-   
 
- 
+
+
 }
