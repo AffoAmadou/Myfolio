@@ -11,11 +11,14 @@ uniform mat4 projectionMatrix;
 
 varying vec2 vUv;
 
+varying vec4 vPosition;
+
 void main() {
     vUv = uv;
 
     vec4 newPosition = modelViewMatrix * vec4(position, 1.0);
 
+    vPosition = newPosition;
     // newPosition.z += cos(position.x * PI);
 
     // newPosition.z += sin(newPosition.y / uViewportSizes.y * PI + PI / 2.0) * abs(uSpeed);
