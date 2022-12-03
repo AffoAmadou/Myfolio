@@ -128,6 +128,8 @@ export default class Media {
         if (!this.bounds) return
         this.updateX(scroll)
         this.updateY()
+        
+        this.program.uniforms.uSpeed.value = speed
 
         this.program.uniforms.uSpeed.value = speed
         this.program.uniforms.uAlpha.value =  this.opacity.multiplier
