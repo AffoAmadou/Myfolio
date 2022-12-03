@@ -129,7 +129,9 @@ export default class Media {
         this.updateX(scroll)
         this.updateY()
         
-        this.program.uniforms.uSpeed.value = speed
+        this.opacity.target = this.index === index ? 1 : 0.4
+
+        this.opacity.current = GSAP.utils.interpolate(this.opacity.current, this.opacity.target, this.opacity.lerp)
 
         this.program.uniforms.uSpeed.value = speed
         this.program.uniforms.uAlpha.value =  this.opacity.multiplier
