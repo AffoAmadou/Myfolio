@@ -1,18 +1,26 @@
 import { map } from "lodash"
 import { Plane, Transform } from "ogl"
 import Gallery from "./Gallery"
-
+import Picture from "./Picture"
 import GSAP from 'gsap'
 
 export default class {
-    constructor({ gl, scene, sizes }) {
+    constructor({ gl, scene, sizes, transition }) {
+        this.id = 'project'
+        this.scene = scene
+
         this.gl = gl
         this.sizes = sizes
 
         this.group = new Transform()
-
+        this.transition = transition
         this.createGeometry()
         this.createGalleries()
+        this.Picture = new Picture({ gl: this.gl, scene: this.scene, sizes: this.sizes, transition: this.transition })
+
+        this.onResize({
+            sizes: this.sizes
+        })
 
         this.group.setParent(scene)
 
@@ -24,6 +32,7 @@ export default class {
     }
 
     createGalleries() {
+
         this.galleriesElements = document.querySelectorAll('.project__mobile')
 
         this.galleries = map(this.galleriesElements, (element, index) => {
@@ -33,16 +42,16 @@ export default class {
                 index,
                 gl: this.gl,
                 scene: this.group,
-                sizes: this.sizes
+                sizes: this.sizes,
             })
         })
     }
-    
-    show(){
+
+    show() {
         map(this.galleries, gallery => gallery.show())
     }
 
-    hide(){
+    hide() {
         map(this.galleries, gallery => gallery.hide())
     }
 
@@ -73,9 +82,11 @@ export default class {
 
     update(scroll) {
         map(this.galleries, gallery => gallery.update(scroll))
+        this.Picture.update(scroll)
     }
 
     destroy() {
         map(this.galleries, gallery => gallery.destroy())
+        this.Picture.destroy()
     }
 }

@@ -1,4 +1,4 @@
-import { Mesh, Program} from 'ogl'
+import { Mesh, Program, Plane } from 'ogl'
 
 import fragment from 'shaders/plane-fragment.glsl'
 import vertex from 'shaders/plane-vertex.glsl'
@@ -12,15 +12,19 @@ export default class Media {
         this.scene = scene
         this.index = index
         this.sizes = sizes
-
-        this.createTexture()
-        this.createProgram()
-        this.createMesh()
-
         this.extra = {
             x: 0,
             y: 0
         }
+        this.createTexture()
+        this.createProgram()
+
+        this.createMesh()
+
+        this.createBounds({
+            sizes: this.sizes
+        })
+
     }
 
     createTexture() {
@@ -29,8 +33,8 @@ export default class Media {
         this.texture = window.TEXTURES[image.getAttribute('data-src')]
     }
 
-    createProgram() {
 
+    createProgram() {
         this.program = new Program(this.gl, {
             fragment,
             vertex,
@@ -39,7 +43,6 @@ export default class Media {
                 tMap: { value: this.texture }
             }
         })
-
     }
 
     createMesh() {
@@ -107,14 +110,12 @@ export default class Media {
         )
     }
     updateScale() {
+
         this.width = this.bounds.width / window.innerWidth
         this.height = this.bounds.height / window.innerHeight
 
         this.mesh.scale.x = this.sizes.width * this.width
         this.mesh.scale.y = this.sizes.height * this.height
-
-
-       
     }
 
     updateX(x = 0) {
@@ -131,13 +132,9 @@ export default class Media {
     }
 
     update(scroll) {
-        if (!this.bounds) return
-
         this.updateRotation()
         this.updateScale()
         this.updateX(scroll)
         this.updateY(0)
     }
-
-
 }

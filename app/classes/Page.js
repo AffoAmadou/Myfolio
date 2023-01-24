@@ -118,22 +118,28 @@ export default class Page {
     /**
      * //!Animation
      */
-    show() {
+    show(animation) {
         return new Promise(resolve => {
-            this.animationIn = GSAP.timeline()
 
-            this.animationIn.fromTo(this.element, {
-                autoAlpha: 0
-            }, {
-                autoAlpha: 1,
-                onComplete: resolve
-            })
+
+            if (animation) {
+                this.animationIn = animation
+            } else {
+                this.animationIn = GSAP.timeline()
+                this.animationIn.fromTo(this.element, {
+                    autoAlpha: 0
+                }, {
+                    autoAlpha: 1,
+                    // onComplete: resolve
+                })
+            }
+
+
 
             this.animationIn.call(_ => {
                 this.addEventListeners()
             })
         })
-
     }
 
     hide() {

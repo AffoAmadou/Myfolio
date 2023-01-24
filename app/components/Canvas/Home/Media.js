@@ -1,4 +1,4 @@
-import { Mesh, Program, Texture } from 'ogl'
+import { Mesh, Program } from 'ogl'
 
 import fragment from 'shaders/home-fragment.glsl'
 import vertex from 'shaders/home-vertex.glsl'
@@ -13,15 +13,27 @@ export default class Media {
         this.scene = scene
         this.index = index
         this.sizes = sizes
-
-        this.createTexture()
-        this.createProgram()
-        this.createMesh()
-
         this.extra = {
             x: 0,
             y: 0
         }
+        this.opacity = {
+            current: 0,
+            target: 0,
+            lerp: 0.1,
+            multiplier: 0
+        }
+
+        this.createTexture()
+        this.createProgram()
+        this.createMesh()
+        this.createBounds({
+            sizes: this.sizes
+        })
+
+
+
+
     }
     createTexture() {
         const image = this.element.querySelector('.home__gallery__media__image')
@@ -50,7 +62,6 @@ export default class Media {
         })
 
         this.mesh.setParent(this.scene)
-
         this.mesh.scale.x = 2
     }
 
@@ -71,16 +82,16 @@ export default class Media {
 
 
     show() {
-        GSAP.fromTo(this.program.uniforms.uAlpha, {
-            value: 0
+        GSAP.fromTo(this.opacity, {
+            multiplier: 0
         }, {
-            value: 1
+            multiplier: 1
         })
     }
 
     hide() {
-        GSAP.to(this.program.uniforms.uAlpha, {
-            value: 0
+        GSAP.to(this.opacity, {
+            multiplier: 0
         })
     }
     /**
@@ -117,11 +128,15 @@ export default class Media {
         this.mesh.position.y = (this.sizes.height / 2) - (this.mesh.scale.y / 2) - (this.y * this.sizes.height) + this.extra.y
     }
 
-    update(scroll, speed) {
-        if (!this.bounds) return
+    update(scroll, speed, index) {
         this.updateX(scroll)
         this.updateY()
 
         this.program.uniforms.uSpeed.value = speed
+
+        this.opacity.target = this.index === index ? 1 : 0.4
+        this.opacity.current = GSAP.utils.interpolate(this.opacity.current, this.opacity.target, this.opacity.lerp)
+
+        this.program.uniforms.uAlpha.value = this.opacity.multiplier * this.opacity.current
     }
 }

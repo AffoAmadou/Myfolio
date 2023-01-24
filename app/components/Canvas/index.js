@@ -1,8 +1,9 @@
-import { values } from 'lodash'
 import { Camera, Renderer, Transform } from 'ogl'
 import Home from './Home'
 import Project from './Project'
+import Transition from './Transition'
 
+import GSAP from 'gsap'
 
 export default class Canvas {
     constructor({ template }) {
@@ -55,7 +56,8 @@ export default class Canvas {
         this.home = new Home({
             gl: this.gl,
             scene: this.scene,
-            sizes: this.sizes
+            sizes: this.sizes,
+            transition: this.transition
         })
     }
 
@@ -72,7 +74,8 @@ export default class Canvas {
         this.project = new Project({
             gl: this.gl,
             scene: this.scene,
-            sizes: this.sizes
+            sizes: this.sizes,
+            transition: this.transition
         })
     }
 
@@ -86,18 +89,35 @@ export default class Canvas {
      */
 
 
-     onPreloaded(){
+    onPreloaded() {
         this.onChangeEnd(this.template)
-     }
+    }
 
-    onChangeStart() {
+    onChangeStart(template, url) {
         if (this.home) {
             this.home.hide()
         }
 
         if (this.project) {
+            this.project.Picture.hide()
             this.project.hide()
         }
+
+        this.isFromHomeToProject = this.template === 'home' && url.indexOf('project') > -1
+        this.isFromProjectToHome = this.template === 'project' && url.indexOf('home') > -1
+
+
+        if (this.isFromHomeToProject || this.isFromProjectToHome) {
+            this.transition = new Transition({
+                gl: this.gl,
+                scene: this.scene,
+                sizes: this.sizes,
+                url
+            })
+
+            this.transition.setElement(this.project || this.home)
+        }
+
     }
     onChangeEnd(template) {
 
@@ -109,9 +129,12 @@ export default class Canvas {
 
         if (template === 'project') {
             this.createProject()
-        } else {
+        }
+        else {
             this.destroyProject()
         }
+
+        this.template = template
     }
 
     onResize() {

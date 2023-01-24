@@ -6,21 +6,19 @@ import Prefix from "prefix"
 import GSAP from 'gsap'
 
 export default class {
-    constructor({ gl, scene, sizes }) {
+    constructor({ gl, scene, sizes, transition }) {
+        this.id = 'home'
         this.gl = gl
         this.sizes = sizes
         this.scene = scene
-
+        this.transition = transition
         this.group = new Transform()
 
         this.galleryElement = document.querySelector('.home__gallery')
 
         this.galleryElementWrapper = document.querySelector('.home__gallery__wrapper')
 
-
-
         this.mediasElements = document.querySelectorAll('.home__gallery__media')
-
 
         this.projectsElementsActive = 'home__article--active'
         this.projectsElements = document.querySelectorAll('.home__article')
@@ -48,6 +46,9 @@ export default class {
         this.createGeometry()
         this.createGallery()
 
+        this.onResize({
+            sizes: this.sizes
+        })
         this.group.setParent(this.scene)
 
         this.show()
@@ -75,9 +76,43 @@ export default class {
     /**
    * Animations
    */
+    async show() {
 
-    show() {
-        map(this.medias, media => media.show())
+        if (this.transition) {
+            // this.media.opacity.multiplier = 0
+
+            const { src } = this.transition.mesh.program.uniforms.tMap.value.image
+            const texture = window.TEXTURES[src]
+            const media = this.medias.find(media => media.texture === texture)
+
+
+            const scroll = -media.bounds.left - media.bounds.width / 2 + window.innerWidth / 2
+
+
+            this.update()
+
+            this.transition.animate(
+                {
+                    scale: media.mesh.scale,
+                    position: { x: 0, y: 0, z: 0 },
+                }, _ => {
+                    console.log(this.media)
+                    media.opacity.multiplier = 1
+
+                    map(this.medias, item => {
+                        if (media !== item) {
+                            item.show()
+                        }
+                    })
+
+                    this.scroll.current = this.scroll.target = this.scroll.last = this.scroll.start = scroll
+
+                })
+
+        } else {
+            map(this.medias, media => media.show())
+        }
+
     }
 
     hide() {
@@ -125,7 +160,6 @@ export default class {
         this.index = index
         // console.log(this.index)
 
-        console.log(this.mediasElements.length)
         if (this.index === this.mediasElements.length) {
             this.index = this.index - 1
         }
@@ -152,20 +186,16 @@ export default class {
                 element.classList.remove(this.projectsTitleActive)
             }
         })
-
     }
     /**
      * UPDATE
      */
 
     update() {
-        if (!this.bounds) return
-
-
-
         this.speed.current = GSAP.utils.interpolate(this.speed.current, this.speed.target, this.speed.lerp)
 
         this.scroll.target = GSAP.utils.clamp(-this.scroll.limit, 0, this.scroll.target)
+
         this.scroll.current = GSAP.utils.interpolate(this.scroll.current, this.scroll.target, this.scroll.lerp)
 
         this.galleryElement.style[this.transformPrefix] = `translateX(${this.scroll.current}px)`
@@ -173,17 +203,20 @@ export default class {
 
         this.scroll.last = this.scroll.current
 
-
-        map(this.medias, (media, index) => {
-            media.update(this.scroll.current, this.speed.current)
-        })
-
-        const index = Math.floor(Math.abs(this.scroll.current / this.scroll.limit) * this.medias.length)
+        const index = Math.floor(Math.abs((this.scroll.current - this.medias[0].bounds.width / 2) / this.scroll.limit) * (this.medias.length - 1))
 
 
         if (this.index !== index) {
             this.onChange(index)
         }
+
+        map(this.medias, (media, index) => {
+            media.update(this.scroll.current, this.speed.current, this.index)
+
+            media.mesh.position.y += Math.cos((media.mesh.position.x / this.sizes.width) * Math.PI * 0.1) * 40 - 40
+        })
+
+
     }
     /**
      * Dedstroy
