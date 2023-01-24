@@ -99,6 +99,7 @@ export default class Canvas {
         }
 
         if (this.project) {
+            this.project.Picture.hide()
             this.project.hide()
         }
 
@@ -114,7 +115,7 @@ export default class Canvas {
                 url
             })
 
-            this.transition.setElement(this.home || this.project)
+            this.transition.setElement(this.project || this.home)
         }
 
     }

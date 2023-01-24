@@ -7,6 +7,7 @@ import vertex from 'shaders/plane-vertex.glsl'
 export default class {
   constructor({ gl, scene, sizes, transition }) {
 
+  
     this.element = document.querySelector('.project__image__media')
 
     this.gl = gl
@@ -66,8 +67,9 @@ export default class {
    * Animations.
    */
   show() {
-
+    console.log(this.transition)
     if (this.transition) {
+
       this.transition.animate(this.mesh, _ => {
         this.program.uniforms.uAlpha.value = 1
       })
@@ -117,20 +119,23 @@ export default class {
       -this.sizes.width / 2 + this.mesh.scale.x / 2 + this.x * this.sizes.width
   }
 
-  updateY() {
-    this.y = this.bounds.top / window.innerHeight
+  //   updateY() {
+  //     this.y = this.bounds.top / window.innerHeight
 
-    this.mesh.position.y =
-      this.sizes.height / 2 -
-      this.mesh.scale.y / 2 -
-      this.y * this.sizes.height
+  //     this.mesh.position.y =
+  //       this.sizes.height / 2 -
+  //       this.mesh.scale.y / 2 -
+  //       this.y * this.sizes.height
+  //   }
+
+  updateY(y = 0) {
+    this.y = (this.bounds.top + y) / window.innerHeight
+    this.mesh.position.y = (this.sizes.height / 2) - (this.mesh.scale.y / 2) - (this.y * this.sizes.height)
   }
-
-  update() {
-    if (!this.bounds) return
+  update(scroll) {
 
     this.updateX()
-    this.updateY()
+    this.updateY(scroll)
   }
 
   /**

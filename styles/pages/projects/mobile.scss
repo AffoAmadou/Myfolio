@@ -9,9 +9,10 @@
     visibility: hidden;
 }
 .project__mobile__wrapper{
-    width: 120.2rem;
+    // width: 120.2rem;
+ width: 100%;
     @extend %center;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .project__mobile__image {
     width   : 30rem;

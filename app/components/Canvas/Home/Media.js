@@ -17,6 +17,13 @@ export default class Media {
             x: 0,
             y: 0
         }
+        this.opacity = {
+            current: 0,
+            target: 0,
+            lerp: 0.1,
+            multiplier: 0
+        }
+
         this.createTexture()
         this.createProgram()
         this.createMesh()
@@ -26,12 +33,7 @@ export default class Media {
 
 
 
-        this.opacity = {
-            current: 0,
-            target: 0,
-            lerp: 0.1,
-            multiplier: 0
-        }
+
     }
     createTexture() {
         const image = this.element.querySelector('.home__gallery__media__image')
@@ -60,7 +62,6 @@ export default class Media {
         })
 
         this.mesh.setParent(this.scene)
-
         this.mesh.scale.x = 2
     }
 
@@ -134,9 +135,8 @@ export default class Media {
         this.program.uniforms.uSpeed.value = speed
 
         this.opacity.target = this.index === index ? 1 : 0.4
-
         this.opacity.current = GSAP.utils.interpolate(this.opacity.current, this.opacity.target, this.opacity.lerp)
 
-        this.program.uniforms.uAlpha.value = this.opacity.multiplier
+        this.program.uniforms.uAlpha.value = this.opacity.multiplier * this.opacity.current
     }
 }

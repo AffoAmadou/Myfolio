@@ -96,7 +96,7 @@ module.exports = {
         test: /\.(jpe?g|png|gif|svg|woff2?|fnt|webp)$/,
         loader: 'file-loader',
         options: {
-          name (file) {
+          name(file) {
             return '[hash].[ext]'
           }
         }
@@ -137,6 +137,11 @@ module.exports = {
   optimization: {
     minimize: true,
     minimizer: [new TerserPlugin()]
-  }
+  },
+  // output: {
+  //   filename: 'index.js',
+  //   path: path.resolve(__dirname, 'dist'),
+  //   clean: true,
+  // },
 
 }

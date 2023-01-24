@@ -35,15 +35,14 @@ export default class Transition {
             program: this.program
         })
 
-        console.log(mesh)
 
         this.mesh.scale.x = mesh.scale.x
         this.mesh.scale.y = mesh.scale.y
         this.mesh.scale.z = mesh.scale.z
 
-        this.mesh.position.x = mesh.scale.x
-        this.mesh.position.y = mesh.scale.y
-        this.mesh.position.z = mesh.scale.z + 0.01
+        this.mesh.position.x = mesh.position.x
+        this.mesh.position.y = mesh.position.y
+        this.mesh.position.z = mesh.position.z + 0.01
 
         this.mesh.setParent(this.scene)
 
@@ -59,8 +58,6 @@ export default class Transition {
             const { index, medias } = element
 
             const media = medias[index]
-            console.log("hey")
-            console.log(media.mesh)
             this.createProgram(media.texture)
 
             this.createMesh(media.mesh)
@@ -73,8 +70,6 @@ export default class Transition {
             this.transition = 'home'
         }
 
-
-        // this.element = 
     }
     /**
      * 
@@ -83,55 +78,42 @@ export default class Transition {
 
 
     animate(element, onComplete) {
-        console.log(element)
+        const timeline = GSAP.timeline({
+
+        })
+
+        timeline.to(this.mesh.scale, {
+            duration: 1.5,
+            ease: 'expo.inOut',
+            x: element.scale.x,
+            y: element.scale.y,
+            z: element.scale.z,
+        }, 0)
+
+        timeline.to(this.mesh.position, {
+            duration: 1.5,
+            ease: 'expo.inOut',
+            x: element.position.x,
+            y: element.position.y,
+            z: element.position.z,
+        }, 0)
 
 
-        if (this.transition === 'project') {
-            this.transition = 'home'
-            const timeline = GSAP.timeline({
-                onComplete
-            })
 
-            timeline.to(this.mesh.scale, {
-                duration: 1.5,
-                ease: 'expo.inOut',
-                x: element.scale.x,
-                y: element.scale.y,
-                z: element.scale.z,
-            }, 0)
 
-            timeline.to(this.mesh.position, {
-                duration: 1.5,
-                ease: 'expo.inOut',
-                x: element.position.x,
-                y: element.position.y,
-                z: element.position.z,
-            }, 0)
-        }
-        else {
+        timeline.call(_ => {
+            onComplete()
+            console.log("Hex")
+        })
 
-            const timeline = GSAP.timeline({
-                onComplete
-            })
+        //*****PROBLEM */
+        timeline.call(_ => {
+            // this.scene.removeChild(this.mesh)
 
-            timeline.to(this.mesh.scale, {
-                duration: 1.5,
-                ease: 'expo.inOut',
-                x: element.scale.x,
-                y: element.scale.y,
-                z: element.scale.z,
-            }, 0)
+            this.mesh.setParent(null)
+        }, null, '+=0.1')
 
-            timeline.to(this.mesh.position, {
-                duration: 1.5,
-                ease: 'expo.inOut',
-                x: element.position.x,
-                y: element.position.y,
-                z: element.position.z,
-            }, 0)
-        }
+
+
     }
-
-
-
 }

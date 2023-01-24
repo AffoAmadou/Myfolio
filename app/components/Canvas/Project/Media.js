@@ -12,16 +12,19 @@ export default class Media {
         this.scene = scene
         this.index = index
         this.sizes = sizes
-
+        this.extra = {
+            x: 0,
+            y: 0
+        }
         this.createTexture()
         this.createProgram()
 
         this.createMesh()
 
-        this.extra = {
-            x: 0,
-            y: 0
-        }
+        this.createBounds({
+            sizes: this.sizes
+        })
+
     }
 
     createTexture() {
@@ -30,7 +33,7 @@ export default class Media {
         this.texture = window.TEXTURES[image.getAttribute('data-src')]
     }
 
-   
+
     createProgram() {
         this.program = new Program(this.gl, {
             fragment,
@@ -107,7 +110,7 @@ export default class Media {
         )
     }
     updateScale() {
-       
+
         this.width = this.bounds.width / window.innerWidth
         this.height = this.bounds.height / window.innerHeight
 
@@ -120,7 +123,7 @@ export default class Media {
         this.mesh.position.x = (-this.sizes.width / 2) + (this.mesh.scale.x / 2) + (this.x * this.sizes.width) + this.extra
     }
 
-    updateY(y = 0) { 
+    updateY(y = 0) {
         this.y = (this.bounds.top + y) / window.innerHeight
         this.mesh.position.y = (this.sizes.height / 2) - (this.mesh.scale.y / 2) - (this.y * this.sizes.height)
 
@@ -129,13 +132,9 @@ export default class Media {
     }
 
     update(scroll) {
-        if (!this.bounds) return
-
         this.updateRotation()
         this.updateScale()
         this.updateX(scroll)
         this.updateY(0)
     }
-
-
 }

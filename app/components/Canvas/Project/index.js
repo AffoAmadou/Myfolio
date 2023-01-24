@@ -9,7 +9,6 @@ export default class {
         this.id = 'project'
         this.scene = scene
 
-        console.log(this.scene)
         this.gl = gl
         this.sizes = sizes
 
@@ -17,6 +16,11 @@ export default class {
         this.transition = transition
         this.createGeometry()
         this.createGalleries()
+        this.Picture = new Picture({ gl: this.gl, scene: this.scene, sizes: this.sizes, transition: this.transition })
+
+        this.onResize({
+            sizes: this.sizes
+        })
 
         this.group.setParent(scene)
 
@@ -29,7 +33,6 @@ export default class {
 
     createGalleries() {
 
-        this.Picture = new Picture({ gl: this.gl, scene: this.scene, sizes: this.sizes, transition: this.transition })
         this.galleriesElements = document.querySelectorAll('.project__mobile')
 
         this.galleries = map(this.galleriesElements, (element, index) => {
@@ -39,7 +42,7 @@ export default class {
                 index,
                 gl: this.gl,
                 scene: this.group,
-                sizes: this.sizes
+                sizes: this.sizes,
             })
         })
     }
@@ -79,9 +82,11 @@ export default class {
 
     update(scroll) {
         map(this.galleries, gallery => gallery.update(scroll))
+        this.Picture.update(scroll)
     }
 
     destroy() {
         map(this.galleries, gallery => gallery.destroy())
+        this.Picture.destroy()
     }
 }

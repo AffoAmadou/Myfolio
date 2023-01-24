@@ -4,7 +4,7 @@ import GSAP from 'gsap'
 import { Transform } from "ogl"
 
 export default class Gallery {
-    constructor({ element, geometry, index, gl, scene, sizes }) {
+    constructor({ element, geometry, index, gl, scene, sizes}) {
         this.element = element
         this.elementWrapper = element.querySelector('.project__mobile__wrapper')
         this.geometry = geometry
@@ -12,6 +12,7 @@ export default class Gallery {
         this.gl = gl
         this.scene = scene
         this.sizes = sizes
+
 
         this.group = new Transform()
 
@@ -24,6 +25,10 @@ export default class Gallery {
         }
 
         this.createMedias()
+
+        this.onResize({
+            sizes: this.sizes
+        })
 
         this.group.setParent(this.scene)
     }
@@ -83,10 +88,9 @@ export default class Gallery {
      */
 
     update(scroll) {
-        if (!this.bounds) return
 
-        const distance = (scroll.current - scroll.target)*0.05
-        const y = scroll.current / window.innerHeight 
+        const distance = (scroll.current - scroll.target) * 0.05
+        const y = scroll.current / window.innerHeight
 
         if (this.scroll.current < this.scroll.target) {
             this.direction = 'right'
@@ -98,7 +102,7 @@ export default class Gallery {
         }
 
 
-        this.scroll.target -= this.scroll.velocity 
+        this.scroll.target -= this.scroll.velocity
         this.scroll.target += distance
 
         this.scroll.current = GSAP.utils.interpolate(this.scroll.current, this.scroll.target, this.scroll.lerp)
@@ -128,6 +132,7 @@ export default class Gallery {
 
             }
             media.update(this.scroll.current)
+          
         })
 
         this.group.position.y = y * this.sizes.height
