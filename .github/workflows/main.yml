@@ -51,7 +51,7 @@ jobs:
         username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASSWORD }}
         port: ${{ secrets.FTP_PORT }}
-        local-dir: dist/
+        local-dir: public/
         server-dir: /domains/amadouh.fr/public_html/
         protocol: ftp
         secure: true
