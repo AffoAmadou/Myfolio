@@ -52,7 +52,7 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         port: ${{ secrets.FTP_PORT }}
         local-dir: dist/
-        server-dir: /domains/amadouh.fr/public_html
+        server-dir: /domains/amadouh.fr/public_html/
         protocol: ftp
         secure: true
         validate-certs: false
