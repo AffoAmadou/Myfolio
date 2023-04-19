@@ -37,6 +37,7 @@ export default class Media {
     }
     createTexture() {
         const image = this.element.querySelector('.home__gallery__media__image')
+        console.log(image.getAttribute('data-src'))
         this.texture = window.TEXTURES[image.getAttribute('data-src')]
     }
 

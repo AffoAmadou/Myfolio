@@ -93,10 +93,10 @@ class App {
 
         const request = await window.fetch(url)
 
-        if (request.status === 200) { //!200 = pagina ben caricata
-            const html = await request.text() //!recupero il contenuto della pagina
+        if (request.status === 200) { //!200 = Page loaded
+            const html = await request.text() //!get next page content
 
-            const div = document.createElement('div') //!Creo una div per metterci la parte del "html" che voglio
+            const div = document.createElement('div') //!Create a div to store the content
             //!cosi da non mettere anche i doctype etc 
 
             if (push) {
@@ -105,19 +105,19 @@ class App {
 
             div.innerHTML = html
 
-            const divContent = div.querySelector('.content')//! Recupero solo il .content che contiene la parte di divs che cambia in ogni pagina
+            const divContent = div.querySelector('.content')//! get the only selector that change in every page
 
             this.template = divContent.getAttribute('data-template')
 
 
-            this.content.setAttribute('data-template', this.template);//*Cambio il data-template per far sapere che sono in questa pagina attualmente
-            this.content.innerHTML = divContent.innerHTML //! E lo inserisco nel content della pagina in cui sono ora
+            this.content.setAttribute('data-template', this.template);//*Change the data template to know in which page i am (home, about, portfolio)
+            this.content.innerHTML = divContent.innerHTML //! Insert it in the content
 
             this.canvas.onChangeEnd(this.template)
 
-            this.page = this.pages[this.template] //!Riassegno la pagina
+            this.page = this.pages[this.template] //! reinsert the content in the page
 
-            this.page.create() //? Chiamo il create nella classe page che é legata ad ognuna delle pagine
+            this.page.create() //? Call the create method in the page class
 
             this.onResize()
 
