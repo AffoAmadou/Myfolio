@@ -78,7 +78,6 @@ export default class Canvas {
             transition: this.transition
         })
     }
-
     destroyProject() {
         if (!this.project) return
         this.project.destroy()
@@ -87,12 +86,9 @@ export default class Canvas {
     /**
      **Events
      */
-
-
     onPreloaded() {
         this.onChangeEnd(this.template)
     }
-
     onChangeStart(template, url) {
         if (this.home) {
             this.home.hide()
@@ -136,7 +132,6 @@ export default class Canvas {
 
         this.template = template
     }
-
     onResize() {
         this.renderer.setSize(window.innerWidth, window.innerHeight)
 
@@ -166,7 +161,6 @@ export default class Canvas {
             this.home.onResize(values)
         }
     }
-
     onTouchDown(event) {
         this.isDown = true
         this.x.start = event.touches ? event.touches[0].clientX : event.clientX
@@ -185,7 +179,6 @@ export default class Canvas {
             this.home.onTouchDown(values)
         }
     }
-
     onTouchMove(event) {
         if (!this.isDown) return
 
@@ -209,7 +202,6 @@ export default class Canvas {
 
         }
     }
-
     onTouchUp(event) {
         this.isDown = false
 
