@@ -16,7 +16,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.KEY }}
         script: |
-          cd /Myfolio
+          cd /root/Myfolio
           git pull
           npm install
           pm2 restart all
