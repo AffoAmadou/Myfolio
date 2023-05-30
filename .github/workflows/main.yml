@@ -14,9 +14,9 @@ jobs:
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.KEY }}
+        password: ${{ secrets.KEY }}
         script: |
-          cd /path/to/your/app
+          cd /Myfolio
           git pull
           npm install
           pm2 restart all
