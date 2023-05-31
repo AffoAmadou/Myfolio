@@ -30,16 +30,30 @@
   transition: opacity 0.4s ease;
   &--active {
     opacity: 1;
-    transition-delay: 0.4s
+    transition-delay: 0.4s;
   }
 
+
+  .home__title__article__title {
+    @extend %title-65;
+    transform: translateY(-5rem); /* moves the element down by 5rem */
+    transition: transform 0.4s ease; /* transition effect */
+  }
+
+  &--active {
+    .home__title__article__title {
+      transform: translateY(0); /* moves the element back to its original position */
+      transition-delay: 0.4s;
+    }
+  }
+
+  // .home__title__article__title {
+  //   @extend %title-65;
+  // }
+
 }
 
-.home__title__article__title {
-  @extend %title-65;
 
-
-}
 
 .home__gallery {
   @extend %cover;
@@ -102,6 +116,18 @@
   @include media('<phone') {
     bottom: 26rem;
     left  : 11.8rem;
+  }
+
+  .home__article__title, .home__article__description {
+    transform: translateY(5rem); /* moves the element down by 5rem */
+    transition: transform 0.4s ease; /* transition effect */
+  }
+
+  &--active {
+    .home__article__title, .home__article__description {
+      transform: translateY(0); /* moves the element back to its original position */
+      transition-delay: 0.4s;
+    }
   }
 }
 
