@@ -43,7 +43,6 @@ export default class Component extends EventEmitter {
 
                 }
             }
-            // console.log(this.elements[key], entry)
 
         })
 

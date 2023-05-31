@@ -96,7 +96,6 @@ export default class {
                     scale: media.mesh.scale,
                     position: { x: 0, y: 0, z: 0 },
                 }, _ => {
-                    console.log(this.media)
                     media.opacity.multiplier = 1
 
                     map(this.medias, item => {
@@ -158,7 +157,6 @@ export default class {
 
     onChange(index) {
         this.index = index
-        // console.log(this.index)
 
         if (this.index === this.mediasElements.length) {
             this.index = this.index - 1
@@ -166,7 +164,6 @@ export default class {
         const selectedProject = parseInt(this.mediasElements[this.index].getAttribute('data-index'))
 
         map(this.projectsElements, (element, elementIndex) => {
-            // console.log(elementIndex, selectedProject)
 
             if (elementIndex === selectedProject) {
                 element.classList.add(this.projectsElementsActive)
@@ -178,7 +175,6 @@ export default class {
 
 
         map(this.projectsTitle, (element, elementIndex) => {
-            console.log(elementIndex, selectedProject)
 
             if (elementIndex === selectedProject) {
                 element.classList.add(this.projectsTitleActive)

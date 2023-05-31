@@ -103,13 +103,10 @@ export default class Transition {
 
         timeline.call(_ => {
             onComplete()
-            console.log("Hex")
         })
 
         //*****PROBLEM */
         timeline.call(_ => {
-            // this.scene.removeChild(this.mesh)
-
             this.mesh.setParent(null)
         }, null, '+=0.1')
 

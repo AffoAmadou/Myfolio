@@ -67,7 +67,6 @@ export default class {
    * Animations.
    */
   show() {
-    console.log(this.transition)
     if (this.transition) {
 
       this.transition.animate(this.mesh, _ => {

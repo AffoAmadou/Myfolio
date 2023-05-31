@@ -7,10 +7,18 @@ block content
 
     .about(data-background="#B2B8C3" data-color="#F9F1E7") 
         .about__wrapper
-            figure.about__image 
-                img.about__media(alt=about.data.image.alt data-src=about.data.image.url)
-            .about__description
-                h1.about__title=about.data.title 
-                p.about__description__text=about.data.description[0].text
-                p.about.content=about.data.content[0].text 
+            .about__header 
+                figure.about__image 
+                    img.about__image__media(alt=about.data.image.alt data-src=about.data.image.url)
+                .about__header__content
+                    h1.about__title(data-animation="title")!=about.data.title 
+                    p.about__description__text(data-animation="paragraph")!=about.data.description[0].text
+                    p.about__content__text(data-animation="paragraph")!=about.data.content[0].text
+                    p.about__text(data-animation="paragraph")!=about.data.text[0].text
+                    p.about__cta!="Say hi:hamadouaffo@gmail.com"
+           
+            //- .about__description
+            //-     h1.about__title=about.data.title 
+            //-     p.about__description__text=about.data.description[0].text
+            //-     p.about.content=about.data.content[0].text 
 

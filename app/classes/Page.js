@@ -69,7 +69,6 @@ export default class Page {
 
                 }
             }
-            // console.log(this.elements[key], entry)
 
         })
 

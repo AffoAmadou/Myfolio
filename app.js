@@ -99,7 +99,6 @@ const handleRequest = async (api) => {
       }),
     ]);
 
-  // console.log(projects[0].data);
 
   const assets = [];
 
@@ -133,29 +132,7 @@ const handleRequest = async (api) => {
 
   assets.push(about.data.image.url)
 
-  // home.data.gallery.forEach((item) => {
-  //  
-  // });
-
-  // about.data.gallery.forEach((item) => {
-  //   assets.push(item.image.url);
-  // });
-
-  // about.data.body.forEach((section) => {
-  //   if (section.slice_type === 'gallery') {
-  //     section.items.forEach((item) => {
-  //       assets.push(item.image.url);
-  //     });
-  //   }
-  // });
-
-  // collections.forEach((collection) => {
-  //   collection.data.products.forEach((item) => {
-  //     assets.push(item.products_product.data.image.url);
-  //   });
-  // });
-
-  // console.log(assets);
+ 
 
   return {
     assets,
@@ -181,6 +158,8 @@ app.get('/', async (req, res) => {
 app.get('/about', async (req, res) => {
   const api = await initApi(req);
   const defaults = await handleRequest(api);
+ 
+
 
   res.render('pages/about', {
     ...defaults,
@@ -204,4 +183,4 @@ app.listen(port,'0.0.0.0', () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
 
-// "start": "concurrently --kill-others \"npm run backend:development\" \"npm run frontend:development\""
+
