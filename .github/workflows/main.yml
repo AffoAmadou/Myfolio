@@ -1,25 +1,3 @@
-# name: Deploy to VPS
-# on:
-#   push:
-#     branches: [ master ]
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: Checkout code
-#       uses: actions/checkout@v2
-
-#     - name: Deploy to VPS
-#       uses: appleboy/ssh-action@master
-#       with:
-#         host: ${{ secrets.HOST }}
-#         username: ${{ secrets.USERNAME }}
-#         password: ${{ secrets.KEY }}
-#         script: |
-#           cd /root/Myfolio
-#           git pull
-#           npm install
-#           pm2 restart all
 name: Deploy to VPS
 on:
   push:
@@ -39,9 +17,6 @@ jobs:
         password: ${{ secrets.KEY }}
         script: |
           cd /root/Myfolio
-          git fetch origin master
-          git reset --hard origin/master  # Ensure latest version is pulled
+          git pull
           npm install
-          npm install graceful-fs@4 natives@latest  # Update specific problematic packages
-          npm audit fix --force                     # Fix vulnerabilities
           pm2 restart all
