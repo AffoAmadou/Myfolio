@@ -38,10 +38,10 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.KEY }}
         script: |
-  cd /root/Myfolio
-  git fetch origin master
-  git reset --hard origin/master  # Ensure latest version is pulled
-  npm install
-  npm install graceful-fs@4 natives@latest  # Update specific problematic packages
-  npm audit fix --force                     # Fix vulnerabilities
-  pm2 restart all
+          cd /root/Myfolio
+          git fetch origin master
+          git reset --hard origin/master  # Ensure latest version is pulled
+          npm install
+          npm install graceful-fs@4 natives@latest  # Update specific problematic packages
+          npm audit fix --force                     # Fix vulnerabilities
+          pm2 restart all
