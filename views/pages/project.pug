@@ -10,7 +10,7 @@ block content
         figure.project__image
           img.project__image__media(alt=project.data.image.alt data-src=project.data.image.url)  
 
-          h1.project__title(data-animation="title")="project.data.title "
+          h1.project__title(data-animation="title")=project.data.title 
 
       each section in project.data.body
         if section.slice_type=='description' 
