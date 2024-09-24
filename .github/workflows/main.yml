@@ -1,3 +1,25 @@
+# name: Deploy to VPS
+# on:
+#   push:
+#     branches: [ master ]
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v2
+
+#     - name: Deploy to VPS
+#       uses: appleboy/ssh-action@master
+#       with:
+#         host: ${{ secrets.HOST }}
+#         username: ${{ secrets.USERNAME }}
+#         password: ${{ secrets.KEY }}
+#         script: |
+#           cd /root/Myfolio
+#           git pull
+#           npm install
+#           pm2 restart all
 name: Deploy to VPS
 on:
   push:
@@ -17,6 +39,8 @@ jobs:
         password: ${{ secrets.KEY }}
         script: |
           cd /root/Myfolio
-          git pull
+          git fetch origin master
+          git reset --hard origin/master  # Force pull to avoid conflicts
           npm install
+          npm audit fix --force           # Attempt to fix vulnerabilities
           pm2 restart all
