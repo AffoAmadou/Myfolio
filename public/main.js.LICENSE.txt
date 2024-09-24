@@ -44,6 +44,8 @@
 
 /*! ./Component */
 
+/*! ./Detection */
+
 /*! ./ExecutionEnvironment */
 
 /*! ./Gallery */

@@ -12,6 +12,7 @@ import Paragraph from 'animations/Paragraph'
 import Label from 'animations/Label'
 import Section from 'animations/Section'
 import Preloader from '../components/Preloader'
+import DetectionManager from './Detection';
 
 import AsyncLoad from './AsyncLoad'
 export default class Page {
@@ -162,6 +163,29 @@ export default class Page {
      * //!Event
      */
     //*Debug dello scroll per lo smoothscroll
+
+onTouchDown(event) {
+    if (!DetectionManager.isPhone) return;
+
+    this.isDown = true;
+
+    this.scroll.position = this.scroll.current;
+    this.start = event.touches ? event.touches[0].clientY : event.clientY;
+  }
+
+  onTouchMove(event) {
+    if (!DetectionManager.isPhone || !this.isDown) return;
+
+    const y = event.touches ? event.touches[0].clientY : event.clientY;
+    const distance = (this.start - y) * 3;
+
+    this.scroll.target = this.scroll.position + distance;
+  }
+  onTouchUp() {
+    if (!DetectionManager.isPhone) return;
+
+    this.isDown = false;
+  }
 
     onWheel({ pixelY }) {
         this.scroll.target += pixelY

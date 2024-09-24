@@ -22,7 +22,6 @@ export default class {
             sizes: this.sizes
         })
 
-        this.group.setParent(scene)
 
         this.show()
     }
@@ -48,10 +47,14 @@ export default class {
     }
 
     show() {
+        this.group.setParent(this.scene)
+
         map(this.galleries, gallery => gallery.show())
     }
 
     hide() {
+        this.group.setParent(null)
+
         map(this.galleries, gallery => gallery.hide())
     }
 
@@ -74,6 +77,7 @@ export default class {
     }
 
     onWheel({ pixelX, pixelY }) {
+
     }
 
     /**
@@ -81,6 +85,9 @@ export default class {
      */
 
     update(scroll) {
+        // const y = scroll.current / window.innerHeight
+
+        // console.log(y,"ipsilon")
         map(this.galleries, gallery => gallery.update(scroll))
         this.Picture.update(scroll)
     }

@@ -3,7 +3,7 @@ import { Mesh, Program, Plane } from 'ogl'
 import fragment from 'shaders/plane-fragment.glsl'
 import vertex from 'shaders/plane-vertex.glsl'
 import GSAP from 'gsap'
-
+import DetectionManager from 'classes/Detection'
 export default class Media {
     constructor({ element, geometry, gl, index, scene, sizes }) {
         this.element = element
@@ -89,7 +89,7 @@ export default class Media {
     /**
       * Events
       */
-    onResize(sizes, scroll) {
+    onResize(sizes, scroll,width) {
         this.extra = 0
         this.createBounds(sizes)
         this.updateX(scroll)
@@ -125,10 +125,14 @@ export default class Media {
 
     updateY(y = 0) {
         this.y = (this.bounds.top + y) / window.innerHeight
+
+        const extra = DetectionManager.isPhone() ? 20 : 40;
+        
         this.mesh.position.y = (this.sizes.height / 2) - (this.mesh.scale.y / 2) - (this.y * this.sizes.height)
 
+
         //*ROTATION
-        this.mesh.position.y += Math.cos((this.mesh.position.x / this.sizes.width) * Math.PI * 0.1) * 40 - 40
+        this.mesh.position.y += Math.cos((this.mesh.position.x / this.sizes.width) * Math.PI * 0.1) * extra - extra
     }
 
     update(scroll) {
