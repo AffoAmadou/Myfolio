@@ -20,13 +20,10 @@ block content
                                 img.home__gallery__media__image(alt=project.data.image.alt data-src=project.data.image.url)
                             
 
-
             .home__content
                 each project, index in projects
                     article.home__article(class=`${index === 0 ?'home__article--active' : ''}`) 
                         each slice in project.data.body
                             if slice.slice_type=='description'
                                 h2.home__article__title=slice.primary.intitulation
-                                p.home__article__description=slice.primary.text
-
-            
+                                p.home__article__description=slice.primary.text   

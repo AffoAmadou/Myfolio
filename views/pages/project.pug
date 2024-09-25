@@ -39,7 +39,7 @@ block content
               .project__process__description 
                 p.project__process__description__main(data-animation="paragraph")!=section.primary.description[0].text.replace(/\n/g, '<br>')
                 p.project__process__description__submain(data-animation="paragraph")!=section.primary.text[0].text.replace(/\n/g, '<br>')
-                a.project__process__link(href=section.primary.link)=section.primary.link_text
+                a.project__process__link(href=section.primary.link, target="_blank")=section.primary.link_text
 
         if section.slice_type=='design'
           each item in section.items

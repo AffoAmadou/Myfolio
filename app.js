@@ -102,7 +102,8 @@ const handleRequest = async (api) => {
 
   const assets = [];
 
-  
+  console.log("Home",home.data.projects)
+  console.log("Projects",projects)
 
   projects.forEach((project) => {
     assets.push(project.data.image.url);

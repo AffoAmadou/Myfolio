@@ -217,7 +217,8 @@ class App {
     }
 
     addLinkListeners() {
-        const links = document.querySelectorAll('a') //! Recupero tutti i link della pagina 
+        const links = document.querySelectorAll('a:not(.project__process__link)')
+ //! Recupero tutti i link della pagina 
 
         each(links, link => {
             link.onclick = event => {

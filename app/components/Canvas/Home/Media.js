@@ -82,12 +82,20 @@ export default class Media {
 
 
     show() {
-        GSAP.fromTo(this.opacity, {
+        this.timeline = GSAP.timeline(
+            {
+                delay: 3.5
+            }
+        )
+
+        this.timeline.fromTo(this.opacity, {
             multiplier: 0
         }, {
             multiplier: 1
         })
     }
+    
+    
 
     hide() {
         GSAP.to(this.opacity, {
