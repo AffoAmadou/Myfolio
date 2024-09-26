@@ -138,7 +138,7 @@ export default class {
         this.scroll.last = this.scroll.current
     }
     onTouchMove({ x, y }) {
-        const distance = (x.start - x.end)*.7
+        const distance = (x.start - x.end)*.5
 
         this.scroll.target = (this.scroll.last - distance) 
     }
