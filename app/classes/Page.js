@@ -177,7 +177,7 @@ onTouchDown(event) {
     if (!DetectionManager.isPhone || !this.isDown) return;
 
     const y = event.touches ? event.touches[0].clientY : event.clientY;
-    const distance = (this.start - y) * 1.8;
+    const distance = (this.start - y) * 2.3;
 
     this.scroll.target = this.scroll.position + distance;
   }
