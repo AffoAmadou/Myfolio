@@ -85,12 +85,13 @@ export default class Preloader extends Component {
             this.animateOut = GSAP.timeline({
                 delay: 1,
                 defaults: {
-                    duration: 1,
+                    duration: 1.5,
                     ease: 'power3.inOut'
                 }
             })
 
             this.animateOut.to([this.elements.upnumber, this.elements.downumber], {
+                
                 autoAlpha: 0,
                 y: "-100%"
             }, 'myLabel')

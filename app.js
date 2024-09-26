@@ -87,9 +87,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.locals.basedir = app.get('views');
 
 const handleRequest = async (api) => {
-  const [preloader, navigation, about, home, project, { results: projects }] =
+console.log("API",api)
+  const [metadata,preloader, navigation, about, home, project, { results: projects }] =
     await Promise.all([
-      // api.getSingle('meta'),
+      api.getSingle('metadata'),
       api.getSingle('preloader'),
       api.getSingle('navigation'),
       api.getSingle('about'),
@@ -103,9 +104,7 @@ const handleRequest = async (api) => {
 
   const assets = [];
 
-  console.log("Home",home.data.projects)
-  console.log("Projects",projects)
-
+  
   projects.forEach((project) => {
     assets.push(project.data.image.url);
     project.data.body.forEach((section) => {
@@ -138,7 +137,7 @@ const handleRequest = async (api) => {
 
   return {
     assets,
-    // meta,
+    metadata,
     preloader,
     navigation,
     home,
@@ -151,7 +150,7 @@ const handleRequest = async (api) => {
 app.get('/', async (req, res) => {
   const api = await initApi(req);
   const defaults = await handleRequest(api);
-
+console.log(defaults.metadata,"defaults");
   res.render('pages/home', {
     ...defaults,
   });
