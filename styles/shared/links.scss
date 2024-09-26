@@ -60,7 +60,11 @@
 //   }
 // }
 
-%link-17{
+%link-17 {
   font-family: $font-colus;
   font-size: 1.7rem;
+
+  @include media('<phone') {
+    font-size: 2.8rem;
+  }
 }

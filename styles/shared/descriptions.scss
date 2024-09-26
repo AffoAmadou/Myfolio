@@ -26,10 +26,19 @@
 
 %description-12 {
   font-size: 1.2rem;
+
+  @include media('<phone') {
+    font-size: 3rem;
+  }
 }
 
 %description-15 {
   font-size: 1.5rem;
+
+  @include media('<phone') {
+    font-size: 2.8rem;
+    line-height: 1.2 !important;
+  }
 }
 
 
@@ -42,22 +51,31 @@
 }
 
 %description-s18 {
-  font-size  : 1.8rem;
+  font-size: 1.8rem;
   font-weight: 600;
+
+  @include media('<phone') {
+    font-size: 2.8rem;
+    line-height: 1.2 !important;
+  }
 }
 
 %description-20 {
-  font-size  : 2rem;
+  font-size: 2rem;
   font-weight: bold;
 }
 
 %description-25 {
-  font-size  : 2.5rem;
+  font-size: 2.5rem;
   font-weight: 600;
+
+  @include media('<phone') {
+    font-size: 3.5rem;
+  }
 }
 
 %description-30 {
-  font-size  : 3rem;
+  font-size: 3rem;
   font-weight: bold;
 }
 
@@ -66,11 +84,11 @@
 }
 
 %description-s34 {
-  font-size  : 3.4rem;
+  font-size: 3.4rem;
   font-weight: 600;
 }
 
 %description-50 {
-  font-size  : 5rem;
+  font-size: 5rem;
   font-weight: bold;
 }

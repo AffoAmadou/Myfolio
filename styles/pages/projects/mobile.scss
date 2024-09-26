@@ -1,26 +1,38 @@
-.project__mobile{
-    width           : 100%;
-    height          : 100vh;
+.project__mobile {
+    width: 100%;
+    height: 100vh;
     margin-bottom: .1rem;
     @extend %center;
     pointer-events: none;
     overflow: hidden;
 
     visibility: hidden;
+
+    @include media('<phone') {
+        height: 30vh;
+    }
+
 }
-.project__mobile__wrapper{
+
+.project__mobile__wrapper {
     // width: 120.2rem;
- width: 100%;
+    width: 100%;
     @extend %center;
     justify-content: space-around;
+
+    @include media('<phone') {
+        display: none;
+    }
 }
+
 .project__mobile__image {
-    width   : 30rem;
-    height  : 64.886rem;
+    width: 30rem;
+    height: 64.886rem;
     position: relative;
     // margin-right: 15.1rem;
 }
-.project__mobile__image__media{
+
+.project__mobile__image__media {
     @extend %cover;
     object-fit: cover;
 }

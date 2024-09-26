@@ -1,16 +1,20 @@
 %title-25 {
   font-family: $font-colus;
-  font-size  : 2.5rem;
+  font-size: 2.5rem;
+
+  @include media('<phone') {
+    font-size: 3.5rem;
+  }
 }
 
 %title-65 {
   font-family: $font-colus;
-  font-size  : 6.5rem;
+  font-size: 6.5rem;
 }
 
 %title-210 {
   font-family: $font-colus;
-  font-size  : 21rem;
+  font-size: 21rem;
 
   @include media('<phone') {
     font-size: 6.5rem;

@@ -1,27 +1,41 @@
 .project__process {
-    width  : 100%;
+    width: 100%;
     padding: 26rem 0;
     @extend %center;
 
 }
 
 .project__process__wrapper {
-    display       : flex;
-    width         : 109rem;
+    display: flex;
+    width: 109rem;
     align-items: stretch;
     justify-content: space-between;
+
+    @include media('<phone') {
+        flex-direction: column;
+        width: 100%;
+    }
 }
 
 .project__process__intitulation {
     margin-bottom: 18.5rem;
+
+    @include media('<phone') {
+        margin-bottom: 9rem;
+        text-align: center
+    }
 }
 
 .project__process__title {
     @extend %title-25;
+
+    @include media('<phone') {
+        margin-bottom: 1rem;
+    }
 }
 
 .project__process__subtitle {
-    display   : flex;
+    display: flex;
     flex-direction: column;
 }
 
@@ -35,21 +49,36 @@
 }
 
 .project__process__description {
-    display        : flex;
+    display: flex;
     flex-direction: column;
+
+    @include media('<phone') {
+        text-align: center;
+        align-items: center;
+    }
 }
 
 .project__process__description__main {
     @extend %description-25;
-   margin-bottom: 3rem;
-   line-height: 3rem;
+    margin-bottom: 3rem;
+    line-height: 3rem;
+
+    @include media('<phone') {
+        width: 85%;
+        line-height: 1.2;
+    }
 }
 
 .project__process__description__submain {
-    @extend %description-18 ;
+    @extend %description-18;
     color: #777777;
     margin-bottom: 4rem;
     line-height: 2.1rem;
+
+    @include media('<phone') {
+        width: 85%;
+        line-height: 1.2;
+    }
 }
 
 .project__process__link {
