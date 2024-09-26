@@ -66,6 +66,7 @@
     @include media('<phone') {
         width: 85%;
         line-height: 1.2;
+        display: none;
     }
 }
 
@@ -78,8 +79,37 @@
     @include media('<phone') {
         width: 85%;
         line-height: 1.2;
+        display: none
     }
 }
+
+.project__process__description__main__mob {
+    @extend %description-25;
+    margin-bottom: 3rem;
+    line-height: 3rem;
+    display: none;
+
+    @include media('<phone') {
+        display: block;
+        width: 85%;
+        line-height: 1.2;
+    }
+}
+
+.project__process__description__submain__mob {
+    @extend %description-18;
+    color: #777777;
+    margin-bottom: 4rem;
+    line-height: 2.1rem;
+    display: none;
+
+    @include media('<phone') {
+        display: block;
+        width: 85%;
+        line-height: 1.2;
+    }
+}
+
 
 .project__process__link {
     @extend %link-17;

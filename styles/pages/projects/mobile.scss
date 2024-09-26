@@ -9,7 +9,7 @@
     visibility: hidden;
 
     @include media('<phone') {
-        height: 30vh;
+        height: 28rem;
     }
 
 }
@@ -29,7 +29,6 @@
     width: 30rem;
     height: 64.886rem;
     position: relative;
-    // margin-right: 15.1rem;
 }
 
 .project__mobile__image__media {
