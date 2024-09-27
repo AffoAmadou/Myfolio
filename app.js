@@ -63,8 +63,6 @@ app.use((req, res, next) => {
   res.locals.isTablet = ua.device.type === 'tablet';
 
 
-  console.log(res.locals.isDesktop, res.locals.isPhone, res.locals.isTablet)
-
   res.locals.Link = HandleLinkResolver;
   res.locals.PrismicH = PrismicH;
   res.locals.Numbers = (index) => {
@@ -87,7 +85,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.locals.basedir = app.get('views');
 
 const handleRequest = async (api) => {
-console.log("API",api)
   const [metadata,preloader, navigation, about, home, project, { results: projects }] =
     await Promise.all([
       api.getSingle('metadata'),
@@ -132,8 +129,7 @@ console.log("API",api)
   })
 
   assets.push(about.data.image.url)
-
- 
+  projects.sort((a, b) => b.uid.localeCompare(a.uid));
 
   return {
     assets,
@@ -150,7 +146,11 @@ console.log("API",api)
 app.get('/', async (req, res) => {
   const api = await initApi(req);
   const defaults = await handleRequest(api);
-console.log(defaults.metadata,"defaults");
+  defaults.home.data.projects.sort((a, b) => {
+    return b.projects_project.uid.localeCompare(a.projects_project.uid);
+  });
+
+
   res.render('pages/home', {
     ...defaults,
   });

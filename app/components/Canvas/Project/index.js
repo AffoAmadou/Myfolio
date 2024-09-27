@@ -85,9 +85,6 @@ export default class {
      */
 
     update(scroll) {
-        // const y = scroll.current / window.innerHeight
-
-        // console.log(y,"ipsilon")
         map(this.galleries, gallery => gallery.update(scroll))
         this.Picture.update(scroll)
     }

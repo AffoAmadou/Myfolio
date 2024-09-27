@@ -1,22 +1,22 @@
 .navigation {
   @extend %center;
 
-  color   : $color-white;
+  color: $color-white;
   position: fixed;
-  top     : 0;
-  left    : 0;
-  z-index : z('navigation');
-  height  : 10.3rem;
-  width   : 100vw;
+  top: 0;
+  left: 0;
+  z-index: z('navigation');
+  height: 10.3rem;
+  width: 100vw;
 }
 
 
 .navigation__wrapper {
-  width          : 178.6rem;
-  height         : 8.9rem;
-  display        : flex;
+  width: 178.6rem;
+  height: 8.9rem;
+  display: flex;
   justify-content: space-between;
-  align-items    : center;
+  align-items: center;
 
   @include media('<phone') {
     width: 66.8rem;
@@ -26,8 +26,8 @@
 .navigation__link {}
 
 .navigation__logo__wrapper {
-  width   : 3.9rem;
-  height  : 4.1rem;
+  width: 3.9rem;
+  height: 4.1rem;
   position: relative;
 }
 
@@ -38,6 +38,12 @@
 
 .navigation__list {
   display: flex;
+
+  @include media('<phone') {
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 1.5rem;
+  }
 }
 
 .navigation__list__item {

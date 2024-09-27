@@ -144,7 +144,6 @@ class App {
         if (this.page && this.page.onTouchDown) {
             this.page.onTouchDown(event);
 
-            console.log("heyyyyy")
           }
     }
     onTouchMove(event) {
