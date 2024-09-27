@@ -9,7 +9,6 @@ export default class Navigation extends Component {
         links: '.navigation__list__link'
       }
     })
-    console.log(this.elements.links, 'this.elements.links')
     this.links = mapEach(this.elements.links, element => {
       return new Link({
         element

@@ -76,11 +76,9 @@ export default class Link extends Animation {
     )
 
     this.addEventListener()
-    console.log('event listener added', this.timeline)
   }
 
   onMouseEnter () {
-    console.log('onMouseEnter', this.timeline)
     this.timeline.play()
   }
 

@@ -78,13 +78,11 @@ export default class Page {
   createAnimations () {
     this.animations = []
 
-    console.log(this.elements.animationsTitles)
     //* Title
     this.animationsTitles = map(this.elements.animationsTitles, element => {
       return new Title({ element })
     })
 
-    console.log(this.animationsTitles)
 
     this.animations.push(...this.animationsTitles)
 
@@ -115,13 +113,11 @@ export default class Page {
 
     this.animations.push(...this.animationsParallax)
 
-    console.log(this.elements.animationsLink)
     //* Link
     this.animationsLink = map(this.elements.animationsLink, element => {
       return new Link({ element })
     })
 
-    console.log(this.animationsLink)
 
     this.animations.push(...this.animationsLink)
   }

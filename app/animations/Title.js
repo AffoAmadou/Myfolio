@@ -10,7 +10,6 @@ export default class Title extends Animation {
       element, elements
     })
 
-    console.log(this.element)
 
     split({
       element: this.element, append: true
