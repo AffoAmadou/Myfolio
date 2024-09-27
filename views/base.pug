@@ -26,7 +26,7 @@ html(class= isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : ""
         meta(name="twitter:description" content=metadata.data.description)
         meta(name="twitter:image" content=metadata.data.image ? metadata.data.image.url : "")
 
-        link(rel="stylesheet" href="main.css" rel="preload" as="style")
+        link(rel="stylesheet" href="main.css"  as="style")
 
     body 
         include ./partials/preloader
