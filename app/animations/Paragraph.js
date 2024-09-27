@@ -1,6 +1,8 @@
 import Animation from "classes/Animation";
 import GSAP from "gsap";
-// import { each } from "lodash";
+ import { each } from "lodash";
+
+ import { CSS } from "../utils/easings";
 
 import { calculate, split } from "utils/text";
 
@@ -9,36 +11,61 @@ export default class Paragraph extends Animation {
         super({
             element, elements
         })
-        // this.elementLinesSpans = split({ element: this.element, append: true })
+
+        split({
+          element: this.element
+      })
+      split({
+        element: this.element
+    })
+        this.elementLinesSpans = this.element.querySelectorAll('span span')
     }
 
     animateIn() {
-        GSAP.fromTo(
-          this.element,
-          {
-            autoAlpha: 0,
-            delay: 1,
-          },
-          {
+        // GSAP.fromTo(
+        //   this.element,
+        //   {
+        //     autoAlpha: 0,
+        //     delay: 1,
+        //   },
+        //   {
+        //     autoAlpha: 1,
+        //     duration: 1,
+        //   }
+        // );
+
+
+        this.timelineIn = GSAP.timeline()
+
+        this.timelineIn.fromTo(this.element, {
+            autoAlpha: 0
+        }, {
             autoAlpha: 1,
-            duration: 1,
-          }
-        );
+        })
+// console.log(this.elementLinesSpans)
+        this.elementLinesSpans.forEach((element,index) => {
+
+          this.timelineIn.fromTo(element, {
+              y: '100%'
+          }, {
+            delay: index * 0.01,
+              duration: 1.2,
+              ease: 'back.inOut',
+              y: '0%',
+              autoAlpha: 1,
+            visibility : 'visible'
+          }, 0)
+     
+          
+        });
 
 
-        // each(this.elementsLines, (line, index) => {
-        //     this.timelineIn.fromTo(line, {
-        //         autoAlpha: 0,
-        //         y: '100%'
-        //     }, {
-        //         autoAlpha: 1,
-        //         delay: index * 0.2,
-        //         duration: 1.5,
-        //         ease: 'expo.out',
-        //         y: '0%'
-        //     }, 0)
-        // })
+// each(this.elementLinesSpans, (line, lineIndex) => {
+ 
+//     line.style.transition = `transform 1.5s ${lineIndex * 0.1}s ${CSS}`;
+//     line.style[this.transformPrefix] = 'translateY(0)';
 
+// });
     }
 
     animateOut() {

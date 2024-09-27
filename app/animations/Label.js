@@ -17,27 +17,16 @@ export default class Label extends Animation {
           this.element,
           {
             autoAlpha: 0,
-            delay: .5,
           },
           {
             autoAlpha: 1,
             duration: 1,
+            delay: .7,
+
           }
         );
 
 
-        // each(this.elementsLines, (line, index) => {
-        //     this.timelineIn.fromTo(line, {
-        //         autoAlpha: 0,
-        //         y: '100%'
-        //     }, {
-        //         autoAlpha: 1,
-        //         delay: index * 0.2,
-        //         duration: 1.5,
-        //         ease: 'expo.out',
-        //         y: '0%'
-        //     }, 0)
-        // })
 
     }
 

@@ -55,6 +55,12 @@
 .project__content__title {
     @extend %description-25;
     margin-right: 4rem;
+    height: fit-content;
+    overflow: hidden;
+
+    span {
+        overflow: hidden;
+    }
 
     @include media('<phone') {
         margin-right: 0;

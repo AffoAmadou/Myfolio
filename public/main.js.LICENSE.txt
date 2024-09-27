@@ -9,10 +9,30 @@
 */
 
 /*!
+ * CustomEase 3.11.3
+ * https://greensock.com
+ *
+ * @license Copyright 2008-2022, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/*!
  * GSAP 3.11.3
  * https://greensock.com
  *
  * @license Copyright 2008-2022, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/*!
+ * paths 3.11.3
+ * https://greensock.com
+ *
+ * Copyright 2008-2022, GreenSock. All rights reserved.
  * Subject to the terms at https://greensock.com/standard-license or for
  * Club GreenSock members, the agreement issued with that membership.
  * @author: Jack Doyle, jack@greensock.com
@@ -33,6 +53,8 @@
 /*! ../modules/logger/index.js */
 
 /*! ../node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */
+
+/*! ../utils/easings */
 
 /*! ../utils/log.js */
 
@@ -364,6 +386,8 @@
 
 /*! ./utils/parseURL.js */
 
+/*! ./utils/paths.js */
+
 /*! ./utils/reloadApp.js */
 
 /*! ./utils/sendMessage.js */
@@ -399,6 +423,8 @@
 /*! events */
 
 /*! gsap */
+
+/*! gsap/CustomEase */
 
 /*! html-entities */
 
@@ -467,6 +493,10 @@
 /*!*****************************!*\
   !*** ./app/classes/Page.js ***!
   \*****************************/
+
+/*!******************************!*\
+  !*** ./app/utils/easings.js ***!
+  \******************************/
 
 /*!*******************************!*\
   !*** ./app/classes/Button.js ***!
@@ -645,6 +675,10 @@
   \*****************************************/
 
 /*!*****************************************!*\
+  !*** ./node_modules/gsap/CustomEase.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
   !*** ./node_modules/lodash/_Promise.js ***!
   \*****************************************/
 
@@ -719,6 +753,10 @@
 /*!*****************************************!*\
   !*** ./node_modules/webpack/hot/log.js ***!
   \*****************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/gsap/utils/paths.js ***!
+  \******************************************/
 
 /*!******************************************!*\
   !*** ./node_modules/lodash/_DataView.js ***!

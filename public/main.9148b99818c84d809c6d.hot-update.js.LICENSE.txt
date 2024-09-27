@@ -1,0 +1,11 @@
+/*! prefix */
+
+/*! utils/breakpoints */
+
+/*! utils/dom */
+
+/*! utils/math */
+
+/*!************************************!*\
+  !*** ./app/animations/Parallax.js ***!
+  \************************************/

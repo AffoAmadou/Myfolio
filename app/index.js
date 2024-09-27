@@ -21,7 +21,6 @@ class App {
 
         this.createCanvas()
         this.createPreloader()
-        // this.createNavigation()
         this.createPages()
         this.addEventListeners()
         this.addLinkListeners()

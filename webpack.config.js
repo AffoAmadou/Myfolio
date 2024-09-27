@@ -141,33 +141,29 @@ module.exports = {
       new TerserPlugin({
         terserOptions: {
           compress: {
-            drop_console: true,  // Rimuove console.log
-            drop_debugger: true, // Rimuove debugger
-            ecma: 2020,          // ECMAScript version per ottimizzazioni moderne
-            warnings: false,     // Disabilita i warnings
-            passes: 3,           // Esegui più passaggi di compressione
-            toplevel: true       // Ottimizza le variabili globali
-          },
+            drop_console: true,  
+            drop_debugger: true, 
+            ecma: 2020,          
+            warnings: false,    
+            passes: 3,          
+            toplevel: true     
           mangle: {
-            properties: true, // Mangling di proprietà degli oggetti
-            toplevel: true,   // Mangling delle variabili top-level
+            properties: true, 
+            toplevel: true,   
           },
           output: {
-            comments: false,    // Rimuove tutti i commenti
+            comments: false,    
           },
-          keep_classnames: false,  // Minimizza nomi di classi
-          keep_fnames: false       // Minimizza nomi delle funzioni
+          keep_classnames: false,  
+          keep_fnames: false       
         },
-        extractComments: false, // Non estrarre i commenti
-        parallel: true,         // Parallelizza il processo di minificazione
-        cache: true,            // Usa la cache per migliorare le prestazioni
+        extractComments: false, 
+        parallel: true,         
+        cache: true,            
+      }
       })
     ],
   },
-  // output: {
-  //   filename: 'index.js',
-  //   path: path.resolve(__dirname, 'dist'),
-  //   clean: true,
-  // },
+ 
 
 }

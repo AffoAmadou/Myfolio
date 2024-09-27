@@ -28,6 +28,7 @@
 
 .project__process__title {
     @extend %title-25;
+    overflow: hidden;
 
     @include media('<phone') {
         margin-bottom: 1rem;

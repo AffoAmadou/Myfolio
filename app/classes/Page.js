@@ -227,7 +227,6 @@ onTouchDown(event) {
 
         this.animations.forEach(animation => {
             if (animation.update) {
-                console.log(animation)
               animation.update(this.scroll);
             }
           });
