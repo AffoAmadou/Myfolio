@@ -11,7 +11,6 @@ import Title from 'animations/Title'
 import Paragraph from 'animations/Paragraph'
 import Label from 'animations/Label'
 import Section from 'animations/Section'
-import Preloader from '../components/Preloader'
 import DetectionManager from './Detection';
 
 import AsyncLoad from './AsyncLoad'

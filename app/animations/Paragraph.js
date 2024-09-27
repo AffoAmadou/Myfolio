@@ -17,7 +17,7 @@ export default class Paragraph extends Animation {
           this.element,
           {
             autoAlpha: 0,
-            delay: 0.5,
+            delay: 1,
           },
           {
             autoAlpha: 1,
