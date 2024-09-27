@@ -136,7 +136,33 @@ module.exports = {
   },
   optimization: {
     minimize: true,
-    minimizer: [new TerserPlugin()]
+    // minimizer: [new TerserPlugin()]
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true,  // Rimuove console.log
+            drop_debugger: true, // Rimuove debugger
+            ecma: 2020,          // ECMAScript version per ottimizzazioni moderne
+            warnings: false,     // Disabilita i warnings
+            passes: 3,           // Esegui più passaggi di compressione
+            toplevel: true       // Ottimizza le variabili globali
+          },
+          mangle: {
+            properties: true, // Mangling di proprietà degli oggetti
+            toplevel: true,   // Mangling delle variabili top-level
+          },
+          output: {
+            comments: false,    // Rimuove tutti i commenti
+          },
+          keep_classnames: false,  // Minimizza nomi di classi
+          keep_fnames: false       // Minimizza nomi delle funzioni
+        },
+        extractComments: false, // Non estrarre i commenti
+        parallel: true,         // Parallelizza il processo di minificazione
+        cache: true,            // Usa la cache per migliorare le prestazioni
+      })
+    ],
   },
   // output: {
   //   filename: 'index.js',
