@@ -1,6 +1,6 @@
 nav.navigation  
     .navigation__wrapper   
-        a.navigation__link(href='/')
+        a.navigation__link(href='/' aria-label='home')
             figure.navigation__logo__wrapper 
                 svg.navigation__logo__image(xmlns="http://www.w3.org/2000/svg" width="1207.57" height="1341.98" viewBox="0 0 1207.57 1341.98")
                     path(id="Tracciato_3" data-name="Tracciato 3" d="M968.63,123.77V111.4H1150.8v12.37a161.277,161.277,0,0,0-39.97,5.35c-14.47,2.53-33.73,24.47-46.74,48.24H1004.5c13.06-32.46,9.37-56.5-35.87-53.58Z")
@@ -13,5 +13,5 @@ nav.navigation
         ul.navigation__list 
             each item in navigation.data.list
                 li.navigation__list__item
-                    a.navigation__list__link( data-animation="link" href=Link(item.link))=item.text
+                    a.navigation__list__link( data-animation="link" href=Link(item.link) aria-label=item.text)=item.text
                     
