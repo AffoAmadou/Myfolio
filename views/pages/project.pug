@@ -16,6 +16,7 @@ block content
         if section.slice_type=='description' 
           section.project__description 
             p.project__description__text(data-animation="paragraph")!=section.primary.text.replace(/\n/g, '<br>')
+            p.project__description__text__mob(data-animation="paragraph")!=section.primary.text
 
         if section.slice_type=='content'
           section.project__content(data-color=`${section.primary.color}`, data-animation="color")
@@ -27,6 +28,8 @@ block content
                 .project__content__text 
                   p.project__content__description(data-animation="paragraph")!=section.primary.description[0].text.replace(/\n/g, '<br>')
                   p.project__content__description__sub(data-animation="paragraph")!=section.primary.text[0].text.replace(/\n/g, '<br>')
+                  p.project__content__description__mob(data-animation="paragraph")!=section.primary.description[0].text
+                  p.project__content__description__sub__mob(data-animation="paragraph")!=section.primary.text[0].text
 
         if section.slice_type=='process'
           section.project__process 

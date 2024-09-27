@@ -62,7 +62,14 @@
     }
 }
 
-.project__content__text {}
+.project__content__text {
+
+    @include media('<phone') {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
 
 .project__content__description {
     @extend %description-s18;
@@ -72,7 +79,7 @@
     @include media('<phone') {
         margin-bottom: 4rem;
         text-align: center;
-
+        display: none;
     }
 }
 
@@ -82,6 +89,41 @@
 
     @include media('<phone') {
         text-align: center;
+        display: none;
+
+    }
+}
+
+
+
+
+
+.project__content__description__mob {
+    @extend %description-s18;
+    margin-bottom: 2rem;
+    line-height: 2.1rem;
+    display: none;
+
+    @include media('<phone') {
+        margin-bottom: 4rem;
+        text-align: center;
+        display: block;
+        width: 85%;
+        font-size: 3.5rem;
+
+    }
+}
+
+.project__content__description__sub__mob {
+    @extend %description-15;
+    line-height: 1.8rem;
+    display: none;
+
+    @include media('<phone') {
+        text-align: center;
+        display: block;
+        width: 85%;
+
 
     }
 }
