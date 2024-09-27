@@ -17,7 +17,7 @@ block content
                     each project, index in projects
                         a.home__gallery__link(href=Link(home.data.projects[index].projects_project) aria-label=projects[index].data.title)
                             figure.home__gallery__media(data-index=index)
-                                img.home__gallery__media__image(alt=project.data.image.alt data-src=project.data.image.url)
+                                img.home__gallery__media__image(alt=project.data.image.alt data-src=project.data.image.url loading="lazy")
                             
 
             .home__content

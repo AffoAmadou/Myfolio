@@ -6,8 +6,8 @@
     "backend:development": "nodemon app.js",
     "frontend:build": "webpack --progress --config webpack.config.js",
     "frontend:development": "webpack serve --progress --config webpack.config.development.js",
-    "start": "concurrently --kill-others \"npm run backend:development\" \"npm run frontend:development\"",
-    "start:prod": "npm run backend:build && npm run frontend:build"
+    "start:dev": "concurrently --kill-others \"npm run backend:development\" \"npm run frontend:development\"",
+    "start": "npm run backend:build && npm run frontend:build"
   },
   "author": "Amadou Affo",
   "license": "ISC",
@@ -40,6 +40,7 @@
     "ogl": "^0.0.97",
     "postcss-loader": "^7.0.0",
     "prefix": "^1.0.0",
+    "purgecss-webpack-plugin": "^6.0.0",
     "raw-loader": "^4.0.2",
     "sass": "^1.53.0",
     "sass-loader": "^13.0.2",

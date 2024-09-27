@@ -26,7 +26,7 @@ html(class= isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : ""
         meta(name="twitter:description" content=metadata.data.description)
         meta(name="twitter:image" content=metadata.data.image ? metadata.data.image.url : "")
 
-        link(rel="stylesheet" href="main.css")
+        link(rel="stylesheet" href="main.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'")
 
     body 
         include ./partials/preloader
@@ -38,4 +38,4 @@ html(class= isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : ""
         script.
          window.ASSETS = !{JSON.stringify(assets).replace(/<\//g, "<\\/")}   
           
-        script(src="main.js")   
+        script(src="main.js" defer)   

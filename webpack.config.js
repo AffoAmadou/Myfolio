@@ -6,8 +6,9 @@ const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
+const { PurgeCSSPlugin } = require('purgecss-webpack-plugin')
 const IS_DEVELOPMENT = process.env.NODE.ENV === 'production'
-
+const glob = require('glob')
 const dirApp = path.join(__dirname, 'app')
 const dirAssets = path.join(__dirname, 'assets')
 const dirStyles = path.join(__dirname, 'styles')
@@ -66,6 +67,9 @@ module.exports = {
       test: /\.(js|css|html|svg)$/,
       threshold: 10240, // Taille minimum de fichier à compresser
       minRatio: 0.8 // Taux de compression minimum
+    }),
+    new PurgeCSSPlugin({
+      paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true })
     })
   ],
   module: {
