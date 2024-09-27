@@ -11,6 +11,7 @@ import Title from 'animations/Title'
 import Paragraph from 'animations/Paragraph'
 import Label from 'animations/Label'
 import Section from 'animations/Section'
+import Parallax from 'animations/Parallax'
 import DetectionManager from './Detection';
 
 import AsyncLoad from './AsyncLoad'
@@ -25,6 +26,7 @@ export default class Page {
             animationsParagraphs: '[data-animation="paragraph"]',
             animationsLabels: '[data-animation="label"]',
             animationsSection: '[data-animation="color"]',
+            animationsParallax: '[data-animation="parallax"]',
 
             preloaders: '[data-src]'
         }
@@ -106,6 +108,14 @@ export default class Page {
             return new Label({ element })
         })
         this.animations.push(...this.animationsLabels)
+
+        //*Parallax
+        this.animationsParallax = map(this.elements.animationsParallax, element => {
+            console.log(element)
+            return new Parallax({ element })
+        })
+
+        this.animations.push(...this.animationsParallax)
     }
 
     createPreloader() {
@@ -214,6 +224,14 @@ onTouchDown(event) {
         if (this.elements.wrapper) {
             this.elements.wrapper[0].style[this.transformPrefix] = `translateY(-${this.scroll.current}px)`
         }
+
+        this.animations.forEach(animation => {
+            if (animation.update) {
+                console.log(animation)
+              animation.update(this.scroll);
+            }
+          });
+      
     }
 
     /**

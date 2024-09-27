@@ -16,6 +16,7 @@
     width: 120.2rem;
     height: 61.4rem;
     position: relative;
+    overflow: hidden;
 
     @include media('<phone') {
         aspect-ratio: 16/9;
