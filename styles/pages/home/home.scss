@@ -152,6 +152,10 @@
 .home__article__description {
   @extend %description-18;
   max-width: 51.3rem;
+
+  @include media('<phone') {
+    font-size: 3.3rem;
+  }
 }
 
 // .home__button{
