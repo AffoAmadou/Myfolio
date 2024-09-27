@@ -8,7 +8,7 @@ block content
     .project__wrapper 
       section.project__head
         figure.project__image(data-animation="parallax")
-          img.project__image__media(alt=project.data.image.alt data-src=project.data.image.url loading="lazy")  
+          img.project__image__media(alt=project.data.image.alt data-src=project.data.image.url )  
 
           h1.project__title(data-animation="title")=project.data.title 
 
@@ -22,7 +22,7 @@ block content
           section.project__content(data-color=`${section.primary.color}`, data-animation="color")
             .project__content__wrapper 
               figure.project__content__image(data-animation="parallax") 
-                img.project__content__image__media(alt=section.primary.content_image.alt data-src=section.primary.content_image.url loading="lazy" )
+                img.project__content__image__media(alt=section.primary.content_image.alt data-src=section.primary.content_image.url  )
               .project__content__content 
                 h2.project__content__title(data-animation="title")!=section.primary.title.replace(/\n/g, '<br>')
                 .project__content__text 
@@ -51,7 +51,7 @@ block content
             each m in item
               section.project__design(data-color=`${section.primary.color}`, data-animation="color")
                 figure.project__design__image(data-animation="parallax") 
-                  img.project__design__image__media(alt=m.alt data-src=m.url loading="lazy")
+                  img.project__design__image__media(alt=m.alt data-src=m.url )
 
         if section.slice_type=='mobile'
           section.project__mobile(data-color=`${section.primary.color}`, data-animation="color")
@@ -59,4 +59,4 @@ block content
               each item in section.items
                 each p in item
                   figure.project__mobile__image 
-                    img.project__mobile__image__media(alt=p.alt data-src=p.url loading="lazy")
+                    img.project__mobile__image__media(alt=p.alt data-src=p.url )
