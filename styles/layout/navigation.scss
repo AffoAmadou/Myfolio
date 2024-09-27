@@ -8,6 +8,10 @@
   z-index: z('navigation');
   height: 10.3rem;
   width: 100vw;
+
+  @include media('<phone') {
+    margin-top: 1.5rem;
+  }
 }
 
 
@@ -40,9 +44,7 @@
   display: flex;
 
   @include media('<phone') {
-    flex-direction: column;
     gap: 2rem;
-    margin-top: 1.5rem;
   }
 }
 
@@ -51,6 +53,7 @@
 
   @include media('<phone') {
     margin-left: 4rem;
+
   }
 }
 
