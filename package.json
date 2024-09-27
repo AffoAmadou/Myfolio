@@ -4,15 +4,17 @@
   "scripts": {
     "backend:build": "node app.js",
     "backend:development": "nodemon app.js",
-    "frontend:build": "webpack --progress --config webpack.config.build.js",
+    "frontend:build": "webpack --progress --config webpack.config.js",
     "frontend:development": "webpack serve --progress --config webpack.config.development.js",
-    "start": "concurrently --kill-others \"npm run backend:development\" \"npm run frontend:development\""
+    "start": "concurrently --kill-others \"npm run backend:development\" \"npm run frontend:development\"",
+    "start:prod": "npm run backend:build && npm run frontend:build"
   },
   "author": "Amadou Affo",
   "license": "ISC",
   "devDependencies": {
     "babel-loader": "^8.2.5",
     "clean-webpack-plugin": "^4.0.0",
+    "compression-webpack-plugin": "^11.1.0",
     "concurrently": "^7.2.2",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",

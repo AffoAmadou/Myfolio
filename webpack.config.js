@@ -2,14 +2,11 @@ const webpack = require('webpack')
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin')
-
 const TerserPlugin = require('terser-webpack-plugin')
-
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-
-const IS_DEVELOPMENT = process.env.NODE.ENV === 'dev'
+const CompressionPlugin = require('compression-webpack-plugin')
+const IS_DEVELOPMENT = process.env.NODE.ENV === 'production'
 
 const dirApp = path.join(__dirname, 'app')
 const dirAssets = path.join(__dirname, 'assets')
@@ -62,7 +59,14 @@ module.exports = {
         }
       }
     }),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new CompressionPlugin({
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.(js|css|html|svg)$/,
+      threshold: 10240, // Taille minimum de fichier à compresser
+      minRatio: 0.8 // Taux de compression minimum
+    })
   ],
   module: {
     rules: [
@@ -136,17 +140,40 @@ module.exports = {
   },
   optimization: {
     minimize: true,
-    minimizer: [new TerserPlugin()]
-
-  },
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    port: 8080,
-    hot: true,
-    // Ajoutez cette ligne pour configurer le chemin d'accès
-    public: 'amadouh.fr:8080'
-    // Assurez-vous que cela correspond à votre nom de domaine
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true // Supprime les appels console.log
+          },
+          output: {
+            comments: false // Supprime les commentaires
+          }
+        },
+        extractComments: false // Ne crée pas de fichier de commentaires séparé
+      })
+    ],
+    splitChunks: {
+      chunks: 'async',
+      minSize: 20000,
+      minRemainingSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      enforceSizeThreshold: 50000,
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          reuseExistingChunk: true
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    }
   }
 
 }
