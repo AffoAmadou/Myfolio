@@ -18,5 +18,6 @@ jobs:
         script: |
           cd /root/Myfolio
           git pull
+          nvm use 20
           npm install
           pm2 restart all
