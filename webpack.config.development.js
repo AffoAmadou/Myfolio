@@ -14,7 +14,7 @@ module.exports = merge(config, {
 
   output: {
     path: path.resolve(__dirname, 'public'),
-    clean: true,
+    clean: true
   }
 
 })

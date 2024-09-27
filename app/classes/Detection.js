@@ -1,37 +1,34 @@
 class Detection {
+  isPhone () {
+    if (!this.isPhoneChecked) {
+      this.isPhoneChecked = true
 
-    isPhone() {
-        if (!this.isPhoneChecked) {
-            this.isPhoneChecked = true
-
-            this.isPhoneCheck = document.documentElement.classList.contains('phone')
-        }
-
-        return this.isPhoneCheck
+      this.isPhoneCheck = document.documentElement.classList.contains('phone')
     }
 
-    isTablet() {
+    return this.isPhoneCheck
+  }
 
-        if (!this.isTabletChecked) {
-            this.isTabletChecked = true
+  isTablet () {
+    if (!this.isTabletChecked) {
+      this.isTabletChecked = true
 
-            this.isTabletCheck = document.documentElement.classList.contains('tablet')
-        }
-
-        return this.isTabletCheck
+      this.isTabletCheck = document.documentElement.classList.contains('tablet')
     }
 
-    isDesktop() {
-        if (!this.isDesktopChecked) {
-            this.isDesktopChecked = true
+    return this.isTabletCheck
+  }
 
-            this.isDesktopCheck = document.documentElement.classList.contains('desktop')
-        }
+  isDesktop () {
+    if (!this.isDesktopChecked) {
+      this.isDesktopChecked = true
 
-        return this.isDesktopCheck
+      this.isDesktopCheck = document.documentElement.classList.contains('desktop')
     }
+
+    return this.isDesktopCheck
+  }
 }
-
 
 const DetectionManager = new Detection()
 

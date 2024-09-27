@@ -1,36 +1,36 @@
-import GSAP from 'gsap';
-import Animation from 'classes/Animation';
+import GSAP from 'gsap'
+import Animation from 'classes/Animation'
 
-import { split } from 'utils/text';
+import { split } from 'utils/text'
 
 export default class Link extends Animation {
-  constructor({ element }) {
+  constructor ({ element }) {
     super({
       element,
-      elements: {},
-    });
+      elements: {}
+    })
 
-    const { innerHTML } = this.element.querySelector('span');
+    const { innerHTML } = this.element.querySelector('span')
 
-    this.elements.text = document.createElement('div');
-    this.elements.text.innerHTML = innerHTML;
+    this.elements.text = document.createElement('div')
+    this.elements.text.innerHTML = innerHTML
     this.elements.textSpans = split({
       append: false,
       element: this.elements.text,
-      expression: '',
-    });
+      expression: ''
+    })
 
-    this.elements.hover = document.createElement('div');
-    this.elements.hover.innerHTML = innerHTML;
+    this.elements.hover = document.createElement('div')
+    this.elements.hover.innerHTML = innerHTML
     this.elements.hoverSpans = split({
       append: false,
       element: this.elements.hover,
-      expression: '',
-    });
+      expression: ''
+    })
 
-    this.element.innerHTML = '';
-    this.element.appendChild(this.elements.text);
-    this.element.appendChild(this.elements.hover);
+    this.element.innerHTML = ''
+    this.element.appendChild(this.elements.text)
+    this.element.appendChild(this.elements.hover)
 
     if (this.element.getAttribute('data-animation-position') === 'center') {
       GSAP.set(this.elements.hover, {
@@ -38,17 +38,17 @@ export default class Link extends Animation {
         position: 'absolute',
         top: '50%',
         x: '-50%',
-        y: '-50%',
-      });
+        y: '-50%'
+      })
     } else {
       GSAP.set(this.elements.hover, {
         left: 0,
         position: 'absolute',
-        top: 0,
-      });
+        top: 0
+      })
     }
 
-    this.timeline = GSAP.timeline({ paused: true });
+    this.timeline = GSAP.timeline({ paused: true })
 
     this.timeline.to(
       this.elements.textSpans,
@@ -56,45 +56,45 @@ export default class Link extends Animation {
         duration: 0.5,
         ease: 'power2',
         transform: 'rotate3d(1, 0.2, 0, -90deg)',
-        stagger: 0.02,
+        stagger: 0.02
       },
-      0,
-    );
+      0
+    )
 
     this.timeline.fromTo(
       this.elements.hoverSpans,
       {
-        transform: 'rotate3d(1, 0.2, 0, 90deg)',
+        transform: 'rotate3d(1, 0.2, 0, 90deg)'
       },
       {
         duration: 0.5,
         ease: 'power2',
         transform: 'rotate3d(0, 0, 0, 90deg)',
-        stagger: 0.02,
+        stagger: 0.02
       },
-      0.05,
-    );
+      0.05
+    )
 
-    this.addEventListener();
-    console.log("event listener added",this.timeline)
+    this.addEventListener()
+    console.log('event listener added', this.timeline)
   }
 
-  onMouseEnter() {
-    console.log('onMouseEnter', this.timeline);
-    this.timeline.play();
+  onMouseEnter () {
+    console.log('onMouseEnter', this.timeline)
+    this.timeline.play()
   }
 
-  onMouseLeave() {
-    this.timeline.reverse();
+  onMouseLeave () {
+    this.timeline.reverse()
   }
 
-  addEventListener() {
-    this.element.addEventListener('mouseenter', this.onMouseEnter);
-    this.element.addEventListener('mouseleave', this.onMouseLeave);
+  addEventListener () {
+    this.element.addEventListener('mouseenter', this.onMouseEnter)
+    this.element.addEventListener('mouseleave', this.onMouseLeave)
   }
 
-  removeEventListener() {
-    this.element.addEventListener('mouseenter', this.onMouseEnter);
-    this.element.addEventListener('mouseleave', this.onMouseLeave);
+  removeEventListener () {
+    this.element.addEventListener('mouseenter', this.onMouseEnter)
+    this.element.addEventListener('mouseleave', this.onMouseLeave)
   }
 }

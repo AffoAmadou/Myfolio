@@ -5,140 +5,137 @@ import vertex from 'shaders/plane-vertex.glsl'
 import GSAP from 'gsap'
 import DetectionManager from 'classes/Detection'
 export default class Media {
-    constructor({ element, geometry, gl, index, scene, sizes }) {
-        this.element = element
-        this.geometry = geometry
-        this.gl = gl
-        this.scene = scene
-        this.index = index
-        this.sizes = sizes
-        this.extra = {
-            x: 0,
-            y: 0
-        }
-        this.createTexture()
-        this.createProgram()
-
-        this.createMesh()
-
-        this.createBounds({
-            sizes: this.sizes
-        })
-
+  constructor ({ element, geometry, gl, index, scene, sizes }) {
+    this.element = element
+    this.geometry = geometry
+    this.gl = gl
+    this.scene = scene
+    this.index = index
+    this.sizes = sizes
+    this.extra = {
+      x: 0,
+      y: 0
     }
+    this.createTexture()
+    this.createProgram()
 
-    createTexture() {
-        const image = this.element.querySelector('img')
+    this.createMesh()
 
-        this.texture = window.TEXTURES[image.getAttribute('data-src')]
-    }
+    this.createBounds({
+      sizes: this.sizes
+    })
+  }
 
+  createTexture () {
+    const image = this.element.querySelector('img')
 
-    createProgram() {
-        this.program = new Program(this.gl, {
-            fragment,
-            vertex,
-            uniforms: {
-                uAlpha: { value: 0 },
-                tMap: { value: this.texture }
-            }
-        })
-    }
+    this.texture = window.TEXTURES[image.getAttribute('data-src')]
+  }
 
-    createMesh() {
-        this.mesh = new Mesh(this.gl, {
-            geometry: this.geometry,
-            program: this.program
-        })
+  createProgram () {
+    this.program = new Program(this.gl, {
+      fragment,
+      vertex,
+      uniforms: {
+        uAlpha: { value: 0 },
+        tMap: { value: this.texture }
+      }
+    })
+  }
 
-        this.mesh.setParent(this.scene)
+  createMesh () {
+    this.mesh = new Mesh(this.gl, {
+      geometry: this.geometry,
+      program: this.program
+    })
 
-        // this.mesh.rotation.z = GSAP.utils.random(-Math.PI * 1.03, Math.PI * 0.03)
-    }
+    this.mesh.setParent(this.scene)
 
-    createBounds({ sizes }) {
-        this.sizes = sizes
+    // this.mesh.rotation.z = GSAP.utils.random(-Math.PI * 1.03, Math.PI * 0.03)
+  }
 
-        this.bounds = this.element.getBoundingClientRect()
+  createBounds ({ sizes }) {
+    this.sizes = sizes
 
-        this.updateScale()
-        this.updateX()
-        this.updateY()
-    }
+    this.bounds = this.element.getBoundingClientRect()
 
-    /**
-    * 
+    this.updateScale()
+    this.updateX()
+    this.updateY()
+  }
+
+  /**
+    *
     * Animations
     */
 
+  show () {
+    GSAP.fromTo(this.program.uniforms.uAlpha, {
+      value: 0
+    }, {
+      value: 1
+    })
+  }
 
-    show() {
-        GSAP.fromTo(this.program.uniforms.uAlpha, {
-            value: 0
-        }, {
-            value: 1
-        })
-    }
+  hide () {
+    GSAP.to(this.program.uniforms.uAlpha, {
+      value: 0
+    })
+  }
 
-    hide() {
-        GSAP.to(this.program.uniforms.uAlpha, {
-            value: 0
-        })
-    }
-    /*
+  /*
     /**
       * Events
       */
-    onResize(sizes, scroll,width) {
-        this.extra = 0
-        this.createBounds(sizes)
-        this.updateX(scroll)
-        this.updateY(0)
-    }
+  onResize (sizes, scroll, width) {
+    this.extra = 0
+    this.createBounds(sizes)
+    this.updateX(scroll)
+    this.updateY(0)
+  }
 
-    /**
+  /**
      * LOOP
      */
 
-    updateRotation() {
-        this.mesh.rotation.z = GSAP.utils.mapRange(
-            -this.sizes.width / 2,
-            this.sizes.width / 2,
-            Math.PI * 0.1,
-            -Math.PI * 0.1,
-            this.mesh.position.x
-        )
-    }
-    updateScale() {
+  updateRotation () {
+    this.mesh.rotation.z = GSAP.utils.mapRange(
+      -this.sizes.width / 2,
+      this.sizes.width / 2,
+      Math.PI * 0.1,
+      -Math.PI * 0.1,
+      this.mesh.position.x
+    )
+  }
 
-        this.width = this.bounds.width / window.innerWidth
-        this.height = this.bounds.height / window.innerHeight
+  updateScale () {
+    this.width = this.bounds.width / window.innerWidth
+    this.height = this.bounds.height / window.innerHeight
 
-        this.mesh.scale.x = this.sizes.width * this.width
-        this.mesh.scale.y = this.sizes.height * this.height
-    }
+    this.mesh.scale.x = this.sizes.width * this.width
+    this.mesh.scale.y = this.sizes.height * this.height
+  }
 
-    updateX(x = 0) {
-        this.x = (this.bounds.left + x) / window.innerWidth
-        this.mesh.position.x = (-this.sizes.width / 2) + (this.mesh.scale.x / 2) + (this.x * this.sizes.width) + this.extra
-    }
+  updateX (x = 0) {
+    this.x = (this.bounds.left + x) / window.innerWidth
+    this.mesh.position.x = (-this.sizes.width / 2) + (this.mesh.scale.x / 2) + (this.x * this.sizes.width) + this.extra
+  }
 
-    updateY(y = 0) {
-        this.y = (this.bounds.top + y) / window.innerHeight
+  updateY (y = 0) {
+    this.y = (this.bounds.top + y) / window.innerHeight
 
-        const extra = DetectionManager.isPhone() ? 20 : 40;
-        
-        this.mesh.position.y = (this.sizes.height / 2) - (this.mesh.scale.y / 2) - (this.y * this.sizes.height)
+    const extra = DetectionManager.isPhone() ? 20 : 40
 
+    this.mesh.position.y = (this.sizes.height / 2) - (this.mesh.scale.y / 2) - (this.y * this.sizes.height)
 
-        //*ROTATION
-        this.mesh.position.y += Math.cos((this.mesh.position.x / this.sizes.width) * Math.PI * 0.1) * extra - extra
-    }
+    //* ROTATION
+    this.mesh.position.y += Math.cos((this.mesh.position.x / this.sizes.width) * Math.PI * 0.1) * extra - extra
+  }
 
-    update(scroll) {
-        this.updateRotation()
-        this.updateScale()
-        this.updateX(scroll)
-        this.updateY(0)
-    }
+  update (scroll) {
+    this.updateRotation()
+    this.updateScale()
+    this.updateX(scroll)
+    this.updateY(0)
+  }
 }

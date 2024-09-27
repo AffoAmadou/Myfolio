@@ -1,48 +1,45 @@
-import Page from "classes/Page";
-import Button from "classes/Button";
+import Page from 'classes/Page'
+import Button from 'classes/Button'
 import GSAP from 'gsap'
 
 export default class Project extends Page {
+  constructor () {
+    super({
+      id: 'project',
+      element: '.project',
+      elements: {
+        navigation: document.querySelector('.navigation'),
+        wrapper: '.project__wrapper',
+        link: '.project__process__link'
+      }
+    })
+  }
 
-    constructor() {
-        super({
-            id: 'project',
-            element: '.project',
-            elements: {
-                navigation: document.querySelector('.navigation'),
-                wrapper: '.project__wrapper',
-                link: '.project__process__link'
-            }
-        })
+  create () {
+    super.create()
 
+    this.link = new Button({
+      element: this.elements.link[0]
+    })
+  }
 
-    }
+  show () {
+    const timeline = GSAP.timeline({
+      delay: 1.34
+    })
 
-    create() {
-        super.create()
+    timeline.fromTo(this.element, {
+      autoAlpha: 0
+    }, {
+      autoAlpha: 1
+    })
 
-        this.link = new Button({
-            element: this.elements.link[0]
-        })
-    }
+    super.show(timeline)
+  }
 
-    show() {
-        const timeline = GSAP.timeline({
-             delay: 1.34
-        })
+  destroy () {
+    super.destroy()
 
-        timeline.fromTo(this.element, {
-            autoAlpha: 0
-        }, {
-            autoAlpha: 1,
-        })
-
-        super.show(timeline)
-    }
-    destroy() {
-        super.destroy()
-
-        this.link.removeEventListeners()
-    }
-
+    this.link.removeEventListeners()
+  }
 }

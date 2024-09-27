@@ -5,9 +5,7 @@ import fragment from 'shaders/plane-fragment.glsl'
 import vertex from 'shaders/plane-vertex.glsl'
 
 export default class {
-  constructor({ gl, scene, sizes, transition }) {
-
-  
+  constructor ({ gl, scene, sizes, transition }) {
     this.element = document.querySelector('.project__image__media')
 
     this.gl = gl
@@ -21,39 +19,39 @@ export default class {
     this.createProgram()
     this.createMesh()
     this.createBounds({
-      sizes: this.sizes,
+      sizes: this.sizes
     })
 
     this.show()
   }
 
-  createTexture() {
+  createTexture () {
     const image = this.element.getAttribute('data-src')
 
     this.texture = window.TEXTURES[image]
   }
 
-  createProgram() {
+  createProgram () {
     this.program = new Program(this.gl, {
       fragment,
       vertex,
       uniforms: {
         uAlpha: { value: 0 },
-        tMap: { value: this.texture },
-      },
+        tMap: { value: this.texture }
+      }
     })
   }
 
-  createMesh() {
+  createMesh () {
     this.mesh = new Mesh(this.gl, {
       geometry: this.geometry,
-      program: this.program,
+      program: this.program
     })
 
     this.mesh.setParent(this.scene)
   }
 
-  createBounds({ sizes }) {
+  createBounds ({ sizes }) {
     this.sizes = sizes
 
     this.bounds = this.element.getBoundingClientRect()
@@ -66,9 +64,8 @@ export default class {
   /**
    * Animations.
    */
-  show() {
+  show () {
     if (this.transition) {
-
       this.transition.animate(this.mesh, _ => {
         this.program.uniforms.uAlpha.value = 1
       })
@@ -79,31 +76,31 @@ export default class {
     }
   }
 
-  hide() {
+  hide () {
     GSAP.to(this.program.uniforms.uAlpha, {
-      value: 0,
+      value: 0
     })
   }
 
   /**
    * Events.
    */
-  onResize(sizes) {
+  onResize (sizes) {
     this.createBounds(sizes)
     this.updateX()
     this.updateY()
   }
 
-  onTouchDown() { }
+  onTouchDown () { }
 
-  onTouchMove() { }
+  onTouchMove () { }
 
-  onTouchUp() { }
+  onTouchUp () { }
 
   /**
    * Loop.
    */
-  updateScale() {
+  updateScale () {
     this.height = this.bounds.height / window.innerHeight
     this.width = this.bounds.width / window.innerWidth
 
@@ -111,7 +108,7 @@ export default class {
     this.mesh.scale.y = this.sizes.height * this.height
   }
 
-  updateX() {
+  updateX () {
     this.x = this.bounds.left / window.innerWidth
 
     this.mesh.position.x =
@@ -127,12 +124,12 @@ export default class {
   //       this.y * this.sizes.height
   //   }
 
-  updateY(y = 0) {
+  updateY (y = 0) {
     this.y = (this.bounds.top + y) / window.innerHeight
     this.mesh.position.y = (this.sizes.height / 2) - (this.mesh.scale.y / 2) - (this.y * this.sizes.height)
   }
-  update(scroll) {
 
+  update (scroll) {
     this.updateX()
     this.updateY(scroll)
   }
@@ -140,7 +137,7 @@ export default class {
   /**
    * Destroy.
    */
-  destroy() {
+  destroy () {
     this.scene.removeChild(this.mesh)
   }
 }

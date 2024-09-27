@@ -96,7 +96,7 @@ module.exports = {
         test: /\.(jpe?g|png|gif|svg|woff2?|fnt|webp)$/,
         loader: 'file-loader',
         options: {
-          name(file) {
+          name (file) {
             return '[hash].[ext]'
           }
         }
@@ -136,34 +136,8 @@ module.exports = {
   },
   optimization: {
     minimize: true,
-    // minimizer: [new TerserPlugin()]
-    minimizer: [
-      new TerserPlugin({
-        terserOptions: {
-          compress: {
-            drop_console: true,  
-            drop_debugger: true, 
-            ecma: 2020,          
-            warnings: false,    
-            passes: 3,          
-            toplevel: true     
-          mangle: {
-            properties: true, 
-            toplevel: true,   
-          },
-          output: {
-            comments: false,    
-          },
-          keep_classnames: false,  
-          keep_fnames: false       
-        },
-        extractComments: false, 
-        parallel: true,         
-        cache: true,            
-      }
-      })
-    ],
-  },
- 
+    minimizer: [new TerserPlugin()]
+
+  }
 
 }

@@ -1,23 +1,22 @@
-import Page from "classes/Page";
+import Page from 'classes/Page'
 
-export default class About extends Page{
-    constructor(){
-        super({
-            id:'about',
-            element: '.about',
-            elements:{
-                wrapper:'.about__wrapper',
-                navigation: document.querySelector('.navigation'),
-            }
-        })
-    }
+export default class About extends Page {
+  constructor () {
+    super({
+      id: 'about',
+      element: '.about',
+      elements: {
+        wrapper: '.about__wrapper',
+        navigation: document.querySelector('.navigation')
+      }
+    })
+  }
 
-    create() {
-        super.create()
+  create () {
+    super.create()
 
-        // this.link = new Button({
-        //     element: this.elements.link[0]
-        // })
-    }
-
+    // this.link = new Button({
+    //     element: this.elements.link[0]
+    // })
+  }
 }

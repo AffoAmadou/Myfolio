@@ -1384,7 +1384,15 @@
  * @license Modernizr 3.0.0pre (Custom Build) | MIT
  */
 
-//! .about ad esempio passato da una delle pagine  
+//! .about ad esempio passato da una delle pagine
+
+//! 200 = Page loaded
+
+//! CREARE LE IMMAGINI DOPO CAMBIO PAGINA
+
+//! Create a div to store the content
+
+//! Creo sta classe per avere un punto in commune in tutte le pagine cosi da avere la possibilità di chiamare i metodi
 
 //! E percio sapere in che pagina mi trovo
 
@@ -1394,32 +1402,24 @@
 
 //! Nessun bisogno di chiamare il file intero
 
-//! Questo metodo mi permette di creare il content e cosi da recuperare il data-template 
+//! Questo metodo mi permette di creare il content e cosi da recuperare il data-template
 
-//! Recupero tutti i link della pagina 
+//! Recupero tutti i link della pagina
 
 //! Se ce né piu di uno, ad esempio le immagini faccio un selector all per avere un array
 
 //! Sono tutte le classi che passo dalla classe pagina  ad esempio
 
+//! all click non eseguo il cambio di pagina come dovrebbe esserer
+
+//! cosi da non mettere anche i doctype etc
+
+//! get next page content
+
 //! get the only selector that change in every page
+
+//! i bottoni o altro in modo da poter fare le animazioni, entrate o uscite
 
 //! reinsert the content in the page
 
 //! una sola volta senza bisogno di chiamarli in tutte le pagine
-
-//!200 = Page loaded
-
-//!CREARE LE IMMAGINI DOPO CAMBIO PAGINA
-
-//!Create a div to store the content
-
-//!Creo sta classe per avere un punto in commune in tutte le pagine cosi da avere la possibilità di chiamare i metodi 
-
-//!all click non eseguo il cambio di pagina come dovrebbe esserer
-
-//!cosi da non mettere anche i doctype etc 
-
-//!get next page content
-
-//!i bottoni o altro in modo da poter fare le animazioni, entrate o uscite

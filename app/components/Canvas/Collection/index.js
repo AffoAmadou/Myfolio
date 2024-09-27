@@ -27,7 +27,6 @@
 //             lerp: 0.1
 //         }
 
-
 //         this.scrollCurrent = {
 //             x: 0,
 //             y: 0
@@ -73,7 +72,6 @@
 //     hide(){
 //         map(this.medias, media => media.hide())
 //     }
-
 
 //     /**
 //      * Events
@@ -133,9 +131,6 @@
 //         } else if (this.scroll.y > this.y.current) {
 //             this.y.direction = 'bottom'
 //         }
-
-
-
 
 //         this.scroll.x = this.x.current
 //         this.scroll.y = this.y.current

@@ -26,7 +26,6 @@
 //     createTexture() {
 //         this.texture = new Texture(this.gl)
 
-
 //         this.image = new window.Image()
 //         this.image.crossOrigin = 'anonymous'
 //         this.image.src = this.element.getAttribute('data-src')
@@ -68,10 +67,9 @@
 //     }
 
 //     /**
-//      * 
+//      *
 //      * Animations
 //      */
-
 
 //     show() {
 //         GSAP.fromTo(this.program.uniforms.uAlpha, {
