@@ -6,6 +6,7 @@ import Project from 'pages/Projects'
 import each from 'lodash/each'
 import Home from 'pages/Home'
 import Preloader from 'components/Preloader'
+import Navigation from 'components/Navigation'
 import Detection from 'classes/Detection'
 
 import NormalizeWheel from 'normalize-wheel'
@@ -21,6 +22,7 @@ class App {
 
         this.createCanvas()
         this.createPreloader()
+        // this.createNavigation()
         this.createPages()
         this.addEventListeners()
         this.addLinkListeners()
@@ -41,7 +43,9 @@ class App {
         //*Event Emitter quando il preloader ha caricato le immagini chiamo il metodo che sta qui sotto
         this.preloader.once('complete', this.onPreloaded.bind(this))
     }
-
+    // createNavigation() {
+    //     this.navigation = new Navigation();
+    //   }
     createCanvas() {
         this.canvas = new Canvas({
             template: this.template

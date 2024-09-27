@@ -42,7 +42,6 @@ export default class Paragraph extends Animation {
         }, {
             autoAlpha: 1,
         })
-// console.log(this.elementLinesSpans)
         this.elementLinesSpans.forEach((element,index) => {
 
           this.timelineIn.fromTo(element, {

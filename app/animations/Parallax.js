@@ -35,7 +35,6 @@ export default class Parallax {
   }
 
   update(scroll) {
-    console.log('scroll', scroll)
     if (!this.offset) {
       return;
     }

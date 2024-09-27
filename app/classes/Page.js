@@ -12,6 +12,7 @@ import Paragraph from 'animations/Paragraph'
 import Label from 'animations/Label'
 import Section from 'animations/Section'
 import Parallax from 'animations/Parallax'
+import Link from '../animations/Link'
 import DetectionManager from './Detection';
 
 import AsyncLoad from './AsyncLoad'
@@ -27,6 +28,7 @@ export default class Page {
             animationsLabels: '[data-animation="label"]',
             animationsSection: '[data-animation="color"]',
             animationsParallax: '[data-animation="parallax"]',
+            animationsLink: '[data-animation="link"]',
 
             preloaders: '[data-src]'
         }
@@ -81,10 +83,13 @@ export default class Page {
     createAnimations() {
         this.animations = []
 
+        console.log(this.elements.animationsTitles)
         //*Title
         this.animationsTitles = map(this.elements.animationsTitles, element => {
             return new Title({ element })
         })
+
+        console.log(this.animationsTitles)
 
         this.animations.push(...this.animationsTitles)
 
@@ -111,11 +116,20 @@ export default class Page {
 
         //*Parallax
         this.animationsParallax = map(this.elements.animationsParallax, element => {
-            console.log(element)
             return new Parallax({ element })
         })
 
         this.animations.push(...this.animationsParallax)
+
+        console.log(this.elements.animationsLink)
+        //*Link
+        this.animationsLink = map(this.elements.animationsLink, element => {
+            return new Link({ element })
+        })
+
+        console.log(this.animationsLink)
+
+        this.animations.push(...this.animationsLink)
     }
 
     createPreloader() {

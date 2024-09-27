@@ -60,6 +60,13 @@
 .navigation__list__link {
   @extend %description-20;
   color: black;
+  transform: scale(1);
+
+  transition: all 1.4s ease;
+
+  &::hover {
+    transform: scale(1.1);
+  }
 }
 
 
