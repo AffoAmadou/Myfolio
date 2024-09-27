@@ -138,6 +138,15 @@ module.exports = {
     minimize: true,
     minimizer: [new TerserPlugin()]
 
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 8080,
+    hot: true,
+    // Ajoutez cette ligne pour configurer le chemin d'accès
+    public: 'amadouh.fr:8080'
+    // Assurez-vous que cela correspond à votre nom de domaine
   }
 
 }
