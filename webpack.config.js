@@ -66,7 +66,7 @@ module.exports = {
       algorithm: 'gzip',
       test: /\.(js|css|html|svg)$/,
       threshold: 10240, // Taille minimum de fichier à compresser
-      minRatio: 0.9 // Taux de compression minimum
+      minRatio: 0.8 // Taux de compression minimum
     })
     // new PurgeCSSPlugin({
     //   paths: glob.sync(`${path.src}/**/*`, { nodir: true })
@@ -101,7 +101,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(jpe?g|png|gif|svg|woff2?|fnt|webp)$/,
+        test: /\.(jpe?g|png|gif|svg|woff2?|fnt|webp|woff?)$/,
         loader: 'file-loader',
         options: {
           name (file) {
