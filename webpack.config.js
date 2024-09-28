@@ -65,7 +65,7 @@ module.exports = {
       filename: '[path][base].gz',
       algorithm: 'gzip',
       test: /\.(js|css|html|svg)$/,
-      threshold: 18240, // Taille minimum de fichier à compresser
+      threshold: 10240, // Taille minimum de fichier à compresser
       minRatio: 0.8 // Taux de compression minimum
     })
     // new PurgeCSSPlugin({
