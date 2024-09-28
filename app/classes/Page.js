@@ -83,7 +83,6 @@ export default class Page {
       return new Title({ element })
     })
 
-
     this.animations.push(...this.animationsTitles)
 
     //* Paragraphs
@@ -117,7 +116,6 @@ export default class Page {
     this.animationsLink = map(this.elements.animationsLink, element => {
       return new Link({ element })
     })
-
 
     this.animations.push(...this.animationsLink)
   }
@@ -185,7 +183,7 @@ export default class Page {
     if (!DetectionManager.isPhone || !this.isDown) return
 
     const y = event.touches ? event.touches[0].clientY : event.clientY
-    const distance = (this.start - y) * 2.3
+    const distance = (this.start - y) * 9.3
 
     this.scroll.target = this.scroll.position + distance
   }
