@@ -101,7 +101,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(jpe?g|png|gif|svg|fnt|webp)$/,
+        test: /\.(jpe?g|png|gif|svg|woff2?|fnt|webp|woff?)$/,
         loader: 'file-loader',
         options: {
           name (file) {
