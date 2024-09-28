@@ -7,18 +7,38 @@ block content
 
     .about(data-background="#B2B8C3" data-color="#F9F1E7") 
         .about__wrapper
-            .about__header 
-                figure.about__image 
-                    img.about__image__media(alt=about.data.image.alt data-src=about.data.image.url )
-                .about__header__content
-                    h1.about__title(data-animation="title")!=about.data.title 
+            h1.about__title!=about.data.title
+            figure.about__image(data-animation="parallax") 
+                img.about__image__media(alt=about.data.image.alt data-src=about.data.image.url )
+                .about__header 
+                    h2.about__subtitle="INTERACTIVE DESIGNER"
+                    p.about__text!="Front end developer with a passion for art, fashion and litterature"
+                    a.about__cta.normal(href="mailto:hamadouaffo@gmail.com" target="_blank")!="Say hi:hamadouaffo@gmail.com 👋🏾"
+                
+            .about__content       
+                .about__header__content  
                     p.about__description__text(data-animation="paragraph")!=about.data.description[0].text
                     p.about__content__text(data-animation="paragraph")!=about.data.content[0].text
-                    p.about__text(data-animation="paragraph")!=about.data.text[0].text
-                    p.about__cta!="Say hi:hamadouaffo@gmail.com"
-           
-            //- .about__description
-            //-     h1.about__title=about.data.title 
-            //-     p.about__description__text=about.data.description[0].text
-            //-     p.about.content=about.data.content[0].text 
-
+        
+                each logo in about.data.body[0].items[0]
+                    figure.about__logo(data-animation="parallax")
+                        img.about__logo__media(alt=logo.alt data-src=logo.url)
+                p.about__text(data-animation="paragraph")!=about.data.text[0].text.replace(/\n/g, '<br>')
+                .about__vertical
+                    figure.about__vertical__figure(data-animation="parallax")
+                        img.about__vertical__media(alt=about.data.body[1].items[0].alt data-src=about.data.body[1].items[0].vertical.url)
+                    figure.about__vertical__figure(data-animation="parallax")
+                        img.about__vertical__media(alt=about.data.body[1].items[1].alt data-src=about.data.body[1].items[1].vertical.url)
+                .about__passion
+                    p.about__passion__text(data-animation="paragraph")!=about.data.passion.replace(/\n/g, '<br>')
+                    .about__passion__vertical 
+                        figure.about__vertical__figure(data-animation="parallax")
+                            img.about__vertical__media(alt=about.data.body[1].items[2].alt data-src=about.data.body[1].items[2].vertical.url)
+                        figure.about__vertical__figure(data-animation="parallax")
+                            img.about__vertical__media(alt=about.data.body[1].items[3].alt data-src=about.data.body[1].items[3].vertical.url)
+                .about__contact
+                    p.about__contact__text(data-animation="paragraph")!=about.data.contact
+                    .about__social
+                        a.about__linkedin.normal(data-animation="paragraph"  target="_blank" href=about.data.body[0].primary.linkedin)="👋🏾 LinkedIn"
+                        a.about__instagram.normal(data-animation="paragraph"  target="_blank" href=about.data.body[0].primary.instagram)="👋🏾 Instagram"
+                        a.about__mail.normal(data-animation="paragraph"  target="_blank" href="mailto:"+about.data.body[0].primary.mail)="👋🏾 Mail"

@@ -174,6 +174,8 @@ class App {
 
     if (this.page && this.page.onWheel) {
       this.page.onWheel(normalizedWheel)
+
+      console.log(normalizedWheel)
     }
   }
 
@@ -213,7 +215,7 @@ class App {
   }
 
   addLinkListeners () {
-    const links = document.querySelectorAll('a:not(.project__process__link)')
+    const links = document.querySelectorAll('a:not(.normal)')
     //! Recupero tutti i link della pagina
 
     each(links, link => {

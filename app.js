@@ -119,6 +119,26 @@ const handleRequest = async (api) => {
         })
       }
     })
+
+    about.data.body.forEach((section) => {
+      if (section.slice_type === 'logos') {
+        section.items.forEach((item) => {
+          assets.push(item.logo.url)
+        })
+      }
+    }
+    )
+    console.log('about', about.data.body[0].primary)
+
+    about.data.body.forEach((section) => {
+      if (section.slice_type === 'vertical') {
+        section.items.forEach((item) => {
+          assets.push(item.vertical.url)
+          console.log('vertical', item.vertical.url)
+        })
+      }
+    }
+    )
   })
 
   assets.push(about.data.image.url)

@@ -1,83 +1,243 @@
 .about {
   @extend %page;
 
-  
-  //   background: $color-cadet-blue;
-  //   color     : $color-bright-grey;
-  
   @extend %description-18
 }
 
 .about__wrapper {
-  padding-top:24.5rem; 
+  width: 100%;
+  padding-top: 24.5rem;
 }
 
-.about__header{
-  width: 161.3rem;
-  height: 72.9rem;
-  background-color: aliceblue;
-  margin: 0 auto;
+.about__content {
+  width: 165rem;
+  margin: auto;
+
+  @include media('<phone') {
+    width: 100%;
+  }
+}
+
+.about__header {
+  width: 100%;
+  @extend %center;
+  flex-direction: column;
+  z-index: 1;
+
+  color: white;
+  gap: 2rem;
+}
+
+.about__image {
+  width: 100%;
+  aspect-ratio: 16/9;
+  position: relative;
+  @extend %center;
+  overflow: hidden;
+  text-align: center;
+}
+
+.about__image__media {
+  @extend %cover;
+  object-fit: cover;
+}
+
+.about__title {
+  @extend %title-210;
+  font-size: 18rem;
+  overflow: hidden;
+  text-align: center;
+
+  @include media('<phone') {
+    font-size: 6.5rem;
+  }
+}
+
+.about__subtitle {
+  @extend %description-18;
+  height: fit-content;
+  font-size: 2.4rem;
+  font-weight: 600;
+  margin-top: 2.4rem;
+}
+
+.about__header__content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-right: 5rem;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+
+  p {
+    width: 75rem;
+    line-height: 2.1rem;
+  }
+
+  @include media('<phone') {
+
+    align-items: center;
+    padding-right: 0;
+
+    p {
+      text-align: center;
+      width: 90%;
+      line-height: 1.2;
+    }
+  }
+}
+
+
+
+.about__description__text {
+  padding: 3.6rem 0;
+}
+
+.about__content__text {}
+
+.about__text {
+  @extend %description-s18;
+  font-size: 2rem;
+  width: 70rem;
+  line-height: 2.1rem;
+
+  @include media('<phone') {
+    text-align: center;
+    margin: auto;
+  }
+}
+
+.about__cta {
+  @extend %description-s18;
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+
+
+
+
+.about__logo {
+  position: relative;
+  height: 50.8rem;
+  width: 70%;
+  margin-bottom: 10rem;
+
+  overflow: hidden;
+
+  @include media('<phone') {
+    width: 100%;
+    aspect-ratio: 16/9;
+  }
+}
+
+.about__logo__media {
+  @extend %cover;
+  object-fit: cover;
+}
+
+
+.about__vertical {
+  width: 100%;
+  margin-bottom: 10rem;
 
   display: flex;
+  gap: .5rem;
+  justify-content: center;
+  margin-bottom: 20rem;
+  margin-top: 20rem;
+
+
+  figure {
+    &:nth-child(2) {
+      margin-right: 35rem;
+    }
+  }
+
+  @include media('<phone') {
+    gap: 2rem;
+    margin-bottom: 10rem;
+    margin-top: 10rem;
+
+    figure {
+      &:nth-child(2) {
+        margin-right: 0;
+      }
+    }
+  }
 }
 
-.about__image{
-  width: 87.9rem;
-  height: 100%;
-
+.about__vertical__figure {
+  width: 30rem;
+  height: 45rem;
   position: relative;
+  overflow: hidden;
 }
 
-.about__image__media{
+.about__vertical__media {
   @extend %cover;
-    object-fit: cover;
+  object-fit: cover;
 }
 
-.about__header__content{
-  width: 73.4rem;
-  height: 100%;
+.about__passion {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 
-  padding-left: 8.7rem;
-  padding-top: 8.3rem;
-  background-color: lightcoral;
+  padding-right: 30rem;
+
+  @include media('<phone') {
+    flex-direction: column;
+    padding-right: 0;
+
+    align-items: center;
+  }
 }
 
-.about__title{
-  @extend %title-65; 
-}
-.about__description__text{
-  padding: 3.6rem 0;
-  width: 54.7rem;
-  line-height: 2.1rem;
+.about__passion__vertical {
+  display: flex;
+  gap: .5rem;
 }
 
-.about__content__text{
-  width: 57.2rem;
-  line-height: 2.1rem;
-
-}
-
-.about__text{
-  width: 57.2rem;
-  padding: 3.6rem 0;
-  line-height: 2.1rem;
-
-}
-
-.about__cta{
+.about__passion__text {
   @extend %description-s18;
-  text-decoration: underline;
+  font-size: 2rem;
+  width: 30rem;
+
+  @include media('<phone') {
+    text-align: center;
+    width: 90%;
+    margin-bottom: 10rem;
+  }
 }
-// .about__title {
-//   @extend %title-100;
 
-//   max-width : 126rem;
-//   margin    : 0 auto;
-//   text-align: center;
+.about__contact {
+  width: 100%;
+  @extend %center;
+  flex-direction: column;
+  gap: 2rem;
 
+  margin-top: 20rem;
+  padding-bottom: 10rem;
 
+  @extend %description-s18;
+  font-size: 2rem;
 
-//   @include media('<phone') {
-//     max-width: 67.7rem;
-//   }
-// }
+  @include media('<phone') {
+    margin-top: 10rem;
+    text-align: center;
+  }
+}
+
+.about__contact__text {
+  width: 70rem;
+}
+
+.about__social {
+  display: flex;
+  gap: 2rem;
+}
+
+//- each logo in about.data.body[0].items
+//-     each slice in logo
+//-         figure.about__logo
+//-             img.about__logo__media(alt=logo.alt data-src=slice.url)

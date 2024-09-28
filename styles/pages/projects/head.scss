@@ -8,10 +8,7 @@
     .project__design:last-child {
         @include media('<phone') {
             background-color: red !important;
-
             padding-bottom: 7rem;
-
-
         }
     }
 }

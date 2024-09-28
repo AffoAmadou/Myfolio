@@ -62,15 +62,15 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new CompressionPlugin({
-      filename: '[path].gz[query]',
+      filename: '[path][base].gz',
       algorithm: 'gzip',
       test: /\.(js|css|html|svg)$/,
       threshold: 10240, // Taille minimum de fichier à compresser
       minRatio: 0.8 // Taux de compression minimum
-    }),
-    new PurgeCSSPlugin({
-      paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true })
     })
+    // new PurgeCSSPlugin({
+    //   paths: glob.sync(`${path.src}/**/*`, { nodir: true })
+    // })
   ],
   module: {
     rules: [

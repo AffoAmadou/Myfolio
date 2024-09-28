@@ -105,6 +105,17 @@ export default class {
         })
     } else {
       map(this.medias, media => media.show())
+
+      // GSAP.fromTo(this.galleryElement, {
+      //   transform: 'translateX(-100%)'
+
+      // }, {
+      //   duration: 1,
+      //   delay: 0.5,
+      //   transform: 'translateX(-0%)',
+      //   ease: 'expo.inOut'
+
+      // })
     }
   }
 
