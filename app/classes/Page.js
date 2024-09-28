@@ -183,7 +183,7 @@ export default class Page {
     if (!DetectionManager.isPhone || !this.isDown) return
 
     const y = event.touches ? event.touches[0].clientY : event.clientY
-    const distance = (this.start - y) * 9.3
+    const distance = (this.start - y) * 2
 
     this.scroll.target = this.scroll.position + distance
   }
