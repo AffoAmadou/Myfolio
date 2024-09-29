@@ -34,8 +34,8 @@
     @include media('<phone') {
         height: 42.2rem;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        justify-content: end;
+        align-items: start;
     }
 }
 
