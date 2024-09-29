@@ -166,3 +166,21 @@
 //   width   : 64.531rem;
 //   height  : 34.613rem;
 // }
+
+
+.contact__btn {
+  font-size: 1.8rem;
+  position: absolute;
+
+  bottom: 8rem;
+  left: 2rem;
+
+  @include media('<phone') {
+    font-size: 2.8rem;
+    position: absolute;
+    top: 19rem;
+    left: 23rem;
+    margin: 0 !important;
+    bottom: auto;
+  }
+}

@@ -1,0 +1,22 @@
+.thanks {
+    width: 100%;
+    position: fixed;
+    height: 100vh;
+
+}
+
+.thanks__wrapper {
+    width: 80%;
+    height: 100%;
+    margin: auto;
+    @extend %center;
+    text-align: center;
+
+    @include media('<phone') {
+        padding-top: 0;
+    }
+}
+
+.thanks__title {
+    @extend %title-110;
+}

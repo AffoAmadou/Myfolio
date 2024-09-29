@@ -81,7 +81,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.locals.basedir = app.get('views')
 
 const handleRequest = async (api) => {
-  const [metadata, preloader, navigation, about, home, project, { results: projects }] =
+  const [metadata, preloader, navigation, about, home, project, contact, { results: projects }] =
     await Promise.all([
       api.getSingle('metadata'),
       api.getSingle('preloader'),
@@ -89,6 +89,7 @@ const handleRequest = async (api) => {
       api.getSingle('about'),
       api.getSingle('home'),
       api.getSingle('project'),
+      api.getSingle('contact'),
       api.query(Prismic.Predicates.at('document.type', 'project'), {
         fetchLinks: 'project.image'
       })
@@ -152,6 +153,7 @@ const handleRequest = async (api) => {
     home,
     about,
     project,
+    contact,
     projects
   }
 }
@@ -173,6 +175,24 @@ app.get('/about', async (req, res) => {
   const defaults = await handleRequest(api)
 
   res.render('pages/about', {
+    ...defaults
+  })
+})
+
+app.get('/contact', async (req, res) => {
+  const api = await initApi(req)
+  const defaults = await handleRequest(api)
+
+  res.render('pages/contact', {
+    ...defaults
+  })
+})
+
+app.get('/thanks', async (req, res) => {
+  const api = await initApi(req)
+  const defaults = await handleRequest(api)
+
+  res.render('pages/thanks', {
     ...defaults
   })
 })

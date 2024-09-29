@@ -235,6 +235,11 @@
 .about__social {
   display: flex;
   gap: 2rem;
+
+  a {
+    font-size: 2.8rem;
+  }
+
 }
 
 //- each logo in about.data.body[0].items

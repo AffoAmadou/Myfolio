@@ -2,9 +2,11 @@
 //! Nessun bisogno di chiamare il file intero
 
 import About from 'pages/About'
+import Contact from 'pages/Contact'
 import Project from 'pages/Projects'
 import each from 'lodash/each'
 import Home from 'pages/Home'
+import Thanks from 'pages/Thanks'
 import Preloader from 'components/Preloader'
 import Navigation from 'components/Navigation'
 import Detection from 'classes/Detection'
@@ -63,6 +65,8 @@ class App {
     this.pages = {
       about: new About(),
       home: new Home(),
+      contact: new Contact(),
+      thanks: new Thanks(),
       project: new Project() //! Il nome colorato deve essere uguale a nome dato nel template
     }
 

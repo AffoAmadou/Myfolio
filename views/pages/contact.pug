@@ -1,0 +1,23 @@
+extends ../base.pug 
+
+block variables     
+    - var template = 'contact'
+
+block content 
+
+    .contact 
+        .contact__wrapper
+            h1.contact__title="Let's create beautiful things together!"
+            .about__social
+                a.about__linkedin.normal(target="_blank" href=about.data.body[0].primary.linkedin)="👋🏾 LinkedIn"
+                a.about__instagram.normal(target="_blank" href=about.data.body[0].primary.instagram)="👋🏾 Instagram"
+                a.about__mail.normal(target="_blank" href="mailto:"+about.data.body[0].primary.mail)="👋🏾 Mail"
+            form.contact__form(name="contact" method="POST" onsubmit="send(event)")
+                label(for="name")="Name" 
+                input.contact__form__input(type="text" name="name" placeholder="Name" required)
+                label(for="email")="Email"
+                input.contact__form__input(type="email" name="email" placeholder="Email" required)
+                label(for="message")="Message"
+                textarea.contact__form__textarea(name="message" placeholder="Message" rows="4" cols="50" required)
+                button.contact__form__button.common__button(type="submit")="Send"
+                p.contact__success__message="Your message has been sent !"
