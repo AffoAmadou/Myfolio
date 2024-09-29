@@ -200,7 +200,7 @@ app.get('/thanks', async (req, res) => {
   const { data, error } = await resend.emails.send({
     from: name + '<hamadouaffo@amadouh.fr>',
     to: ['hamadouaffo@gmail.com'],
-    subject: 'Contact Form',
+    subject: 'Amadouh.fr - ' + name,
     html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong> ${message}</p>`
   })
 
