@@ -1,0 +1,22 @@
+.contact {
+    width: 100%;
+    position: fixed;
+    min-height: 100vh;
+
+    background-color: #DFDAD7;
+    z-index: 10;
+
+}
+
+.contact__wrapper {
+    width: 80%;
+    margin: auto;
+    padding-top: 15rem;
+
+}
+
+.contact__title {
+    @extend %title-110;
+    width: 110rem;
+    margin-bottom: 5rem;
+}

@@ -20,3 +20,12 @@
     font-size: 6.5rem;
   }
 }
+
+%title-110 {
+  font-family: $font-colus;
+  font-size: 11rem;
+
+  @include media('<phone') {
+    font-size: 6.5rem;
+  }
+}
