@@ -11,8 +11,10 @@ const express = require('express')
 const errorHandler = require('errorhandler')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
+const { Resend } = require('resend')
 
 const app = express()
+const resend = new Resend(process.env.RESEND__API)
 const port = process.env.PORT || 3000
 // const port = 5001;
 
@@ -129,13 +131,11 @@ const handleRequest = async (api) => {
       }
     }
     )
-    console.log('about', about.data.body[0].primary)
 
     about.data.body.forEach((section) => {
       if (section.slice_type === 'vertical') {
         section.items.forEach((item) => {
           assets.push(item.vertical.url)
-          console.log('vertical', item.vertical.url)
         })
       }
     }
@@ -159,12 +159,13 @@ const handleRequest = async (api) => {
 }
 
 app.get('/', async (req, res) => {
+  console.log('HI')
+
   const api = await initApi(req)
   const defaults = await handleRequest(api)
   defaults.home.data.projects.sort((a, b) => {
     return b.projects_project.uid.localeCompare(a.projects_project.uid)
   })
-
   res.render('pages/home', {
     ...defaults
   })
@@ -192,6 +193,22 @@ app.get('/thanks', async (req, res) => {
   const api = await initApi(req)
   const defaults = await handleRequest(api)
 
+  const { name, email, message } = req.query
+
+  console.log(name, email, message)
+
+  const { data, error } = await resend.emails.send({
+    from: name + '<hamadouaffo@amadouh.fr>',
+    to: ['hamadouaffo@gmail.com'],
+    subject: 'Contact Form',
+    html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong> ${message}</p>`
+  })
+
+  if (error) {
+    console.error(error)
+  } else if (data) {
+    console.log(data)
+  }
   res.render('pages/thanks', {
     ...defaults
   })

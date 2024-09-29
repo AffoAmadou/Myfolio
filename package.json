@@ -63,6 +63,7 @@
     "node-fetch": "^2.6.7",
     "nodemon": "^2.0.18",
     "pug": "^3.0.2",
+    "resend": "^4.0.0",
     "ua-parser-js": "^1.0.2"
   }
 }
