@@ -51,20 +51,7 @@ export default class Title extends Animation {
         visibility: 'visible'
       }, 0)
     })
-    // each(this.elementsLinesSpans, (line, index) => {
-    //   console.log(line)
-    //     this.timelineIn.fromTo(line, {
-    //       delay: 3,
-    //         y: '100%'
-    //     }, {
-    //         delay: index * 0.2,
-    //         duration: 5.5,
-    //         ease: 'expo.out',
-    //         y: '0%',
-    //         autoAlpha: 1,
-    //       visibility : 'visible'
-    //     }, 0)
-    // })
+    
   }
 
   animateOut () {

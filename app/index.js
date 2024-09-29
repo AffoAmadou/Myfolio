@@ -178,8 +178,6 @@ class App {
 
     if (this.page && this.page.onWheel) {
       this.page.onWheel(normalizedWheel)
-
-      console.log(normalizedWheel)
     }
   }
 

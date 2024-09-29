@@ -37,7 +37,6 @@ export default class Preloader extends Component {
   }
 
   createLoader () {
-    console.log(window.ASSETS)
     window.ASSETS.forEach((image) => {
       const texture = new Texture(this.canvas.gl, {
         generateMipmaps: false

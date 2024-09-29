@@ -15,6 +15,5 @@ export default class Thanks extends Page {
   create () {
     super.create()
 
-    // this.elements.links[0].addEventListener('click', _ => console.log('OH YOU CLICKED'))
   }
 }

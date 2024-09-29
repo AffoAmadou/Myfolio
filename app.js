@@ -159,7 +159,6 @@ const handleRequest = async (api) => {
 }
 
 app.get('/', async (req, res) => {
-  console.log('HI')
 
   const api = await initApi(req)
   const defaults = await handleRequest(api)
@@ -195,12 +194,15 @@ app.get('/thanks', async (req, res) => {
 
   const { name, email, message } = req.query
 
-  console.log(name, email, message)
+  const senderEmail = name
+    .split(' ')
+    .join('')
+    .toLowerCase() + '@amadouh.fr'
 
   const { data, error } = await resend.emails.send({
-    from: name + '<hamadouaffo@amadouh.fr>',
+    from: name + ' <' + senderEmail + '>',
     to: ['hamadouaffo@gmail.com'],
-    subject: 'Amadouh.fr - ' + name + ' - ' + email,
+    subject: name + ' - ' + email,
     html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong> ${message}</p>`
   })
 
