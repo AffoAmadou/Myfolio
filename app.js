@@ -214,7 +214,7 @@ app.get('/thanks', async (req, res) => {
     from: 'Contact <contact@amadouh.fr>',
     to: [email],
     subject: 'Thank you for contacting us!',
-    html: '<h1 style="text-align: center;">Thank you for contacting us! We will get back to you as soon as possible. 😁</h1>'
+    html: '<h1 style="text-align: center;">Thank you for contacting me! I will get back to you as soon as possible. 😁</h1>'
   })
 
   if (error2) {
