@@ -29,7 +29,6 @@ app.use(errorHandler())
 app.use(methodOverride())
 app.use(express.static(path.join(__dirname, 'public')))
 
-
 // Initialize the prismic.io api
 const initApi = (req) => {
   return Prismic.createClient(process.env.PRISMIC_ENDPOINT, {
@@ -209,6 +208,19 @@ app.get('/thanks', async (req, res) => {
     console.error(error)
   } else if (data) {
     console.log(data)
+  }
+
+  const { data2, error2 } = await resend.emails.send({
+    from: 'Contact <contact@amadouh.fr>',
+    to: [email],
+    subject: 'Thank you for contacting us!',
+    html: '<h1>Thank you for contacting us! We will get back to you as soon as possible. 😁</h1>'
+  })
+
+  if (error2) {
+    console.error(error2)
+  } else if (data2) {
+    console.log(data2)
   }
   res.render('pages/thanks', {
     ...defaults
