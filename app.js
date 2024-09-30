@@ -30,6 +30,12 @@ app.use(errorHandler())
 app.use(methodOverride())
 app.use(express.static(path.join(__dirname, 'public')))
 
+if (window.location.hostname !== 'localhost') {
+  console.log = function () {}
+  console.warn = function () {}
+  console.error = function () {}
+}
+
 // Initialize the prismic.io api
 const initApi = (req) => {
   return Prismic.createClient(process.env.PRISMIC_ENDPOINT, {
@@ -159,7 +165,6 @@ const handleRequest = async (api) => {
 }
 
 app.get('/', async (req, res) => {
-
   const api = await initApi(req)
   const defaults = await handleRequest(api)
   defaults.home.data.projects.sort((a, b) => {
