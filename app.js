@@ -30,11 +30,9 @@ app.use(errorHandler())
 app.use(methodOverride())
 app.use(express.static(path.join(__dirname, 'public')))
 
-if (window.location.hostname !== 'localhost') {
-  console.log = function () {}
-  console.warn = function () {}
-  console.error = function () {}
-}
+console.log = function () {}
+console.warn = function () {}
+console.error = function () {}
 
 // Initialize the prismic.io api
 const initApi = (req) => {
