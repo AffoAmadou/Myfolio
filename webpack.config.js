@@ -181,7 +181,9 @@ module.exports = {
   },
   devServer: {
     client: {
-      logging: 'none'
+      logging: 'none',
+      hot: false,
+      liveReload: false
     }
   }
 

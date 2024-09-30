@@ -16,7 +16,6 @@ const { Resend } = require('resend')
 const app = express()
 const resend = new Resend(process.env.RESEND__API)
 const port = process.env.PORT || 3000
-// const port = 5001;
 
 const Prismic = require('@prismicio/client')
 const PrismicH = require('@prismicio/helpers')
