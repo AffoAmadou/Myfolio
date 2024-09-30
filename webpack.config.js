@@ -178,13 +178,6 @@ module.exports = {
         }
       }
     }
-  },
-  devServer: {
-    client: {
-      logging: 'none',
-      hot: false,
-      liveReload: false
-    }
   }
 
 }
