@@ -30,9 +30,11 @@ app.use(errorHandler())
 app.use(methodOverride())
 app.use(express.static(path.join(__dirname, 'public')))
 
-console.log = function () {}
-console.warn = function () {}
-console.error = function () {}
+console.log = () => {}
+console.warn = () => {}
+console.error = () => {}
+
+console.clear()
 
 // Initialize the prismic.io api
 const initApi = (req) => {
