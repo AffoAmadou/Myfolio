@@ -27,6 +27,13 @@ html(class= isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : ""
         meta(name="twitter:image" content=metadata.data.image ? metadata.data.image.url : "")
 
         link(rel="stylesheet" href="main.css"  as="style")
+    script(async src="https://www.googletagmanager.com/gtag/js?id=G-ZW70P08B7Y")
+    script.
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZW70P08B7Y');
+
 
     body 
         include ./partials/preloader
